@@ -2,10 +2,10 @@
 {
     public class Job : Base
     {
-        public int ServiceId { get; private set; }
-        public Job(int id, string name, string description, int serviceId) : base(id, name, description)
+        public int JobId { get; private set; }
+        public Job(int id, string name, string description, int jobId) : base(id, name, description)
         {
-            ServiceId = serviceId;
+            JobId = jobId;
         }
     }
 }
