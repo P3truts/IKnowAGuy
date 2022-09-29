@@ -4,32 +4,32 @@ namespace IKnowAGuy.Repositories.Implementation
 {
     public class AdRepository : IAdRepository
     {
-        public void Add(BaseAd item)
+        public void Add(Ad item)
         {
             throw new NotImplementedException();
         }
 
-        public BaseAd Get(int id)
+        public Ad Get(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<BaseAd> GetAdsByAddress(Address address)
+        public IEnumerable<Ad> GetAdsByAddress(Address address)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<BaseAd> GetAdsByJob(Job job)
+        public IEnumerable<Ad> GetAdsByJob(Job job)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<BaseAd> GetAdsByService(Service service)
+        public IEnumerable<Ad> GetAdsByService(Service service)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<BaseAd> GetAll()
+        public IEnumerable<Ad> GetAll()
         {
             throw new NotImplementedException();
         }

@@ -3,14 +3,14 @@ namespace IKnowAGuy.Services
 {
     public interface IAdService
     {
-        IEnumerable<BaseAd> GetAllAds();
+        IEnumerable<Ad> GetAllAds();
 
-        BaseAd GetAdById(int id);
+        Ad GetAdById(int id);
 
-        IEnumerable<BaseAd> GetAdsByService(Service service);
+        IEnumerable<Ad> GetAdsByService(Service service);
 
-        IEnumerable<BaseAd> GetAdsByJob(Job job);
+        IEnumerable<Ad> GetAdsByJob(Job job);
 
-        IEnumerable<BaseAd> GetAdsByAddress(Address address);
+        IEnumerable<Ad> GetAdsByAddress(Address address);
     }
 }
