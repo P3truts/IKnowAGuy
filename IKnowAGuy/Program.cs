@@ -13,8 +13,6 @@ builder.Services.AddScoped<IAdRepository, AdRepository>();
 builder.Services.AddScoped<IAddressRepository, AddressRepository>();
 builder.Services.AddScoped<IJobRepository, JobRepository>();
 
-
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

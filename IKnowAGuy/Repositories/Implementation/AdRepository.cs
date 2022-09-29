@@ -14,6 +14,21 @@ namespace IKnowAGuy.Repositories.Implementation
             throw new NotImplementedException();
         }
 
+        public IEnumerable<BaseAd> GetAdsByAddress(Address address)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<BaseAd> GetAdsByJob(Job job)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<BaseAd> GetAdsByService(Service service)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<BaseAd> GetAll()
         {
             throw new NotImplementedException();

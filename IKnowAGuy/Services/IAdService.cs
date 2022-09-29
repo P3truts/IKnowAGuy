@@ -7,10 +7,10 @@ namespace IKnowAGuy.Services
 
         BaseAd GetAdById(int id);
 
-        IEnumerable<BaseAd> GetAdByService(Service service);
+        IEnumerable<BaseAd> GetAdsByService(Service service);
 
-        IEnumerable<BaseAd> GetAdByJob(Job job);
+        IEnumerable<BaseAd> GetAdsByJob(Job job);
 
-        IEnumerable<BaseAd> GetAdByAddress(Address address);
+        IEnumerable<BaseAd> GetAdsByAddress(Address address);
     }
 }

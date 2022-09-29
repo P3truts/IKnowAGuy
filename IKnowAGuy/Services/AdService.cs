@@ -1,33 +1,24 @@
 ﻿using IKnowAGuy.Models;
 using IKnowAGuy.Repositories;
+using IKnowAGuy.Repositories.Implementation;
+using System.Linq;
 
 namespace IKnowAGuy.Services
 {
     public class AdService : IAdService
     {
-        public IEnumerable<BaseAd> GetAdByAddress(Address address)
+
+        private readonly IAdRepository adRepository;
+
+        public AdService(IAdRepository adRepository)
         {
-            throw new NotImplementedException();
+            this.adRepository = adRepository;
         }
 
-        public BaseAd GetAdById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<BaseAd> GetAdByJob(Job job)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<BaseAd> GetAdByService(Service service)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<BaseAd> GetAllAds()
-        {
-            throw new NotImplementedException();
-        }
+        public IEnumerable<BaseAd> GetAdsByAddress(Address address) => adRepository.GetAdsByAddress(address);
+        public BaseAd GetAdById(int id) => adRepository.Get(id);
+        public IEnumerable<BaseAd> GetAdsByJob(Job job) => adRepository.GetAdsByJob(job);
+        public IEnumerable<BaseAd> GetAdsByService(Service service) => adRepository.GetAdsByService(service);
+        public IEnumerable<BaseAd> GetAllAds() => adRepository.GetAll();
     }
 }
