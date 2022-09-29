@@ -1,3 +1,5 @@
+using IKnowAGuy.Repositories;
+using IKnowAGuy.Repositories.Implementation;
 using IKnowAGuy.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +9,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IAdService, AdService>();
+builder.Services.AddScoped<IAdRepository, AdRepository>();
+builder.Services.AddScoped<IAddressRepository, AddressRepository>();
+builder.Services.AddScoped<IJobRepository, JobRepository>();
+
+
 
 var app = builder.Build();
 

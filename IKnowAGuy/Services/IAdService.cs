@@ -1,17 +1,16 @@
-﻿using IKnowAGuy.Repositories;
-
+﻿using IKnowAGuy.Models;
 namespace IKnowAGuy.Services
 {
     public interface IAdService
     {
-        IEnumerable<Ad> GetAllAds();
+        IEnumerable<BaseAd> GetAllAds();
 
-        Ad GetAdById(int id);
+        BaseAd GetAdById(int id);
 
-        IEnumerable<Ad> GetAdByService(Service service);
+        IEnumerable<BaseAd> GetAdByService(Service service);
 
-        IEnumerable<Ad> GetAdByJob(Job job);
+        IEnumerable<BaseAd> GetAdByJob(Job job);
 
-        IEnumerable<Ad> GetAdByAddress(Address address);
+        IEnumerable<BaseAd> GetAdByAddress(Address address);
     }
 }

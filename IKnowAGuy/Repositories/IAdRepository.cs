@@ -1,6 +1,8 @@
-﻿namespace IKnowAGuy.Repositories
+﻿using IKnowAGuy.Models;
+
+namespace IKnowAGuy.Repositories
 {
-    public interface IAdRepository: IRepository<Ad>
+    public interface IAdRepository: IRepository<BaseAd>
     {
     }
 }
