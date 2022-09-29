@@ -14,6 +14,7 @@ var connectionString = builder.Configuration.GetConnectionString("DatabaseContex
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(connectionString).EnableSensitiveDataLogging());
 builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<DatabaseContext>();
+builder.Services.AddSession();
 
 builder.Services.AddScoped<IAdService, AdService>();
 builder.Services.AddScoped<IAdRepository, AdRepository>();
