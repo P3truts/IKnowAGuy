@@ -1,3 +1,7 @@
+using IKnowAGuy.Repositories;
+using IKnowAGuy.Repositories.Implementation;
+using IKnowAGuy.Services;
+
 using IKnowAGuy.Data;
 using IKnowAGuy.Models;
 using Microsoft.AspNetCore.Identity;
@@ -10,6 +14,11 @@ var connectionString = builder.Configuration.GetConnectionString("DatabaseContex
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(connectionString).EnableSensitiveDataLogging());
 builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<DatabaseContext>();
+
+builder.Services.AddScoped<IAdService, AdService>();
+builder.Services.AddScoped<IAdRepository, AdRepository>();
+builder.Services.AddScoped<IAddressRepository, AddressRepository>();
+builder.Services.AddScoped<IJobRepository, JobRepository>();
 
 var app = builder.Build();
 
