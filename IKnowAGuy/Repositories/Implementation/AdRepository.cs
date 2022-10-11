@@ -16,8 +16,8 @@ namespace IKnowAGuy.Repositories.Implementation
             throw new NotImplementedException();
         }
 
-        public Ad Get(string id) => _context.Ads.FirstOrDefault(a => a.Id == id);
-        public IEnumerable<Ad> GetAdsByAddress(string addressId)
+        public Ad Get(long id) => _context.Ads.FirstOrDefault(a => a.Id == id);
+        public IEnumerable<Ad> GetAdsByAddress(long addressId)
         {
             var querry = from ad in _context.Ads
                          where ad.Id == addressId
@@ -26,7 +26,7 @@ namespace IKnowAGuy.Repositories.Implementation
             return querry;
         }
 
-        public IEnumerable<Ad> GetAdsByJob(string jobId)
+        public IEnumerable<Ad> GetAdsByJob(long jobId)
         {
             var querry = from ad in _context.Ads
                          where ad.Id == jobId
@@ -34,7 +34,7 @@ namespace IKnowAGuy.Repositories.Implementation
             return querry;
         }
 
-        public IEnumerable<Ad> GetAdsByService(string serviceId)
+        public IEnumerable<Ad> GetAdsByService(long serviceId)
         {
            var querry = from ad in _context.Ads
                         where ad.Id == serviceId

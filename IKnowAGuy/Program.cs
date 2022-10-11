@@ -6,6 +6,7 @@ using IKnowAGuy.Data;
 using IKnowAGuy.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using IKnowAGuy.Data.Seed;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DatabaseContext");
@@ -64,4 +65,5 @@ app.MapControllerRoute(
 
 app.MapFallbackToFile("index.html"); ;
 
-app.Run();
+app.MigrateDatabase().Run();
+

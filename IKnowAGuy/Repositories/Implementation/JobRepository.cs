@@ -9,7 +9,7 @@ namespace IKnowAGuy.Repositories.Implementation
             throw new NotImplementedException();
         }
 
-        public Job Get(string id)
+        public Job Get(long id)
         {
             throw new NotImplementedException();
         }

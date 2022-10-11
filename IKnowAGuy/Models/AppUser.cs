@@ -4,7 +4,7 @@ namespace IKnowAGuy.Models
 {
     public class AppUser : IdentityUser
     {
-        public string? AdId { get; set; }
+        public long AdId { get; set; }
         public List<Job>? Jobs { get; set; }
         public List<Service>? Services { get; set; }
         public string? CompanyType { get; set; }

@@ -2,6 +2,6 @@
 {
     public class Service : Base
     {
-        public string? JobId { get; private set; }
+        public Job Job { get;  set; }
     }
 }

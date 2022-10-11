@@ -15,10 +15,10 @@ namespace IKnowAGuy.Services
             this.adRepository = adRepository;
         }
 
-        public IEnumerable<Ad> GetAdsByAddress(string addressId) => adRepository.GetAdsByAddress(addressId);
-        public Ad GetAdById(string id) => adRepository.Get(id);
-        public IEnumerable<Ad> GetAdsByJob(string jobId) => adRepository.GetAdsByJob(jobId);
-        public IEnumerable<Ad> GetAdsByService(string serviceId) => adRepository.GetAdsByService(serviceId);
+        public IEnumerable<Ad> GetAdsByAddress(long addressId) => adRepository.GetAdsByAddress(addressId);
+        public Ad GetAdById(long id) => adRepository.Get(id);
+        public IEnumerable<Ad> GetAdsByJob(long jobId) => adRepository.GetAdsByJob(jobId);
+        public IEnumerable<Ad> GetAdsByService(long serviceId) => adRepository.GetAdsByService(serviceId);
         public IEnumerable<Ad> GetAllAds() => adRepository.GetAll();
     }
 }
