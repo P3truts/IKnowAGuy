@@ -9,7 +9,7 @@ namespace IKnowAGuy.Repositories.Implementation
             throw new NotImplementedException();
         }
 
-        public Service Get(int id)
+        public Service Get(string id)
         {
             throw new NotImplementedException();
         }

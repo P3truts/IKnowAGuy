@@ -4,8 +4,8 @@ namespace IKnowAGuy.Repositories
 {
     public interface IAdRepository: IRepository<Ad>
     {
-        IEnumerable<Ad> GetAdsByJob(Job job);
-        IEnumerable<Ad> GetAdsByService(Service service);
-        IEnumerable<Ad> GetAdsByAddress(Address address);
+        IEnumerable<Ad> GetAdsByJob(string jobId);
+        IEnumerable<Ad> GetAdsByService(string serviceId);
+        IEnumerable<Ad> GetAdsByAddress(string addressId);
     }
 }

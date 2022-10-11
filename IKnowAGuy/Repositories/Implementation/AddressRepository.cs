@@ -9,7 +9,7 @@ namespace IKnowAGuy.Repositories.Implementation
             throw new NotImplementedException();
         }
 
-        public Address Get(int id)
+        public Address Get(string id)
         {
             throw new NotImplementedException();
         }
