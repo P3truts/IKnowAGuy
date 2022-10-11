@@ -5,12 +5,12 @@ namespace IKnowAGuy.Services
     {
         IEnumerable<Ad> GetAllAds();
 
-        Ad GetAdById(int id);
+        Ad GetAdById(string id);
 
-        IEnumerable<Ad> GetAdsByService(Service service);
+        IEnumerable<Ad> GetAdsByService(string serviceId);
 
-        IEnumerable<Ad> GetAdsByJob(Job job);
+        IEnumerable<Ad> GetAdsByJob(string jobId);
 
-        IEnumerable<Ad> GetAdsByAddress(Address address);
+        IEnumerable<Ad> GetAdsByAddress(string addressId);
     }
 }
