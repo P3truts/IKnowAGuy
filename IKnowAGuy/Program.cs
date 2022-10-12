@@ -7,6 +7,7 @@ using IKnowAGuy.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using IKnowAGuy.Data.Seed;
+using IKnowAGuy.Services.Implementation;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DatabaseContext");

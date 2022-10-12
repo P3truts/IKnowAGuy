@@ -2,7 +2,7 @@
 using IKnowAGuy.Models;
 using IKnowAGuy.Repositories;
 
-namespace IKnowAGuy.Services
+namespace IKnowAGuy.Services.Implementation
 {
     public class AddressService : IAddressService
     {

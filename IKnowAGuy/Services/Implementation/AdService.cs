@@ -3,7 +3,7 @@ using IKnowAGuy.Repositories;
 using IKnowAGuy.Repositories.Implementation;
 using System.Linq;
 
-namespace IKnowAGuy.Services
+namespace IKnowAGuy.Services.Implementation
 {
     public class AdService : IAdService
     {
