@@ -6,7 +6,7 @@ namespace IKnowAGuy.Data.Seed
     {
         private static DataSeeder? instance;
 
-        public DataSeeder()
+        private DataSeeder()
         {
 
         }
@@ -39,9 +39,6 @@ namespace IKnowAGuy.Data.Seed
                     City = "Bucuresti",
                     County = "Ilfov"
                 },
-
-
-               
 
                 Service = new Service
                 {

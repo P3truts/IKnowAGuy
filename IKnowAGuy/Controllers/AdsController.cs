@@ -16,24 +16,33 @@ namespace IKnowAGuy.Controllers
         {
             _adService = adService;
         }
+
         // GET: api/<AdsController>
         [HttpGet]
-        public IEnumerable<Ad> Get()
+        public ActionResult<IEnumerable<Ad>> GetAds()
         {
-            return _adService.GetAllAds();
+            var ads =  _adService.GetAllAds();
+            if (!ads.Any())
+                return NotFound();
+
+            return Ok(ads);
         }
 
         // GET api/<AdsController>/5
         [HttpGet("{id}")]
-        public Ad Get(int id)
+        public ActionResult<Ad> GetAd(int id)
         {
-            return _adService.GetAdById(id);
+            var ad = _adService.GetAdById(id);
+            if(ad == null)
+                return NotFound();
+            return Ok(ad);
         }
 
         // POST api/<AdsController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] Ad ad)
         {
+            bool saved = _adService.CreateAd(ad);
         }
 
         // PUT api/<AdsController>/5

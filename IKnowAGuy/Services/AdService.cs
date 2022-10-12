@@ -20,5 +20,6 @@ namespace IKnowAGuy.Services
         public IEnumerable<Ad> GetAdsByJob(long jobId) => adRepository.GetAdsByJob(jobId);
         public IEnumerable<Ad> GetAdsByService(long serviceId) => adRepository.GetAdsByService(serviceId);
         public IEnumerable<Ad> GetAllAds() => adRepository.GetAll();
+        public bool CreateAd(Ad ad) => adRepository.Add(ad);
     }
 }

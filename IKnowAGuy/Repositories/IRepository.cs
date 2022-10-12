@@ -2,7 +2,7 @@
 {
     public interface IRepository<T>
     {
-        void Add(T item);
+        bool Add(T item);
         void Remove(int id);
         T Get(long id);
         IEnumerable<T> GetAll();

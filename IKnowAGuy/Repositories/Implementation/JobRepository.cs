@@ -4,7 +4,7 @@ namespace IKnowAGuy.Repositories.Implementation
 {
     public class JobRepository : IJobRepository
     {
-        public void Add(Job item)
+        public bool Add(Job item)
         {
             throw new NotImplementedException();
         }

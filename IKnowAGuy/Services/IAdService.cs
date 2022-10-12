@@ -7,6 +7,8 @@ namespace IKnowAGuy.Services
 
         Ad GetAdById(long id);
 
+        bool CreateAd(Ad ad);
+
         IEnumerable<Ad> GetAdsByService(long serviceId);
 
         IEnumerable<Ad> GetAdsByJob(long jobId);

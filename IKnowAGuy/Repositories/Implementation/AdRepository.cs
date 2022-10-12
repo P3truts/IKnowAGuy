@@ -11,9 +11,10 @@ namespace IKnowAGuy.Repositories.Implementation
         {
             _context = context;
         }
-        public void Add(Ad item)
+        public bool Add(Ad item)
         {
-            throw new NotImplementedException();
+            _context.Ads.Add(item);
+            return Save();
         }
 
         public Ad Get(long id) => _context.Ads.FirstOrDefault(a => a.Id == id);
@@ -22,7 +23,6 @@ namespace IKnowAGuy.Repositories.Implementation
             var querry = from ad in _context.Ads
                          where ad.Id == addressId
                          select ad;
-
             return querry;
         }
 
@@ -31,6 +31,7 @@ namespace IKnowAGuy.Repositories.Implementation
             var querry = from ad in _context.Ads
                          where ad.Id == jobId
                          select ad;
+
             return querry;
         }
 
@@ -39,6 +40,7 @@ namespace IKnowAGuy.Repositories.Implementation
            var querry = from ad in _context.Ads
                         where ad.Id == serviceId
                         select ad;
+
             return querry;
         }
 
@@ -48,6 +50,12 @@ namespace IKnowAGuy.Repositories.Implementation
         public void Remove(int id)
         {
             throw new NotImplementedException();
+        }
+
+        private bool Save()
+        {
+            var saved = _context.SaveChanges();
+            return saved > 0 ? true : false;
         }
     }
 }

@@ -4,7 +4,7 @@ namespace IKnowAGuy.Repositories.Implementation
 {
     public class ServiceRepository : IServiceRepository
     {
-        public void Add(Service item)
+        public bool Add(Service item)
         {
             throw new NotImplementedException();
         }

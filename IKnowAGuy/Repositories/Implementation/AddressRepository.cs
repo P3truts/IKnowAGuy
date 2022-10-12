@@ -4,7 +4,7 @@ namespace IKnowAGuy.Repositories.Implementation
 {
     public class AddressRepository : IAddressRepository
     {
-        public void Add(Address item)
+        public bool Add(Address item)
         {
             throw new NotImplementedException();
         }
