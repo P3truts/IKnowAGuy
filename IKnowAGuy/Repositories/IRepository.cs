@@ -4,7 +4,7 @@
     {
         bool Add(T item);
         bool Update(T item);
-        void Remove(int id);
+        bool Remove(T item);
         T Get(long id);
         IEnumerable<T> GetAll();
     }

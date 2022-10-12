@@ -48,9 +48,10 @@ namespace IKnowAGuy.Repositories.Implementation
         public IEnumerable<Ad> GetAll() => _context.Ads.ToList();
            
 
-        public void Remove(int id)
+        public bool Remove(Ad ad)
         {
-            throw new NotImplementedException();
+            _context.Remove(ad);
+            return Save();
         }
 
         public bool Update(Ad ad)

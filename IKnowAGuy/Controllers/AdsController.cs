@@ -74,8 +74,17 @@ namespace IKnowAGuy.Controllers
 
         // DELETE api/<AdsController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult Delete(int id)
         {
+            var ad = _adService.GetAdById(id);
+
+            if (ad == null)
+                return NotFound();
+
+            if (!_adService.DeleteAd(ad))
+                ModelState.AddModelError("", "Something went wrong deleting the ad");
+
+            return NoContent();
         }
     }
 }

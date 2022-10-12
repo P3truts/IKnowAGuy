@@ -19,7 +19,7 @@ namespace IKnowAGuy.Repositories.Implementation
             throw new NotImplementedException();
         }
 
-        public void Remove(int id)
+        public bool Remove(JobCategory jobCategory)
         {
             throw new NotImplementedException();
         }

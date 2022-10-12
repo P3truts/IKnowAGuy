@@ -23,7 +23,7 @@ namespace IKnowAGuy.Repositories.Implementation
 
         public IEnumerable<Address> GetAll() => _context.Addresses.ToList();
 
-        public void Remove(int id)
+        public bool Remove(Address address)
         {
             throw new NotImplementedException();
         }
