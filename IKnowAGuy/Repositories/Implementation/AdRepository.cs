@@ -52,10 +52,14 @@ namespace IKnowAGuy.Repositories.Implementation
             throw new NotImplementedException();
         }
 
+        public bool Update(long id, Ad item)
+        {
+            throw new NotImplementedException();
+        }
+
         private bool Save()
         {
-            var saved = _context.SaveChanges();
-            return saved > 0 ? true : false;
+            return _context.SaveChanges() > 0;
         }
     }
 }

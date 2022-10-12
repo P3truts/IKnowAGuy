@@ -23,5 +23,10 @@ namespace IKnowAGuy.Repositories.Implementation
         {
             throw new NotImplementedException();
         }
+
+        public bool Update(long id, Job item)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

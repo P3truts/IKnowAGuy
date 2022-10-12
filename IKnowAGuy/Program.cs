@@ -21,6 +21,7 @@ builder.Services.AddScoped<IAdService, AdService>();
 builder.Services.AddScoped<IAdRepository, AdRepository>();
 builder.Services.AddScoped<IAddressRepository, AddressRepository>();
 builder.Services.AddScoped<IJobRepository, JobRepository>();
+builder.Services.AddScoped<IAddressService, AddressService>();
 
 builder.Services.AddSwaggerGen(options =>
         options.SwaggerDoc("v1",

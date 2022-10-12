@@ -40,14 +40,23 @@ namespace IKnowAGuy.Controllers
 
         // POST api/<AdsController>
         [HttpPost]
-        public void Post([FromBody] Ad ad)
+        public ActionResult Post([FromBody] Ad ad)
         {
-            bool saved = _adService.CreateAd(ad);
+            if(ad == null)
+                return BadRequest(ModelState);
+
+            if(!_adService.CreateAd(ad))
+            {
+                ModelState.AddModelError("", "Something went wrong while saving");
+                return StatusCode(500, ModelState);
+            }
+
+            return CreatedAtAction("post",ad);
         }
 
         // PUT api/<AdsController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public ActionResult Put(int id, [FromBody] Ad ad)
         {
         }
 
