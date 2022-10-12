@@ -39,13 +39,16 @@ namespace IKnowAGuy.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<long?>("JobId")
+                        .HasColumnType("bigint");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("RoleId")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("ServiceId")
+                    b.Property<long?>("ServiceId")
                         .HasColumnType("bigint");
 
                     b.Property<string>("UserId")
@@ -54,8 +57,6 @@ namespace IKnowAGuy.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AddressId");
-
-                    b.HasIndex("ServiceId");
 
                     b.ToTable("Ads");
                 });
@@ -156,7 +157,7 @@ namespace IKnowAGuy.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("IKnowAGuy.Models.Job", b =>
+            modelBuilder.Entity("IKnowAGuy.Models.JobCategory", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -194,7 +195,7 @@ namespace IKnowAGuy.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("JobId")
+                    b.Property<long>("JobCategoryId")
                         .HasColumnType("bigint");
 
                     b.Property<string>("Name")
@@ -204,7 +205,7 @@ namespace IKnowAGuy.Migrations
 
                     b.HasIndex("AppUserId");
 
-                    b.HasIndex("JobId");
+                    b.HasIndex("JobCategoryId");
 
                     b.ToTable("Services");
                 });
@@ -350,18 +351,10 @@ namespace IKnowAGuy.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("IKnowAGuy.Models.Service", "Service")
-                        .WithMany()
-                        .HasForeignKey("ServiceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Address");
-
-                    b.Navigation("Service");
                 });
 
-            modelBuilder.Entity("IKnowAGuy.Models.Job", b =>
+            modelBuilder.Entity("IKnowAGuy.Models.JobCategory", b =>
                 {
                     b.HasOne("IKnowAGuy.Models.AppUser", null)
                         .WithMany("Jobs")
@@ -374,13 +367,13 @@ namespace IKnowAGuy.Migrations
                         .WithMany("Services")
                         .HasForeignKey("AppUserId");
 
-                    b.HasOne("IKnowAGuy.Models.Job", "Job")
-                        .WithMany()
-                        .HasForeignKey("JobId")
+                    b.HasOne("IKnowAGuy.Models.JobCategory", "JobCategory")
+                        .WithMany("Services")
+                        .HasForeignKey("JobCategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Job");
+                    b.Navigation("JobCategory");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -438,6 +431,11 @@ namespace IKnowAGuy.Migrations
                 {
                     b.Navigation("Jobs");
 
+                    b.Navigation("Services");
+                });
+
+            modelBuilder.Entity("IKnowAGuy.Models.JobCategory", b =>
+                {
                     b.Navigation("Services");
                 });
 #pragma warning restore 612, 618

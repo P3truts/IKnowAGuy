@@ -21,5 +21,7 @@ namespace IKnowAGuy.Services.Implementation
         public IEnumerable<Ad> GetAdsByService(long serviceId) => adRepository.GetAdsByService(serviceId);
         public IEnumerable<Ad> GetAllAds() => adRepository.GetAll();
         public bool CreateAd(Ad ad) => adRepository.Add(ad);
+        public bool UpdateAd(Ad ad) => adRepository.Update(ad);
+       
     }
 }

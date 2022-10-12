@@ -2,6 +2,7 @@
 {
     public class Service : Base
     {
-        public Job Job { get;  set; }
+        public long JobCategoryId { get; set; }
+        public JobCategory JobCategory { get;  set; }
     }
 }

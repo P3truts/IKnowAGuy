@@ -11,7 +11,7 @@ namespace IKnowAGuy.Data
         {
         }
 
-        public DbSet<Job> Jobs { get; set; }
+        public DbSet<JobCategory> Jobs { get; set; }
         public DbSet<Service> Services { get; set; }
         public DbSet<Ad> Ads { get; set; }
         public DbSet<Address> Addresses { get; set; }

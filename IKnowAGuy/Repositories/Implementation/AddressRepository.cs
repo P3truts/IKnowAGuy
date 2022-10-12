@@ -28,7 +28,7 @@ namespace IKnowAGuy.Repositories.Implementation
             throw new NotImplementedException();
         }
 
-        public bool Update(long id, Address item)
+        public bool Update(Address item)
         {
             throw new NotImplementedException();
         }

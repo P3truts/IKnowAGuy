@@ -4,17 +4,17 @@ namespace IKnowAGuy.Repositories.Implementation
 {
     public class JobRepository : IJobRepository
     {
-        public bool Add(Job item)
+        public bool Add(JobCategory item)
         {
             throw new NotImplementedException();
         }
 
-        public Job Get(long id)
+        public JobCategory Get(long id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Job> GetAll()
+        public IEnumerable<JobCategory> GetAll()
         {
             throw new NotImplementedException();
         }
@@ -24,7 +24,7 @@ namespace IKnowAGuy.Repositories.Implementation
             throw new NotImplementedException();
         }
 
-        public bool Update(long id, Job item)
+        public bool Update(JobCategory item)
         {
             throw new NotImplementedException();
         }

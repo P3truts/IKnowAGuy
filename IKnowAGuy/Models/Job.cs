@@ -1,7 +1,7 @@
 ﻿namespace IKnowAGuy.Models
 {
-    public class Job : Base
+    public class JobCategory : Base
     {
-        //public List<Service>? Services { get;  set; }
+        public List<Service>? Services { get; set; }
     }
 }

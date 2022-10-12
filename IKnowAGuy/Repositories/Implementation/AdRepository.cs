@@ -12,12 +12,8 @@ namespace IKnowAGuy.Repositories.Implementation
             _context = context;
         }
       
-        public bool Add(Ad ad, Address address, Service service, Job job)
+        public bool Add(Ad ad)
         {
-            ad.Address = address;
-            ad.Service = service;
-            ad.Service.Job = job;
-
             _context.Ads.Add(ad);
             return Save();
         }
@@ -57,12 +53,8 @@ namespace IKnowAGuy.Repositories.Implementation
             throw new NotImplementedException();
         }
 
-        public bool Update(Ad ad, Address address, Service service, Job job)
+        public bool Update(Ad ad)
         {
-            ad.Service = service;
-            ad.Address = address;
-            ad.Service.Job = job;
-
             _context.Ads.Update(ad);
             return Save();
         }

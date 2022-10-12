@@ -27,7 +27,30 @@ namespace IKnowAGuy.Data.Seed
         private List<Base> GetData()
         {
             List<Base> ads = new List<Base>();
+            var jobCategory1 = new JobCategory
+            {
+                Name = "Category1",
+                Description = "CategoryDescription"
+            };
+            var jobCategory2 = new JobCategory
+            {
+                Name = "Categor2",
+                Description = "CategoryDescription"
+            };
 
+            var service1 = new Service()
+            {
+                Name = "Service1",
+                Description = "ServiceDescription",
+                JobCategoryId = jobCategory1.Id
+            };
+
+
+            var service2 = new Service()
+            {
+                Name = "Service2",
+                Description = "ServiceDescription"
+            };
             var ad = new Ad 
             {
                 Name = "Add1",
@@ -40,17 +63,8 @@ namespace IKnowAGuy.Data.Seed
                     County = "Ilfov"
                 },
 
-                Service = new Service
-                {
-                    Name = "Pipe repair service",
-                    Description = "Service description",
-                     Job = new Job
-                     {
-                         Name = "new Job",
-                         Description = "Job Description",
-                     },
-                },               
-               
+                ServiceId = service1.Id,
+                JobId = jobCategory1.Id,
             };
             
             ads.Add(ad);
