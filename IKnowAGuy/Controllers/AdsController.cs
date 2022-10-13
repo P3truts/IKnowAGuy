@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace IKnowAGuy.Controllers
 {
     [Route("[controller]")]
-    [ApiController]
     public class AdsController : ControllerBase
     {
         private readonly IAdService _adService;
@@ -17,7 +16,7 @@ namespace IKnowAGuy.Controllers
             _adService = adService;
         }
 
-        // GET: api/<AdsController>
+        // GET: /<AdsController>
         [HttpGet]
         public ActionResult<IEnumerable<Ad>> GetAds()
         {
