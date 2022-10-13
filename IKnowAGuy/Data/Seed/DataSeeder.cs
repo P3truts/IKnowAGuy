@@ -50,7 +50,7 @@ namespace IKnowAGuy.Data.Seed
                 Name = "Service2",
                 Description = "ServiceDescription"
             };
-            var ad = new Ad 
+            var ad = new Ad
             {
                 Name = "Add1",
                 Description = "test",
@@ -63,11 +63,47 @@ namespace IKnowAGuy.Data.Seed
                 },
 
                 Service = service1,
-                JobCategory= jobCategory1,
+                JobCategory = jobCategory1,
                 RoleId = "123",
                 UserId = "1234"
+            }; 
+            var ad2 = new Ad
+            {
+                Name = "Add2",
+                Description = "Add 2 Description",
+                Date = DateTime.Now,
+
+                Address = new Address
+                {
+                    City = "Bucuresti",
+                    County = "Ilfov"
+                },
+
+                Service = service1,
+                JobCategory = jobCategory1,
+                RoleId = "123asdf",
+                UserId = "1234asdfasd"
             };
-            
+            var ad3 = new Ad
+            {
+                Name = "Add3",
+                Description = "Add 3 Description",
+                Date = DateTime.Now,
+
+                Address = new Address
+                {
+                    City = "Bucuresti",
+                    County = "Ilfov"
+                },
+
+                Service = service1,
+                JobCategory = jobCategory1,
+                RoleId = "123asdf",
+                UserId = "1234asdfasd"
+            };
+
+            ads.Add(ad2);
+            ads.Add(ad3);
             ads.Add(ad);
             return ads;
         }

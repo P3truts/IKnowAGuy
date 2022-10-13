@@ -1,6 +1,9 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { Ad } from './Ad';
+import { HeaderTyping } from './HeaderTyping';
+import './Home.css';
+import { SearchBar } from './SearchBar';
 
 export function Home() {
     const [ads, setAds] = useState([]);
@@ -21,17 +24,15 @@ export function Home() {
     }, []);
 
     return (
-        <div className='ads-list'>
-            <h2>Ads</h2>
-            <div>
+        <>
+            <HeaderTyping />
+            <SearchBar />
+            <h2 style={{ textAlign: 'left' }}>Services</h2>
+            <div className='ads-div container'>
                 {ads.map((ad, index) => {
-                    return (
-                        <li key={index}>
-                            <Ad ad={ad} />
-                        </li>
-                    );
+                    return <Ad ad={ad} index={index} key={index} />;
                 })}
             </div>
-        </div>
+        </>
     );
 }
