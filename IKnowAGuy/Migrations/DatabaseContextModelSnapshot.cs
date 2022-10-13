@@ -30,7 +30,7 @@ namespace IKnowAGuy.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
-                    b.Property<long>("AddressId")
+                    b.Property<long?>("AddressId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("Date")
@@ -39,35 +39,41 @@ namespace IKnowAGuy.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long?>("JobId")
+                    b.Property<long?>("JobCategoryId")
                         .HasColumnType("bigint");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("RoleId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<long?>("ServiceId")
                         .HasColumnType("bigint");
 
                     b.Property<string>("UserId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AddressId");
 
+                    b.HasIndex("JobCategoryId");
+
+                    b.HasIndex("ServiceId");
+
                     b.ToTable("Ads");
                 });
 
             modelBuilder.Entity("IKnowAGuy.Models.Address", b =>
                 {
-                    b.Property<long>("AddressId")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("AddressId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
@@ -75,7 +81,7 @@ namespace IKnowAGuy.Migrations
                     b.Property<string>("County")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("AddressId");
+                    b.HasKey("Id");
 
                     b.ToTable("Addresses");
                 });
@@ -195,7 +201,7 @@ namespace IKnowAGuy.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("JobCategoryId")
+                    b.Property<long?>("JobCategoryId")
                         .HasColumnType("bigint");
 
                     b.Property<string>("Name")
@@ -347,11 +353,21 @@ namespace IKnowAGuy.Migrations
                 {
                     b.HasOne("IKnowAGuy.Models.Address", "Address")
                         .WithMany()
-                        .HasForeignKey("AddressId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AddressId");
+
+                    b.HasOne("IKnowAGuy.Models.JobCategory", "JobCategory")
+                        .WithMany()
+                        .HasForeignKey("JobCategoryId");
+
+                    b.HasOne("IKnowAGuy.Models.Service", "Service")
+                        .WithMany()
+                        .HasForeignKey("ServiceId");
 
                     b.Navigation("Address");
+
+                    b.Navigation("JobCategory");
+
+                    b.Navigation("Service");
                 });
 
             modelBuilder.Entity("IKnowAGuy.Models.JobCategory", b =>
@@ -367,13 +383,9 @@ namespace IKnowAGuy.Migrations
                         .WithMany("Services")
                         .HasForeignKey("AppUserId");
 
-                    b.HasOne("IKnowAGuy.Models.JobCategory", "JobCategory")
+                    b.HasOne("IKnowAGuy.Models.JobCategory", null)
                         .WithMany("Services")
-                        .HasForeignKey("JobCategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("JobCategory");
+                        .HasForeignKey("JobCategoryId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

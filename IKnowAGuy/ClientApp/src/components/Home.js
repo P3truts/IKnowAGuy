@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import { Ad } from './Ad';
 
 export function Home() {
     const [ads, setAds] = useState([]);
@@ -22,16 +23,15 @@ export function Home() {
     return (
         <div className='ads-list'>
             <h2>Ads</h2>
-            <ul>
+            <div>
                 {ads.map((ad, index) => {
                     return (
                         <li key={index}>
-                            <h3>{ad.name}</h3>
-                            <p>{ad.Description}</p>
+                            <Ad ad={ad} />
                         </li>
                     );
                 })}
-            </ul>
+            </div>
         </div>
     );
 }

@@ -2,7 +2,7 @@
 {
     public class Address
     {
-        public long AddressId { get;  set; }
+        public long Id { get;  set; }
         public string? County { get;  set; }
         public string? City { get;  set; }
     }

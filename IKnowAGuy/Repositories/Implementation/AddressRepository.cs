@@ -18,7 +18,7 @@ namespace IKnowAGuy.Repositories.Implementation
             return Save();
         }
 
-        public Address Get(long id) => _context.Addresses.FirstOrDefault(a => a.AddressId == id);
+        public Address Get(long id) => _context.Addresses.FirstOrDefault(a => a.Id == id);
 
 
         public IEnumerable<Address> GetAll() => _context.Addresses.ToList();

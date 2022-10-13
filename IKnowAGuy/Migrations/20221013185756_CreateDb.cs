@@ -13,14 +13,14 @@ namespace IKnowAGuy.Migrations
                 name: "Addresses",
                 columns: table => new
                 {
-                    AddressId = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     County = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     City = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Addresses", x => x.AddressId);
+                    table.PrimaryKey("PK_Addresses", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -64,32 +64,6 @@ namespace IKnowAGuy.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Ads",
-                columns: table => new
-                {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    AddressId = table.Column<long>(type: "bigint", nullable: false),
-                    JobId = table.Column<long>(type: "bigint", nullable: true),
-                    ServiceId = table.Column<long>(type: "bigint", nullable: true),
-                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    RoleId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Ads", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Ads_Addresses_AddressId",
-                        column: x => x.AddressId,
-                        principalTable: "Addresses",
-                        principalColumn: "AddressId",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -224,8 +198,8 @@ namespace IKnowAGuy.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    JobCategoryId = table.Column<long>(type: "bigint", nullable: false),
                     AppUserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    JobCategoryId = table.Column<long>(type: "bigint", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -241,14 +215,58 @@ namespace IKnowAGuy.Migrations
                         name: "FK_Services_Jobs_JobCategoryId",
                         column: x => x.JobCategoryId,
                         principalTable: "Jobs",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Ads",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    AddressId = table.Column<long>(type: "bigint", nullable: true),
+                    ServiceId = table.Column<long>(type: "bigint", nullable: true),
+                    JobCategoryId = table.Column<long>(type: "bigint", nullable: true),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RoleId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Ads", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Ads_Addresses_AddressId",
+                        column: x => x.AddressId,
+                        principalTable: "Addresses",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Ads_Jobs_JobCategoryId",
+                        column: x => x.JobCategoryId,
+                        principalTable: "Jobs",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Ads_Services_ServiceId",
+                        column: x => x.ServiceId,
+                        principalTable: "Services",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Ads_AddressId",
                 table: "Ads",
                 column: "AddressId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Ads_JobCategoryId",
+                table: "Ads",
+                column: "JobCategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Ads_ServiceId",
+                table: "Ads",
+                column: "ServiceId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -326,10 +344,10 @@ namespace IKnowAGuy.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Services");
+                name: "Addresses");
 
             migrationBuilder.DropTable(
-                name: "Addresses");
+                name: "Services");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

@@ -42,7 +42,6 @@ namespace IKnowAGuy.Data.Seed
             {
                 Name = "Service1",
                 Description = "ServiceDescription",
-                JobCategoryId = jobCategory1.Id
             };
 
 
@@ -63,8 +62,10 @@ namespace IKnowAGuy.Data.Seed
                     County = "Ilfov"
                 },
 
-                ServiceId = service1.Id,
-                JobId = jobCategory1.Id,
+                Service = service1,
+                JobCategory= jobCategory1,
+                RoleId = "123",
+                UserId = "1234"
             };
             
             ads.Add(ad);

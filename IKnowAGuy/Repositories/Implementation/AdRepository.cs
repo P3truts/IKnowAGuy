@@ -1,5 +1,6 @@
 ﻿using IKnowAGuy.Data;
 using IKnowAGuy.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace IKnowAGuy.Repositories.Implementation
 {
@@ -45,7 +46,8 @@ namespace IKnowAGuy.Repositories.Implementation
             return querry;
         }
 
-        public IEnumerable<Ad> GetAll() => _context.Ads.ToList();
+        public IEnumerable<Ad> GetAll() => _context.Ads.Include(a => a.Address)
+            .Include(a => a.JobCategory).Include(a => a.Service).ToList();
            
 
         public bool Remove(Ad ad)
