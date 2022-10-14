@@ -1,5 +1,5 @@
 import React from 'react';
-import './HeaderTyping.css';
+import '../css/HeaderTyping.css';
 import Typed from 'typed.js';
 
 export const HeaderTyping = () => {

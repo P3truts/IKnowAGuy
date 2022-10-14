@@ -1,5 +1,5 @@
 import React from 'react';
-import './Ad.css';
+import '../css/Ad.css';
 
 export const Ad = ({ ad, index }) => {
     const imagePath = 'Assets/handyman-' + index + '.png';

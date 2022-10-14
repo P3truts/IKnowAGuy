@@ -2,7 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { Ad } from './Ad';
 import { HeaderTyping } from './HeaderTyping';
-import './Home.css';
+import '../css/Home.css';
 import { SearchBar } from './SearchBar';
 
 export function Home() {
@@ -27,7 +27,7 @@ export function Home() {
         <>
             <HeaderTyping />
             <SearchBar />
-            <h2 style={{ textAlign: 'left' }}>Services</h2>
+            <h2 style={{ textAlign: 'left' }}>Ads</h2>
             <div className='ads-div container'>
                 {ads.map((ad, index) => {
                     return <Ad ad={ad} index={index} key={index} />;
