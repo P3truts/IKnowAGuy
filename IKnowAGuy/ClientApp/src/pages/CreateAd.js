@@ -1,11 +1,14 @@
 import React from 'react';
+import AdForm from '../components/AdForm';
 import './CreateAd.css';
 
 const CreateAd = () => {
     return (
-        <div className='ad-form'>
-            <h1>Not Implemented</h1>
-        </div>
+        <>
+            <div className='ad-form'>
+                <AdForm />;
+            </div>
+        </>
     );
 };
 

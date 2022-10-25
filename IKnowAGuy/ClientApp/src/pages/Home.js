@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { Ad } from '../components/Ad';
+import { AdCard } from '../components/AdCard';
 import { HeaderTyping } from '../components/HeaderTyping';
 import './Home.css';
 import { SearchBar } from '../components/SearchBar';
@@ -30,7 +30,7 @@ export function Home() {
             <h2 style={{ textAlign: 'left' }}>Services</h2>
             <div className='ads-div container'>
                 {ads.map((ad, index) => {
-                    return <Ad ad={ad} index={index} key={index} />;
+                    return <AdCard ad={ad} index={index} key={index} />;
                 })}
             </div>
         </>
