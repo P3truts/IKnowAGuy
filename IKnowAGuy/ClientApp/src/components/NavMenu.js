@@ -1,13 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './NavMenu.css';
+import AppPaths from '../AppPaths';
 
 const NavMenu = () => {
     return (
         <>
             <nav className='navbar navbar-expand-lg'>
                 <div className='container-fluid'>
-                    <a className='navbar-brand'>IKnowAGuy</a>
+                    <Link to={AppPaths.Home} className='navbar-brand'>
+                        IKnowAGuy
+                    </Link>
                     <button
                         className='navbar-toggler'
                         type='button'
@@ -22,26 +25,31 @@ const NavMenu = () => {
                     <div className='collapse navbar-collapse' id='navbarNav'>
                         <ul className='navbar-nav'>
                             <li className='nav-item'>
-                                {/* <a className='nav-link active' aria-current='page'>
-                                    Home
-                                </a> */}
                                 <button type='button' className='btn'>
-                                    <a className='nav-link'>Home</a>
+                                    <Link to={AppPaths.Home} className='navbar-brand'>
+                                        Home
+                                    </Link>
                                 </button>
                             </li>
                             <li className='nav-item'>
                                 <button type='button' className='btn'>
-                                    <a className='nav-link'>Sign In</a>
+                                    <Link to={AppPaths.CreateAd} className='navbar-brand'>
+                                        Sign In
+                                    </Link>
                                 </button>
                             </li>
                             <li className='nav-item'>
                                 <button type='button' className='btn'>
-                                    <a className='nav-link'>Log In</a>
+                                    <Link to={AppPaths.CreateAd} className='navbar-brand'>
+                                        Log In
+                                    </Link>
                                 </button>
                             </li>
                             <li className='nav-item'>
                                 <button type='button create-ad-button' className='btn btn-info'>
-                                    <a className='nav-link'>Create Ad</a>
+                                    <Link to={AppPaths.CreateAd} className='navbar-brand'>
+                                        Create Ad
+                                    </Link>
                                 </button>
                             </li>
                         </ul>
