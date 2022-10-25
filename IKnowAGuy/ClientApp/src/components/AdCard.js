@@ -1,7 +1,7 @@
 import React from 'react';
 import './Ad.css';
 
-export const Ad = ({ ad, index }) => {
+export const AdCard = ({ ad, index }) => {
     const imagePath = 'Assets/handyman-' + index + '.png';
     console.log(imagePath);
     return (
