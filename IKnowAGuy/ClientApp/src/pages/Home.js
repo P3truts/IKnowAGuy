@@ -1,9 +1,9 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { Ad } from './Ad';
-import { HeaderTyping } from './HeaderTyping';
+import { Ad } from '../components/Ad';
+import { HeaderTyping } from '../components/HeaderTyping';
 import './Home.css';
-import { SearchBar } from './SearchBar';
+import { SearchBar } from '../components/SearchBar';
 
 export function Home() {
     const [ads, setAds] = useState([]);
