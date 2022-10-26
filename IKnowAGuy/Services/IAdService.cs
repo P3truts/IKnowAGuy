@@ -13,5 +13,7 @@ namespace IKnowAGuy.Services
         IEnumerable<Ad> GetAdsByJob(long jobId);
 
         IEnumerable<Ad> GetAdsByAddress(long addressId);
+
+        IEnumerable<Ad> GetSearchedAds(string searched);
     }
 }

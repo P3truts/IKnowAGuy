@@ -66,5 +66,13 @@ namespace IKnowAGuy.Repositories.Implementation
         {
             return _context.SaveChanges() > 0;
         }
+
+        public IEnumerable<Ad> GetSearchedAds(string searched)
+        {
+            var query = _context.Ads.Where(ad => ad.Name.Contains(searched) || ad.Description.Contains(searched)).Include(a => a.Address)
+            .Include(a => a.JobCategory).Include(a => a.Service);
+
+            return query;
+        }
     }
 }

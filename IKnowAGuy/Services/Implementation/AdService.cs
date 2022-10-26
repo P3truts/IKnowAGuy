@@ -23,5 +23,7 @@ namespace IKnowAGuy.Services.Implementation
         public bool CreateAd(Ad ad) => adRepository.Add(ad);
         public bool UpdateAd(Ad ad) => adRepository.Update(ad);
         public bool DeleteAd(Ad ad) => adRepository.Remove(ad);
+        public IEnumerable<Ad> GetSearchedAds(string searched) => adRepository.GetSearchedAds(searched);
+
     }
 }
