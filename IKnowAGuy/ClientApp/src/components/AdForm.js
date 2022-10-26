@@ -1,8 +1,13 @@
 import React from 'react';
 import './AdForm.css';
 import { useState } from 'react';
+import fetchapi from '../utils/fetchApi';
+import { useNavigate } from 'react-router-dom';
+import PATH from '../AppPaths';
 
 const AdForm = () => {
+    const [isPending, setIsPending] = useState(false);
+    const navigate = useNavigate();
     const [service, setService] = useState({
         name: '',
         description: 'service description',
@@ -31,15 +36,21 @@ const AdForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setIsPending(true);
 
-        fetch('ads', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(ad),
-        })
-            .then((res) => res.json())
-            .then((serverRes) => console.log(serverRes))
-            .catch((e) => console.log(e));
+        fetchapi.post('ads', ad).then(() => {
+            setIsPending(false);
+            navigate(PATH.Home);
+        });
+
+        // fetch('ads', {
+        //     method: 'POST',
+        //     headers: { 'Content-Type': 'application/json' },
+        //     body: JSON.stringify(ad),
+        // })
+        //     .then((res) => res.json())
+        //     .then((serverRes) => console.log(serverRes))
+        //     .catch((e) => console.log(e));
     };
 
     const handleChange = (e) => {
@@ -65,6 +76,7 @@ const AdForm = () => {
                         className='form-select'
                         name='job-type'
                         aria-label='Default select example'
+                        defaultValue={'JobCategory'}
                     >
                         <option value='JobCategory1'>One</option>
                         <option value='JobCategory2'>Two</option>
@@ -86,7 +98,7 @@ const AdForm = () => {
                         id='service'
                         name='service'
                         aria-label='Default select example'
-                        required
+                        defaultValue={'Service'}
                     >
                         <option value='Service'>One</option>
                         <option value='Service2'>Two</option>
@@ -107,7 +119,7 @@ const AdForm = () => {
                         id='county'
                         name='county'
                         aria-label='Default select example'
-                        required
+                        defaultValue={'Ilfov'}
                     >
                         <option value='Ilfov'>Ilfov</option>
                         <option value='Timis'>Timis</option>
@@ -129,7 +141,7 @@ const AdForm = () => {
                         id='city'
                         name='city'
                         aria-label='Default select example'
-                        required
+                        defaultValue={'Bucuresti'}
                     >
                         <option value='Bucuresti'>Bucuresti</option>
                         <option value='Timisoara'>Timisoara</option>
@@ -180,9 +192,15 @@ const AdForm = () => {
                     </div>
                 </div>
 
-                <button type='submit' className='btn btn-primary'>
-                    Submit
-                </button>
+                {!isPending ? (
+                    <button type='submit' className='btn btn-primary'>
+                        Submit
+                    </button>
+                ) : (
+                    <button disabled type='submit' className='btn btn-primary'>
+                        Adding Add...
+                    </button>
+                )}
             </form>
         </>
     );
