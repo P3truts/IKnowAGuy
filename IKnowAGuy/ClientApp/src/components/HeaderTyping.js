@@ -1,5 +1,5 @@
 import React from 'react';
-import './HeaderTyping.css';
+import '../css/HeaderTyping.css';
 import Typed from 'typed.js';
 
 export const HeaderTyping = () => {
@@ -7,7 +7,7 @@ export const HeaderTyping = () => {
         <>
             <div id='typed-strings'>
                 <h1>
-                    Find Handymans for <span id='typed'></span>
+                    Find Handymen for <span id='typed'></span>
                 </h1>
             </div>
         </>

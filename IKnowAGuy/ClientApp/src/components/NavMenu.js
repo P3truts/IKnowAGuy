@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './NavMenu.css';
+import '../css/NavMenu.css';
 import AppPaths from '../AppPaths';
 
 const NavMenu = () => {

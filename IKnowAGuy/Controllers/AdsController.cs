@@ -85,5 +85,16 @@ namespace IKnowAGuy.Controllers
 
             return NoContent();
         }
+
+        // GET: /<AdsController>/searchedKeyword
+        [HttpGet("search/{searched}")]
+        public ActionResult<IEnumerable<Ad>> GetSearchedAds(string searched)
+        {
+            var ads = _adService.GetSearchedAds(searched);
+            if (!ads.Any())
+                return NotFound();
+
+            return Ok(ads);
+        }
     }
 }
