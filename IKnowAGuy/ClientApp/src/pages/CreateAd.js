@@ -5,8 +5,10 @@ import './CreateAd.css';
 const CreateAd = () => {
     return (
         <>
-            <div className='ad-form'>
-                <AdForm />;
+            <div className='create-ad-main'>
+                <div className='ad-form'>
+                    <AdForm />
+                </div>
             </div>
         </>
     );

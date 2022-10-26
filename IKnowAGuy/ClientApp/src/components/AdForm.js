@@ -66,16 +66,15 @@ const AdForm = () => {
                         name='job-type'
                         aria-label='Default select example'
                     >
-                        <option defaultValue={'test1'}>Default</option>
-                        <option value='test'>One</option>
-                        <option value='test2'>Two</option>
-                        <option value='test3'>Three</option>
+                        <option value='JobCategory1'>One</option>
+                        <option value='JobCategory2'>Two</option>
+                        <option value='JobCategory3'>Three</option>
                     </select>
                 </div>
 
                 <div className='mb-3'>
                     <label htmlFor='service' className='form-label'>
-                        Job Category
+                        Service
                     </label>
                     <select
                         onChange={(e) => {
@@ -89,10 +88,9 @@ const AdForm = () => {
                         aria-label='Default select example'
                         required
                     >
-                        <option defaultValue={'category1'}>Default</option>
-                        <option value='category'>One</option>
-                        <option value='category2'>Two</option>
-                        <option value='category3'>Three</option>
+                        <option value='Service'>One</option>
+                        <option value='Service2'>Two</option>
+                        <option value='Service3'>Three</option>
                     </select>
                 </div>
                 <div className='mb-3'>
@@ -111,10 +109,9 @@ const AdForm = () => {
                         aria-label='Default select example'
                         required
                     >
-                        <option defaultValue={'Ilfov'}>Default</option>
-                        <option value='category'>One</option>
-                        <option value='category2'>Two</option>
-                        <option value='category3'>Three</option>
+                        <option value='Ilfov'>Ilfov</option>
+                        <option value='Timis'>Timis</option>
+                        <option value='Cluj'>Cluj</option>
                     </select>
                 </div>
                 <div className='mb-3'>
@@ -126,6 +123,7 @@ const AdForm = () => {
                             const newAddress = { ...address };
                             newAddress.city = e.target.value;
                             setAddress(newAddress);
+                            console.log(newAddress);
                         }}
                         className='form-select'
                         id='city'
@@ -133,10 +131,9 @@ const AdForm = () => {
                         aria-label='Default select example'
                         required
                     >
-                        <option defaultValue={'Bucuresti'}>Default</option>
-                        <option value='category'>One</option>
-                        <option value='category2'>Two</option>
-                        <option value='category3'>Three</option>
+                        <option value='Bucuresti'>Bucuresti</option>
+                        <option value='Timisoara'>Timisoara</option>
+                        <option value='Cluj-Napoca'>Cluj-Napoca</option>
                     </select>
                 </div>
                 <div className='mb-3'>

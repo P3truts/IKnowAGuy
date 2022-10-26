@@ -1,4 +1,15 @@
 .ad-form {
-    margin-top: 20%;
-    text-align: center;
+    width: 40vw;
+    background-color: white;
+}
+
+.create-ad-main {
+    margin-top: 10%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    /* background-image: url(https://cdn.mesterilocali.ro/images/inregistrare-meseriasi.webp);
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover; */
 }
