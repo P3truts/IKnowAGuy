@@ -1,17 +1,21 @@
 import React from 'react';
 import '../css/SearchBar.css';
-import { useState, useEffect } from 'react';
-import { event } from 'jquery';
+import { useState } from 'react';
 
 
 export const SearchBar = ({ setAds }) => {
     const [searchTerm, setSearchTerm] = useState('');
 
     const searchAds = async (searchTerm) => {
-        const resp = await fetch(`ads/search/${(searchTerm)}`)
-        var searchData = await resp.json();
-        console.log(searchData);
-        setAds(searchData);
+        const req = await fetch(`ads/search/${(searchTerm)}`)
+        if (req.ok) {
+            var searchData = await req.json();
+            setAds(searchData);
+            console.log(searchData);
+        } else {
+            console.log("Request is nok");
+            setAds([]);
+        }
     };
 
     return (
