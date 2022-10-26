@@ -27,7 +27,9 @@ export function Home() {
         <>
             <HeaderTyping />
             <SearchBar />
-            <h2 style={{ textAlign: 'left' }}>Services</h2>
+            <div className='container'>
+                <h2 style={{ paddingLeft: '20px' }}>Services</h2>
+            </div>
             <div className='ads-div container'>
                 {ads.map((ad, index) => {
                     return <AdCard ad={ad} index={index} key={index} />;
