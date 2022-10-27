@@ -26,10 +26,17 @@ export function AdDetails() {
         <>
             <h2 style={{ textAlign: 'left' }}>Ad Details</h2>
             <div className='ads-div container'>
-                {(ad.length > 0 &&
-                    ad.map((ad) => {
-                        return <div>{ad.name}</div>;
-                    })) || (ad.length == 0 && <h3>No ad found!</h3>)}
+                <img src={`Assets/handyman-${ad.id}.png`} className='card-img-top' alt='...' />
+                <div className='card-body'>
+                    <h3>{ad.name}</h3>
+                    <p className='card-text'>{ad.description}</p>
+                        <p className='card-text'>{ad.date}</p>
+                        {/* <p className='card-text'>{ad.jobCategory.name}</p>
+                        <p className='card-text'>{ad.service.name}</p> */}
+                        <a href='#' className='btn btn-primary'>
+                            Contact
+                        </a>
+                    </div>
             </div>
         </>
     );

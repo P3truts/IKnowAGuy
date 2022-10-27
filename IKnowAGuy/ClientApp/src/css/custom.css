@@ -15,5 +15,6 @@ code {
 
 .page-container {
   height: fit-content;
-  margin-bottom: 50px;
+  margin-bottom: 10%;
+  margin-top: 10%;
 }
