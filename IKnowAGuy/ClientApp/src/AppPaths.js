@@ -3,7 +3,7 @@ const PATH = {
     CreateAd: '/create-ad',
     LogIn: '/log-in',
     SignIn: '/sign-in',
-    AdDetails: `/ad-details`,
+    AdDetails: `/ad-details/:id`,
 };
 
 export default PATH;
