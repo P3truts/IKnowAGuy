@@ -15,7 +15,7 @@ const AdCard = ({ ad }) => {
                         <a href={ad.id}>{ad.name}</a>
                         </h5> */}
                     <button type='button' className='btn'>
-                                <Link to={AppPaths.AdDetails} className='navbar-brand' style={{ color: 'black' }}>
+                                <Link to={`/ad-details/${ad.id}`} className='navbar-brand' style={{ color: 'black' }}>
                                     {ad.name}
                                 </Link>
                             </button>

@@ -1,5 +1,5 @@
 import React from 'react';
-import './AdForm.css';
+import '../css/AdForm.css';
 import { useState } from 'react';
 import fetchapi from '../utils/fetchApi';
 import { useNavigate } from 'react-router-dom';
