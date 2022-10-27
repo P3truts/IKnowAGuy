@@ -10,7 +10,7 @@ export const HeaderTyping = () => {
         new Typed('#typed', {
             strings: ['paintings', 'renovations', 'cleaning', 'almost anything'],
             typeSpeed: 90,
-            backSpeed: 9,
+            backSpeed: 10,
             loop: true,
             showCursor: false,
         });
@@ -18,7 +18,7 @@ export const HeaderTyping = () => {
 
     useEffect(() => {
         typed();
-      });
+      }, []);
 
     return (
         <>
