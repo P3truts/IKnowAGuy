@@ -19,7 +19,8 @@ namespace IKnowAGuy.Repositories.Implementation
             return Save();
         }
 
-        public Ad Get(long id) => _context.Ads.FirstOrDefault(a => a.Id == id);
+        public Ad Get(long id) => _context.Ads.Include(a => a.Address).Include(a => a.JobCategory).Include(a => a.Service)
+            .FirstOrDefault(a => a.Id == id);
         public IEnumerable<Ad> GetAdsByAddress(long addressId)
         {
             var querry = from ad in _context.Ads
@@ -69,8 +70,9 @@ namespace IKnowAGuy.Repositories.Implementation
 
         public IEnumerable<Ad> GetSearchedAds(string searched)
         {
-            var query = _context.Ads.Where(ad => ad.Name.Contains(searched) || ad.Description.Contains(searched)).Include(a => a.Address)
-            .Include(a => a.JobCategory).Include(a => a.Service);
+            var query = _context.Ads.Where(ad => ad.Name.Contains(searched) || ad.Description.Contains(searched) || 
+                ad.JobCategory.Name.Contains(searched) || ad.Service.Name.Contains(searched)).Include(a => a.Address)
+                    .Include(a => a.JobCategory).Include(a => a.Service);
 
             return query;
         }
