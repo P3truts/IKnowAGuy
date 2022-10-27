@@ -1,11 +1,35 @@
 import React from 'react';
 import '../css/AdForm.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import fetchapi from '../utils/fetchApi';
 import { useNavigate } from 'react-router-dom';
 import PATH from '../AppPaths';
 
+const LOCATIONS_API = 'https://roloca.coldfuse.io';
+
 const AdForm = () => {
+    const [counties, setCounties] = useState([]);
+    const [county, setCounty] = useState('');
+    const [countyAuto, setCountyAuto] = useState('');
+    const [cities, setCities] = useState([]);
+
+    const loader = async (url, cb) => {
+        fetchapi.get(url).then((res) => {
+            cb(res);
+        });
+    };
+
+    useEffect(() => {
+        if (counties.length === 0) {
+            loader(LOCATIONS_API + '/judete', setCounties);
+        }
+        if (countyAuto) {
+            loader(LOCATIONS_API + '/orase/' + countyAuto, setCities);
+        } else {
+            loader(LOCATIONS_API + '/orase/AB', setCities);
+        }
+    }, [county]);
+
     const [isPending, setIsPending] = useState(false);
     const navigate = useNavigate();
     const [service, setService] = useState({
@@ -42,15 +66,6 @@ const AdForm = () => {
             setIsPending(false);
             navigate(PATH.Home);
         });
-
-        // fetch('ads', {
-        //     method: 'POST',
-        //     headers: { 'Content-Type': 'application/json' },
-        //     body: JSON.stringify(ad),
-        // })
-        //     .then((res) => res.json())
-        //     .then((serverRes) => console.log(serverRes))
-        //     .catch((e) => console.log(e));
     };
 
     const handleChange = (e) => {
@@ -109,10 +124,20 @@ const AdForm = () => {
                     <label htmlFor='county' className='form-label'>
                         County
                     </label>
+
                     <select
                         onChange={(e) => {
                             const newAddress = { ...address };
                             newAddress.county = e.target.value;
+
+                            counties.forEach((c) => {
+                                if (c.nume === e.target.value) {
+                                    setCountyAuto(c.auto);
+                                    return;
+                                }
+                            });
+
+                            setCounty(e.target.value);
                             setAddress(newAddress);
                         }}
                         className='form-select'
@@ -121,9 +146,14 @@ const AdForm = () => {
                         aria-label='Default select example'
                         defaultValue={'Ilfov'}
                     >
-                        <option value='Ilfov'>Ilfov</option>
-                        <option value='Timis'>Timis</option>
-                        <option value='Cluj'>Cluj</option>
+                        {counties.length > 1 &&
+                            counties.map((county, index) => {
+                                return (
+                                    <option key={index} value={county.nume}>
+                                        {county.nume}
+                                    </option>
+                                );
+                            })}
                     </select>
                 </div>
                 <div className='mb-3'>
@@ -135,7 +165,6 @@ const AdForm = () => {
                             const newAddress = { ...address };
                             newAddress.city = e.target.value;
                             setAddress(newAddress);
-                            console.log(newAddress);
                         }}
                         className='form-select'
                         id='city'
@@ -143,9 +172,14 @@ const AdForm = () => {
                         aria-label='Default select example'
                         defaultValue={'Bucuresti'}
                     >
-                        <option value='Bucuresti'>Bucuresti</option>
-                        <option value='Timisoara'>Timisoara</option>
-                        <option value='Cluj-Napoca'>Cluj-Napoca</option>
+                        {cities.length > 1 &&
+                            cities.map((city, index) => {
+                                return (
+                                    <option key={index} value={city.nume}>
+                                        {city.nume}
+                                    </option>
+                                );
+                            })}
                     </select>
                 </div>
                 <div className='mb-3'>
