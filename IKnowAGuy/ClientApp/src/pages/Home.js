@@ -31,11 +31,10 @@ export function Home() {
             <SearchBar setAds={setAds} />
             <h2 style={{ textAlign: 'left' }}>Ads</h2>
             <div className='ads-div container'>
-                {ads.length > 0 &&
+                {(ads.length > 0 &&
                     ads.map((ad) => {
                         return <AdCard ad={ad} key={ad.id} />;
-                    })}
-                {ads.length == 0 && <h3>No ads found!</h3>}
+                    })) || (ads.length == 0 && <h3>No ads found!</h3>)}
             </div>
         </>
     );

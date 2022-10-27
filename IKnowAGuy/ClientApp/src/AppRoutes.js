@@ -1,6 +1,7 @@
-import { FetchData } from './components/FetchData';
+// import { FetchData } from './components/FetchData';
 import { Home } from './pages/Home';
 import CreateAd from './pages/CreateAd';
+import { AdDetails } from './pages/AdDetails';
 import AppPaths from './AppPaths';
 
 const AppRoutes = [
@@ -14,11 +15,15 @@ const AppRoutes = [
     },
     {
         path: AppPaths.LogIn,
-        element: <CreateAd />,
+        element: <Home />,
     },
     {
         path: AppPaths.SignIn,
-        element: <CreateAd />,
+        element: <Home />,
+    },
+    {
+        path: AppPaths.AdDetails,
+        element: <AdDetails />,
     },
     // {
     //     path: '/fetch-data',
