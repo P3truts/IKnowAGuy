@@ -25,7 +25,7 @@ const AdCard = ({ ad }) => {
                     <p className='card-text'>{ad.service.name}</p>
                     <p className='card-text'>{ad.address.city}</p>
                     <p className='card-text'>{ad.address.county}</p>
-                    <a href='#' className='btn btn-primary'>
+                    <a href='#' className='btn ad-contact'>
                         Contact
                     </a>
                 </div>

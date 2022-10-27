@@ -4,12 +4,19 @@
 }
 
 .create-ad-main {
-    margin-top: 10%;
-    height: 100vh;
+    height: 80vh;
     display: flex;
     justify-content: center;
     /* background-image: url(https://cdn.mesterilocali.ro/images/inregistrare-meseriasi.webp);
     background-position: top;
     background-repeat: no-repeat;
     background-size: cover; */
+
+}
+
+.ad-form img {
+    display: block;
+    width: 130px;
+    margin: auto;
+    margin-bottom: 5%;
 }

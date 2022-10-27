@@ -47,7 +47,7 @@ namespace IKnowAGuy.Repositories.Implementation
         }
 
         public IEnumerable<Ad> GetAll() => _context.Ads.Include(a => a.Address)
-            .Include(a => a.JobCategory).Include(a => a.Service).ToList();
+            .Include(a => a.JobCategory).Include(a => a.Service).ToList().OrderByDescending(a => a.Date);
            
 
         public bool Remove(Ad ad)

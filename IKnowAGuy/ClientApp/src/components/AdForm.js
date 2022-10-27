@@ -80,7 +80,7 @@ const AdForm = () => {
 
     return (
         <>
-            <form className='form-test' onSubmit={handleSubmit}>
+            <form className='form-ad' onSubmit={handleSubmit}>
                 <div className='mb-3'>
                     <label htmlFor='job-type' className='form-label'>
                         Job Type
@@ -203,7 +203,6 @@ const AdForm = () => {
                         id='name'
                         name='ad-name'
                         type='text'
-                        placeholder='Default input'
                         aria-label='default input example'
                         required
                     />
@@ -224,18 +223,17 @@ const AdForm = () => {
                             id='description'
                             name='description'
                             rows='3'
-                            placeholder='Min 10 words'
                             required
                         ></textarea>
                     </div>
                 </div>
 
                 {!isPending ? (
-                    <button type='submit' className='btn btn-primary'>
+                    <button type='submit' className='btn'>
                         Submit
                     </button>
                 ) : (
-                    <button disabled type='submit' className='btn btn-primary'>
+                    <button disabled type='submit' className='btn'>
                         Adding Add...
                     </button>
                 )}

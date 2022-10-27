@@ -1,0 +1,9 @@
+.ad-form button{
+    display: block;
+    margin: auto;
+    background-color: #0dcaf0;
+    width: 40vw;
+    height: 6vh;
+    color: white;
+    font-size: 1.5rem;
+}
