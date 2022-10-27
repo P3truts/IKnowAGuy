@@ -23,6 +23,8 @@ const AdCard = ({ ad }) => {
                     <p className='card-text'>{formatTime(ad.date)}</p>
                     <p className='card-text'>{ad.jobCategory.name}</p>
                     <p className='card-text'>{ad.service.name}</p>
+                    <p className='card-text'>{ad.address.city}</p>
+                    <p className='card-text'>{ad.address.county}</p>
                     <a href='#' className='btn btn-primary'>
                         Contact
                     </a>
