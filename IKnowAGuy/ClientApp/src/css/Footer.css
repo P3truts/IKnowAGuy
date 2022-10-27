@@ -1,8 +1,10 @@
 ﻿.footer {
-
     left: 0;
     bottom: 0;
     width: 100%;
-    text-align: left;
-    position: fixed;
+    /* position: fixed; */
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
