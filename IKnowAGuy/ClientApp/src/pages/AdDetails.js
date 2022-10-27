@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import '../pages/AdDetails.css';
 
 export function AdDetails() {
     const [ad, setAd] = useState([]);
@@ -26,16 +27,17 @@ export function AdDetails() {
 
     return (
         <>
-            <h2 style={{ textAlign: 'left' }}>Ad Details</h2>
+            
             {ad.id && (
-            <div className='ads-div container'>
-                <img src={`Assets/handyman-${ad.id}.png`} className='card-img-top' alt='...' />
+            <div className='container' style={{ 'paddingLeft' : '20%' }}>
+                <h2>Ad Details</h2>
+                <img src={`Assets/handyman-${ad.id}.png`} style={{ 'width' : '70%' }} alt='...' />
                 <div className='card-body'>
                     <h3>{ad.name}</h3>
                     <p className='card-text'>{ad.description}</p>
-                        <p className='card-text'>{ad.date}</p>
-                        {/* <p className='card-text'>{ad.jobCategory.name}</p>
-                        <p className='card-text'>{ad.service.name}</p> */}
+                        <p className='card-text'>{ad.date.split('T')[0]} {ad.date.split('T')[1].slice(0, 5)}</p>
+                        <p className='card-text'>{ad.jobCategory.name}</p>
+                        <p className='card-text'>{ad.service.name}</p>
                         <a href='#' className='btn btn-primary'>
                             Contact
                         </a>

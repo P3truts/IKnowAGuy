@@ -19,7 +19,8 @@ namespace IKnowAGuy.Repositories.Implementation
             return Save();
         }
 
-        public Ad Get(long id) => _context.Ads.FirstOrDefault(a => a.Id == id);
+        public Ad Get(long id) => _context.Ads.Include(a => a.Address).Include(a => a.JobCategory).Include(a => a.Service)
+            .FirstOrDefault(a => a.Id == id);
         public IEnumerable<Ad> GetAdsByAddress(long addressId)
         {
             var querry = from ad in _context.Ads

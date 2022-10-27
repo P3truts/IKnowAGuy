@@ -29,7 +29,7 @@ export function Home() {
         <>
             <HeaderTyping />
             <SearchBar setAds={setAds} />
-            <h2 style={{ textAlign: 'left' }}>Ads</h2>
+            <h2 style={{ 'paddingLeft' : '15%' }}>Ads</h2>
             <div className='ads-div container'>
                 {(ads.length > 0 &&
                     ads.map((ad) => {
