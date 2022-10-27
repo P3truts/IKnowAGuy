@@ -18,7 +18,7 @@ const AdCard = ({ ad }) => {
                                     {ad.name}
                                 </Link>
                             </button>
-                    <p className='card-text'>{ad.description}</p>
+                    <p className='card-text' style={{ color: 'grey' }}>{ad.description}</p>
                     <p className='card-text'>{ad.date.split('T')[0]} {ad.date.split('T')[1].slice(0, 5)}</p>
                     <p className='card-text'>{ad.jobCategory.name}</p>
                     <p className='card-text'>{ad.service.name}</p>
