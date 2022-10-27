@@ -1,7 +1,7 @@
 import React from 'react';
 import '../css/Ad.css';
 import { Link } from 'react-router-dom';
-import AppPaths from '../AppPaths';
+import { formatTime } from '../utils/helpers';
 
 const AdCard = ({ ad }) => {
     // const imagePath = 'Assets/handyman-' + ad.id + '.png';
@@ -15,12 +15,12 @@ const AdCard = ({ ad }) => {
                         <a href={ad.id}>{ad.name}</a>
                         </h5> */}
                     <button type='button' className='btn'>
-                                <Link to={`/ad-details/${ad.id}`} className='navbar-brand' style={{ color: 'black' }}>
-                                    {ad.name}
-                                </Link>
-                            </button>
+                        <Link to={`/ad-details/${ad.id}`} className='navbar-brand' style={{ color: 'black' }}>
+                            {ad.name}
+                        </Link>
+                    </button>
                     <p className='card-text'>{ad.description}</p>
-                    <p className='card-text'>{ad.date}</p>
+                    <p className='card-text'>{formatTime(ad.date)}</p>
                     <p className='card-text'>{ad.jobCategory.name}</p>
                     <p className='card-text'>{ad.service.name}</p>
                     <a href='#' className='btn btn-primary'>

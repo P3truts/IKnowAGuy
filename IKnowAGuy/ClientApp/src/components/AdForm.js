@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import fetchapi from '../utils/fetchApi';
 import { useNavigate } from 'react-router-dom';
 import PATH from '../AppPaths';
+import { getCurentTime } from '../utils/helpers';
 
 const LOCATIONS_API = 'https://roloca.coldfuse.io';
 
@@ -60,6 +61,9 @@ const AdForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        ad.date = getCurentTime();
+
         setIsPending(true);
 
         fetchapi.post('ads', ad).then(() => {

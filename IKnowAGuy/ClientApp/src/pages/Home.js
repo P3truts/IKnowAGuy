@@ -34,7 +34,8 @@ export function Home() {
                 {(ads.length > 0 &&
                     ads.map((ad) => {
                         return <AdCard ad={ad} key={ad.id} />;
-                    })) || (ads.length == 0 && <h3>No ads found!</h3>)}
+                    })) ||
+                    (ads.length === 0 && <h3>No ads found!</h3>)}
             </div>
         </>
     );
