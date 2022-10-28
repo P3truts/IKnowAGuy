@@ -37,7 +37,7 @@ const fetchapi = {
             headers: { 'Content-Type': 'application/json' },
         });
         try {
-            return await request.json();
+            return await request;
         } catch (error) {
             console.error(error);
         }
