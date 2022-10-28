@@ -95,11 +95,11 @@ const AdForm = () => {
                         className='form-select'
                         name='job-type'
                         aria-label='Default select example'
-                        defaultValue={'JobCategory'}
+                        defaultValue={'Choose category'}
                     >
-                        <option value='JobCategory1'>One</option>
-                        <option value='JobCategory2'>Two</option>
-                        <option value='JobCategory3'>Three</option>
+                        <option value='Piping'>Piping</option>
+                        <option value='Electrics'>Electrics</option>
+                        <option value='Carpentry'>Carpentry</option>
                     </select>
                 </div>
 
@@ -117,11 +117,10 @@ const AdForm = () => {
                         id='service'
                         name='service'
                         aria-label='Default select example'
-                        defaultValue={'Service'}
                     >
-                        <option value='Service'>One</option>
-                        <option value='Service2'>Two</option>
-                        <option value='Service3'>Three</option>
+                        <option value='Pipe repairs'>Pipe repairs</option>
+                        <option value='Electric installation'>Electric installation</option>
+                        <option value='General repairs'>General repairs</option>
                     </select>
                 </div>
                 <div className='mb-3'>

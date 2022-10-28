@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IKnowAGuy.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20221013185756_CreateDb")]
+    [Migration("20221028052902_CreateDb")]
     partial class CreateDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
