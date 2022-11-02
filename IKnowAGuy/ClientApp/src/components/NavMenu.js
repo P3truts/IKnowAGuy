@@ -5,8 +5,8 @@ import "../css/NavMenu.css";
 
 const NavMenu = () => {
     return (
-        <nav className="navbar navbar-expand-lg">
-            <div className="container-fluid">
+        <nav className="navbar navbar-dark navbar-expand-lg">
+            <div className="container">
                 <Link to={AppPaths.Home} className="navbar-brand">
                     IKnowAGuy
                 </Link>
@@ -21,44 +21,28 @@ const NavMenu = () => {
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNav">
-                    <ul className="navbar-nav">
+                    <ul className="ms-auto navbar-nav">
                         <li className="nav-item">
-                            <button type="button" className="btn">
-                                <Link
-                                    to={AppPaths.Home}
-                                    className="navbar-brand">
-                                    Home
-                                </Link>
-                            </button>
+                            <Link to={AppPaths.Home} className="btn">
+                                Home
+                            </Link>
                         </li>
                         <li className="nav-item">
-                            <button type="button" className="btn">
-                                <Link
-                                    to={AppPaths.CreateAd}
-                                    className="navbar-brand">
-                                    Sign In
-                                </Link>
-                            </button>
+                            <Link to={AppPaths.CreateAd} className="btn">
+                                Sign In
+                            </Link>
                         </li>
                         <li className="nav-item">
-                            <button type="button" className="btn">
-                                <Link
-                                    to={AppPaths.CreateAd}
-                                    className="navbar-brand">
-                                    Log In
-                                </Link>
-                            </button>
+                            <Link to={AppPaths.CreateAd} className="btn">
+                                Log In
+                            </Link>
                         </li>
                         <li className="nav-item">
-                            <button
-                                type="button create-ad-button"
+                            <Link
+                                to={AppPaths.CreateAd}
                                 className="btn btn-info">
-                                <Link
-                                    to={AppPaths.CreateAd}
-                                    className="navbar-brand">
-                                    Create Ad
-                                </Link>
-                            </button>
+                                Create Ad
+                            </Link>
                         </li>
                     </ul>
                 </div>
