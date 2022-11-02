@@ -41,8 +41,8 @@ const SearchBar = ({ setAds }) => {
             <input
                 type="text"
                 className="form-control"
-                ariaLabel="Sizing example input"
-                ariaDescribedby="inputGroup-sizing-lg"
+                aria-label="Sizing example input"
+                aria-describedby="inputGroup-sizing-lg"
                 placeholder="Search for ads"
                 value={searchTerm}
                 onChange={handleChange}

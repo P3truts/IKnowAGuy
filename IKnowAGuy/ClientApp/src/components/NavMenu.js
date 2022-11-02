@@ -23,17 +23,17 @@ const NavMenu = () => {
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="ms-auto navbar-nav">
                         <li className="nav-item">
-                            <Link to={AppPaths.Home} className="btn">
+                            <Link to={AppPaths.Home} className="btn btn-outline-light">
                                 Home
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link to={AppPaths.CreateAd} className="btn">
+                            <Link to={AppPaths.CreateAd} className="btn btn-outline-light">
                                 Sign In
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link to={AppPaths.CreateAd} className="btn">
+                            <Link to={AppPaths.CreateAd} className="btn btn-outline-light">
                                 Log In
                             </Link>
                         </li>
