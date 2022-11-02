@@ -5,6 +5,7 @@ import fetchapi from "../utils/fetchApi";
 import { useNavigate } from "react-router-dom";
 import PATH from "../AppPaths";
 import { getCurentTime } from "../utils/helpers";
+import GeneralForm from "./GeneralForm";
 
 const LOCATIONS_API = "https://roloca.coldfuse.io";
 
@@ -73,160 +74,59 @@ const AdForm = () => {
     };
 
     return (
-        <form className="form-ad" onSubmit={handleSubmit}>
-            <div className="mb-3">
-                <label htmlFor="job-type" className="form-label">
-                    Job Type
-                </label>
-                <select
-                    onChange={(e) => {
-                        const newJobCategory = { ...jobCategory };
-                        newJobCategory.name = e.target.value;
-                        setJobCategory(newJobCategory);
-                    }}
-                    id="jobType"
-                    className="form-select"
-                    name="job-type"
-                    aria-label="Default select example"
-                    defaultValue={"Choose category"}>
-                    <option value="Piping">Piping</option>
-                    <option value="Electrics">Electrics</option>
-                    <option value="Carpentry">Carpentry</option>
-                </select>
-            </div>
+        <GeneralForm
+            onSubmit={handleSubmit}
+            onJobTypeChange={(e) => {
+                const newJobCategory = { ...jobCategory };
+                newJobCategory.name = e.target.value;
+                setJobCategory(newJobCategory);
+            }}
+            jobType={jobCategory}
+            onServiceChange={(e) => {
+                const newService = { ...service };
+                newService.name = e.target.value;
+                setService(newService);
+            }}
+            service={service}
+            onCountyChange={(e) => {
+                const newAddress = { ...address };
+                newAddress.county = e.target.value;
 
-            <div className="mb-3">
-                <label htmlFor="service" className="form-label">
-                    Service
-                </label>
-                <select
-                    onChange={(e) => {
-                        const newService = { ...service };
-                        newService.name = e.target.value;
-                        setService(newService);
-                    }}
-                    className="form-select"
-                    id="service"
-                    name="service"
-                    aria-label="Default select example">
-                    <option value="Pipe repairs">Pipe repairs</option>
-                    <option value="Electric installation">
-                        Electric installation
-                    </option>
-                    <option value="General repairs">General repairs</option>
-                </select>
-            </div>
-            <div className="mb-3">
-                <label htmlFor="county" className="form-label">
-                    County
-                </label>
+                counties.forEach((c) => {
+                    if (c.nume === e.target.value) {
+                        setCountyAuto(c.auto);
+                        return;
+                    }
+                });
 
-                <select
-                    onChange={(e) => {
-                        const newAddress = { ...address };
-                        newAddress.county = e.target.value;
-
-                        counties.forEach((c) => {
-                            if (c.nume === e.target.value) {
-                                setCountyAuto(c.auto);
-                                return;
-                            }
-                        });
-
-                        setCounty(e.target.value);
-                        setAddress(newAddress);
-                    }}
-                    className="form-select"
-                    id="county"
-                    name="county"
-                    aria-label="Default select example"
-                    defaultValue={"Ilfov"}>
-                    {counties.length > 1 &&
-                        counties.map((county, index) => {
-                            return (
-                                <option key={index} value={county.nume}>
-                                    {county.nume}
-                                </option>
-                            );
-                        })}
-                </select>
-            </div>
-            <div className="mb-3">
-                <label htmlFor="city" className="form-label">
-                    City
-                </label>
-                <select
-                    onChange={(e) => {
-                        const newAddress = { ...address };
-                        newAddress.city = e.target.value;
-                        setAddress(newAddress);
-                    }}
-                    className="form-select"
-                    id="city"
-                    name="city"
-                    aria-label="Default select example"
-                    defaultValue={"Bucuresti"}>
-                    {cities.length > 1 &&
-                        cities.map((city, index) => {
-                            return (
-                                <option key={index} value={city.nume}>
-                                    {city.nume}
-                                </option>
-                            );
-                        })}
-                </select>
-            </div>
-            <div className="mb-3">
-                <label htmlFor="ad-name" className="form-label">
-                    Ad Name
-                </label>
-                <input
-                    onChange={(e) => {
-                        const newAd = { ...ad };
-                        newAd.name = e.target.value;
-                        newAd.address = address;
-                        newAd.jobCategory = jobCategory;
-                        newAd.service = service;
-                        setAd(newAd);
-                    }}
-                    className="form-control"
-                    id="name"
-                    name="ad-name"
-                    type="text"
-                    aria-label="default input example"
-                    required
-                />
-            </div>
-
-            <div className="mb-3">
-                <div className="mb-3">
-                    <label htmlFor="description" className="form-label">
-                        Ad Description
-                    </label>
-                    <textarea
-                        onChange={(e) => {
-                            const newAd = { ...ad };
-                            newAd.description = e.target.value;
-                            setAd(newAd);
-                        }}
-                        className="form-control"
-                        id="description"
-                        name="description"
-                        rows="3"
-                        required></textarea>
-                </div>
-            </div>
-
-            {!isPending ? (
-                <button type="submit" className="btn">
-                    Submit
-                </button>
-            ) : (
-                <button disabled type="submit" className="btn">
-                    Adding Add...
-                </button>
-            )}
-        </form>
+                setCounty(e.target.value);
+                setAddress(newAddress);
+            }}
+            county={county}
+            counties={counties}
+            onCityChange={(e) => {
+                const newAddress = { ...address };
+                newAddress.city = e.target.value;
+                setAddress(newAddress);
+            }}
+            city={city}
+            cities={cities}
+            onAdNameChange={(e) => {
+                const newAd = { ...ad };
+                newAd.name = e.target.value;
+                newAd.address = address;
+                newAd.jobCategory = jobCategory;
+                newAd.service = service;
+                setAd(newAd);
+            }}
+            adName={ad.name}
+            onDescriptionChange={(e) => {
+                const newAd = { ...ad };
+                newAd.description = e.target.value;
+                setAd(newAd);
+            }}
+            description={ad.description}
+        />
     );
 };
 
