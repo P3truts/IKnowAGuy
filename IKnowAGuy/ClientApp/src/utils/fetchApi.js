@@ -1,5 +1,5 @@
 const fetchapi = {
-    get: async function (url) {
+    get: async (url) => {
         const request = await fetch(url);
         try {
             return await request.json();
@@ -7,10 +7,10 @@ const fetchapi = {
             console.error(error);
         }
     },
-    post: async function (url, data) {
+    post: async (url, data) => {
         const request = await fetch(url, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data),
         });
         try {
@@ -19,10 +19,10 @@ const fetchapi = {
             console.error(error);
         }
     },
-    put: async function (url, data) {
+    put: async (url, data) => {
         const request = await fetch(url, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data),
         });
         try {
@@ -31,10 +31,10 @@ const fetchapi = {
             console.error(error);
         }
     },
-    delete: async function (url) {
+    delete: async (url) => {
         const request = await fetch(url, {
-            method: 'DELETE',
-            headers: { 'Content-Type': 'application/json' },
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" },
         });
         try {
             return await request;

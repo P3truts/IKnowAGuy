@@ -1,20 +1,5 @@
-/* Provide sufficient contrast against white background */
-/* a {
-  color: #0366d6;
-}
-
-code {
-  color: #E01A76;
-}
-
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
-} */
-
 .page-container {
-  height: fit-content;
-  margin-bottom: 10%;
-  margin-top: 10%;
+    height: fit-content;
+    margin-bottom: 10%;
+    margin-top: 10%;
 }

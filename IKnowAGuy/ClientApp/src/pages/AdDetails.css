@@ -10,8 +10,8 @@
 }
 
 .ad-details-container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        width: 90vw;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 90vw;
 }

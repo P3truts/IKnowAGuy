@@ -1,22 +1,22 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
-import AdCard from '../components/AdCard';
-import { HeaderTyping } from '../components/HeaderTyping';
-import '../css/Home.css';
-import { SearchBar } from '../components/SearchBar';
+import { useState, useEffect } from "react";
+import AdCard from "../components/AdCard";
+import { HeaderTyping } from "../components/HeaderTyping";
+import { SearchBar } from "../components/SearchBar";
 
-export function Home() {
+import "../css/Home.css";
+
+const Home = () => {
     const [ads, setAds] = useState([]);
 
     console.log(ads);
 
     const loader = async () => {
-        const req = await fetch('ads');
+        const req = await fetch("ads");
         if (req.ok) {
             const res = await req.json();
             setAds(res);
         } else {
-            console.log('req is not ok');
+            console.log("req is not ok");
             setAds([]);
         }
     };
@@ -29,8 +29,8 @@ export function Home() {
         <>
             <HeaderTyping />
             <SearchBar setAds={setAds} />
-            <h2 className='text-center mb-5'>Latest Ads</h2>
-            <div className='ads-div container'>
+            <h2 className="text-center mb-5">Latest Ads</h2>
+            <div className="ads-div container">
                 {(ads.length > 0 &&
                     ads.map((ad) => {
                         return <AdCard ad={ad} key={ad.id} />;
@@ -39,4 +39,6 @@ export function Home() {
             </div>
         </>
     );
-}
+};
+
+export default Home;

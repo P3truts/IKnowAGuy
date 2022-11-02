@@ -4,7 +4,7 @@ export const getCurentTime = () => {
 };
 
 export const formatTime = (str) => {
-    const indexT = str.indexOf('T');
+    const indexT = str.indexOf("T");
 
     if (indexT > 0) {
         return str.slice(0, indexT);
