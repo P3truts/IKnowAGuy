@@ -109,7 +109,7 @@ const AdForm = () => {
                 newAddress.city = e.target.value;
                 setAddress(newAddress);
             }}
-            city={city}
+            city={ad.city}
             cities={cities}
             onAdNameChange={(e) => {
                 const newAd = { ...ad };
@@ -126,6 +126,7 @@ const AdForm = () => {
                 setAd(newAd);
             }}
             description={ad.description}
+            isPending={isPending}
         />
     );
 };

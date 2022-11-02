@@ -16,6 +16,7 @@ const GeneralForm = ({
     adName,
     onDescriptionChange,
     description,
+    isPending
 }) => {
     return (
         <form className="form-ad" onSubmit={onSubmit}>
