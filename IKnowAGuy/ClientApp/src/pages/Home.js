@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import AdCard from "../components/AdCard";
-import { HeaderTyping } from "../components/HeaderTyping";
-import { SearchBar } from "../components/SearchBar";
+import HeaderTyping from "../components/HeaderTyping";
+import SearchBar from "../components/SearchBar";
 
 import "../css/Home.css";
 

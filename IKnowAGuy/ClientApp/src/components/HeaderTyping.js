@@ -2,7 +2,7 @@ import "../css/HeaderTyping.css";
 import Typed from "typed.js";
 import { useEffect } from "react";
 
-export const HeaderTyping = () => {
+const HeaderTyping = () => {
     const typed = () => {
         new Typed("#typed", {
             strings: [
@@ -30,3 +30,5 @@ export const HeaderTyping = () => {
         </div>
     );
 };
+
+export default HeaderTyping;
