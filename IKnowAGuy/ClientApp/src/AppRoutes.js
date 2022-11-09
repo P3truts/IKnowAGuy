@@ -1,7 +1,8 @@
-import Home from "./pages/Home";
-import CreateAd from "./pages/CreateAd";
-import AdDetails from "./pages/AdDetails";
-import AppPaths from "./AppPaths";
+import Home from './pages/Home';
+import CreateAd from './pages/CreateAd';
+import AdDetails from './pages/AdDetails';
+import UpdateAd from './pages/UpdateAd';
+import PATH from './AppPaths';
 
 const AppRoutes = [
     {
@@ -9,19 +10,23 @@ const AppRoutes = [
         element: <Home />,
     },
     {
-        path: AppPaths.CreateAd,
+        path: PATH.CreateAd,
         element: <CreateAd />,
     },
     {
-        path: AppPaths.LogIn,
+        path: PATH.UpdateAd,
+        element: <UpdateAd />,
+    },
+    {
+        path: PATH.LogIn,
         element: <Home />,
     },
     {
-        path: AppPaths.SignIn,
+        path: PATH.SignIn,
         element: <Home />,
     },
     {
-        path: AppPaths.AdDetails,
+        path: PATH.AdDetails,
         element: <AdDetails />,
     },
 ];
