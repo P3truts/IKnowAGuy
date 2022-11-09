@@ -1,13 +1,14 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+
 using IKnowAGuy.Repositories;
 using IKnowAGuy.Repositories.Implementation;
 using IKnowAGuy.Services;
-
 using IKnowAGuy.Data;
 using IKnowAGuy.Models;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using IKnowAGuy.Data.Seed;
 using IKnowAGuy.Services.Implementation;
+using IKnowAGuy.Configurations;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DatabaseContext");
@@ -15,7 +16,13 @@ var connectionString = builder.Configuration.GetConnectionString("DatabaseContex
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(connectionString).EnableSensitiveDataLogging());
-builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<DatabaseContext>();
+
+builder.Services.AddAutoMapper(typeof(MapperInitializer));
+
+builder.Services.AddAuthentication();
+builder.Services.AddIdentity<AppUser, IdentityRole>(q => q.User.RequireUniqueEmail = true)
+    .AddEntityFrameworkStores<DatabaseContext>().AddDefaultTokenProviders();
+
 builder.Services.AddSession();
 
 builder.Services.AddScoped<IAdService, AdService>();
@@ -51,8 +58,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 
-app.UseAuthorization();
 app.UseAuthentication();
+app.UseAuthorization();
 
 app.UseSwagger();
 app.UseSwaggerUI(options =>
