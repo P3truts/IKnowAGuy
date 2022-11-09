@@ -1,4 +1,6 @@
-﻿namespace IKnowAGuy.Data.Seed
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace IKnowAGuy.Data.Seed
 {
     public static class MigrationManager
     {
@@ -14,7 +16,7 @@
                         {
                             DataSeeder.GetInstance().SeedData(appContext);
                         }
-                        //appContext.Database.Migrate();
+                        appContext.Database.Migrate();
                     }
                     catch (Exception ex)
                     {
