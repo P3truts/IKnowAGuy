@@ -42,7 +42,8 @@ namespace IKnowAGuy.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    AdId = table.Column<long>(type: "bigint", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CompanyType = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CompanyName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CompanyDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -230,6 +231,7 @@ namespace IKnowAGuy.Migrations
                     JobCategoryId = table.Column<long>(type: "bigint", nullable: true),
                     UserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     RoleId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AppUserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -240,6 +242,11 @@ namespace IKnowAGuy.Migrations
                         name: "FK_Ads_Addresses_AddressId",
                         column: x => x.AddressId,
                         principalTable: "Addresses",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Ads_AspNetUsers_AppUserId",
+                        column: x => x.AppUserId,
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Ads_Jobs_JobCategoryId",
@@ -257,6 +264,11 @@ namespace IKnowAGuy.Migrations
                 name: "IX_Ads_AddressId",
                 table: "Ads",
                 column: "AddressId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Ads_AppUserId",
+                table: "Ads",
+                column: "AppUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Ads_JobCategoryId",

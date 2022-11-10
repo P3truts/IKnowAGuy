@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import PATH from '../AppPaths';
 import fetchapi from '../utils/fetchApi';
+import { formatTime } from '../utils/helpers';
 
 import '../pages/AdDetails.css';
 
@@ -11,11 +12,8 @@ const AdDetails = () => {
     const { id } = useParams();
     const navigate = useNavigate();
 
-    console.log(ad);
-
     const loader = async () => {
         const req = await fetch(`ads/${id}`);
-        // const req = await fetch(`ads/${1}`);
         if (req.ok) {
             const res = await req.json();
             setAd(res);
@@ -31,13 +29,6 @@ const AdDetails = () => {
         });
     };
 
-    // const updateAd = async () => {
-    //     fetchapi.put(`ads/update-ad/${id}`).then(() => {
-    //         // console.log(`ad ${id} is deleted`);
-    //         navigate(PATH.Home);
-    //     });
-    // };
-
     useEffect(() => {
         loader();
     }, []);
@@ -49,7 +40,7 @@ const AdDetails = () => {
                     Ad Details
                     <Link
                         to={`/update-ad/${id}`}
-                        className='btn btn-info'
+                        className='btn btn-info me-5'
                         style={{ position: 'relative', left: '38%' }}
                     >
                         Update
@@ -66,12 +57,24 @@ const AdDetails = () => {
                 <img src={`Assets/handyman-${ad.id}.png`} style={{ width: '70%' }} alt='...' />
                 <div className='card-body'>
                     <h3>{ad.name}</h3>
-                    <p className='card-text'>{ad.description}</p>
                     <p className='card-text'>
-                        {ad.date.split('T')[0]} {ad.date.split('T')[1].slice(0, 5)}
+                        <strong>Description</strong>: {ad.description}
                     </p>
-                    <p className='card-text'>{ad.jobCategory.name}</p>
-                    <p className='card-text'>{ad.service.name}</p>
+                    <p className='card-text'>
+                        <strong>Date</strong>: {formatTime(ad.date)}
+                    </p>
+                    <p className='card-text'>
+                        <strong>Category</strong>: {ad.jobCategory.name}
+                    </p>
+                    <p className='card-text'>
+                        <strong>Service</strong>: {ad.service.name}
+                    </p>
+                    <p className='card-text'>
+                        <strong>City</strong>:{ad.address.city}
+                    </p>
+                    <p className='card-text'>
+                        <strong>County</strong>:{ad.address.county}
+                    </p>
                     <a href='#' className='btn btn-primary'>
                         Contact
                     </a>

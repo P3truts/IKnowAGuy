@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IKnowAGuy.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20221028052902_CreateDb")]
+    [Migration("20221110073527_CreateDb")]
     partial class CreateDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,6 +34,9 @@ namespace IKnowAGuy.Migrations
 
                     b.Property<long?>("AddressId")
                         .HasColumnType("bigint");
+
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
@@ -61,6 +64,8 @@ namespace IKnowAGuy.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AddressId");
+
+                    b.HasIndex("AppUserId");
 
                     b.HasIndex("JobCategoryId");
 
@@ -96,9 +101,6 @@ namespace IKnowAGuy.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    b.Property<long>("AdId")
-                        .HasColumnType("bigint");
-
                     b.Property<string>("CompanyDescription")
                         .HasColumnType("nvarchar(max)");
 
@@ -118,6 +120,12 @@ namespace IKnowAGuy.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -357,6 +365,10 @@ namespace IKnowAGuy.Migrations
                         .WithMany()
                         .HasForeignKey("AddressId");
 
+                    b.HasOne("IKnowAGuy.Models.AppUser", null)
+                        .WithMany("Ads")
+                        .HasForeignKey("AppUserId");
+
                     b.HasOne("IKnowAGuy.Models.JobCategory", "JobCategory")
                         .WithMany()
                         .HasForeignKey("JobCategoryId");
@@ -443,6 +455,8 @@ namespace IKnowAGuy.Migrations
 
             modelBuilder.Entity("IKnowAGuy.Models.AppUser", b =>
                 {
+                    b.Navigation("Ads");
+
                     b.Navigation("Jobs");
 
                     b.Navigation("Services");

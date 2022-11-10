@@ -9,8 +9,8 @@ const fetchapi = {
     },
     post: async (url, data) => {
         const request = await fetch(url, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data),
         });
         try {
@@ -21,8 +21,8 @@ const fetchapi = {
     },
     put: async (url, data) => {
         const request = await fetch(url, {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data),
         });
         try {
@@ -33,8 +33,8 @@ const fetchapi = {
     },
     delete: async (url) => {
         const request = await fetch(url, {
-            method: "DELETE",
-            headers: { "Content-Type": "application/json" },
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
         });
         try {
             return await request;
