@@ -1,8 +1,9 @@
 const PATH = {
-    Home: "/",
-    CreateAd: "/create-ad",
-    LogIn: "/log-in",
-    SignIn: "/sign-in",
+    Home: '/',
+    CreateAd: '/create-ad',
+    UpdateAd: `/update-ad/:id`,
+    LogIn: '/log-in',
+    SignIn: '/sign-in',
     AdDetails: `/ad-details/:id`,
 };
 
