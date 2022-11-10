@@ -36,10 +36,11 @@ namespace IKnowAGuy.Services.Implementation
 
             var token = new JwtSecurityToken
             (
-                issuer: jwtSettings.GetSection("validIssuer").Value,
+                issuer: jwtSettings.GetSection("Issuer").Value,
                 claims: claims,
                 expires: expiration,
-                signingCredentials: signinCredentials
+                signingCredentials: signinCredentials,
+                audience: "IKnowAGuy"
             );
 
             return token;
