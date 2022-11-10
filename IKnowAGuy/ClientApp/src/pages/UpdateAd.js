@@ -3,8 +3,10 @@ import { useEffect, useState } from 'react';
 import fetchapi from '../utils/fetchApi';
 import FETCH_URL from '../AppFetchUrl';
 import GeneralForm from '../components/GeneralForm';
+import { getCurentTime } from '../utils/helpers';
 
 const UpdateAd = () => {
+    const [isPending, setIsPending] = useState(false);
     const { id } = useParams();
     const [ad, setAd] = useState({
         address: { county: '', city: '' },
@@ -20,56 +22,66 @@ const UpdateAd = () => {
             console.log(ad);
         });
     }, []);
-    console.log(ad.address.county);
 
-    const handleSubmit = () => {
-        console.log('submit');
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        ad.date = getCurentTime();
+        setIsPending(true);
+        console.log(ad);
+        debugger;
+
+        fetchapi.post(FETCH_URL.ads, ad).then(() => {
+            setIsPending(false);
+            //navigate(PATH.Home);
+        });
     };
 
-    const onJobTypeChange = () => {
-        console.log('on job type change');
+    const onChange = (e) => {
+        const newAd = { ...ad };
+        newAd[e.target.id] = e.target.value;
+        setAd(newAd);
     };
 
-    const onServiceChange = () => {
-        console.log('service change');
-    };
-    const onCountyChange = () => {
-        console.log('service change');
-    };
-
-    const cityChange = () => {
-        console.log('service change');
+    const onAddressChange = (e) => {
+        const newAd = { ...ad };
+        newAd.address[e.target.id] = e.target.value;
+        setAd(newAd);
     };
 
-    const adNameChange = () => {
-        console.log('ad name change');
+    const onJobChateggory = (e) => {
+        const newAd = { ...ad };
+        newAd.jobCategory.name = e.target.value;
+        setAd(newAd);
     };
 
-    const changeDescription = () => {
-        console.log('description');
+    const onServiceChange = (e) => {
+        const newAd = { ...ad };
+        newAd.service.name = e.target.value;
+        setAd(newAd);
     };
 
     return (
         <GeneralForm
             onSubmit={handleSubmit}
-            onJobTypeChange={onJobTypeChange}
+            onJobTypeChange={onJobChateggory}
             jobType={ad.jobCategory.name}
             onServiceChange={onServiceChange}
             service={ad.service.name}
-            onCountyChange={onCountyChange}
+            onCountyChange={onAddressChange}
             county={ad.address.county}
             counties={[{ nume: ad.address.county }]}
-            onCityChange={cityChange}
+            onCityChange={onAddressChange}
             city={ad.address.city}
             cities={[{ nume: ad.address.city }]}
-            onAdNameChange={adNameChange}
+            onAdNameChange={onChange}
             adName={ad.name}
             onDescriptionChange={(e) => {
                 const newAd = { ...ad };
                 newAd.description = e.target.value;
             }}
             description={ad.description}
-            isPending={true}
+            isPending={isPending}
         />
     );
 };
