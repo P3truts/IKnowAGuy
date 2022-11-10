@@ -29,12 +29,12 @@ const NavMenu = () => {
                             </Link>
                         </li>
                         <li className='nav-item'>
-                            <Link to={PATH.CreateAd} className='btn btn-outline-light'>
+                            <Link to={PATH.SignIn} className='btn btn-outline-light'>
                                 Sign In
                             </Link>
                         </li>
                         <li className='nav-item'>
-                            <Link to={PATH.CreateAd} className='btn btn-outline-light'>
+                            <Link to={PATH.LogIn} className='btn btn-outline-light'>
                                 Log In
                             </Link>
                         </li>
