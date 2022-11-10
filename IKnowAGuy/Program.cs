@@ -41,13 +41,14 @@ builder.Services.AddAuthentication(options =>
         ValidIssuer = jwtSettings.GetSection("Issuer").Value,
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key))
     };
+    opt.Audience = "IKnowAGuy";
 });
 
+builder.Services.AddAuthorization();
 
 builder.Services.AddIdentity<AppUser, IdentityRole>(q => q.User.RequireUniqueEmail = true)
     .AddEntityFrameworkStores<DatabaseContext>().AddDefaultTokenProviders();
 
-builder.Services.AddAuthorization();
 builder.Services.AddSession();
 
 builder.Services.AddScoped<IAdService, AdService>();
@@ -114,8 +115,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 
-app.UseAuthentication();
 app.UseAuthorization();
+app.UseAuthentication();
 
 app.UseSwagger();
 app.UseSwaggerUI(options =>
