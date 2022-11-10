@@ -1,6 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using IKnowAGuy.Models;
+using System.ComponentModel.DataAnnotations;
 
-namespace IKnowAGuy.Models
+namespace IKnowAGuy.ModelsDTO
 {
     public class UserDTO
     {

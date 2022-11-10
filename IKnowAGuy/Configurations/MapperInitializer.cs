@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using IKnowAGuy.Models;
+using IKnowAGuy.ModelsDTO;
 
 namespace IKnowAGuy.Configurations
 {
