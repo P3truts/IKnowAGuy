@@ -73,13 +73,15 @@ namespace IKnowAGuy.Controllers
             return CreatedAtAction("post",ad);
         }
 
-        // PUT api/<AdsController>/5
-        [HttpPut("{id}")]
-        public ActionResult Put(int id, [FromBody] Ad ad)
+        // PUT api/<AdsController>
+        [HttpPut]
+        public ActionResult Put([FromBody] Ad ad)
         {
            /* ad.Address = address;
             ad.Service = service;
             ad.Service.Job = job;*/
+           if(!ModelState.IsValid)
+                return BadRequest(ModelState);
 
             _adService.UpdateAd(ad);
 
