@@ -1,6 +1,7 @@
 ﻿using IKnowAGuy.Models;
 using IKnowAGuy.ModelsDTO;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -63,7 +64,8 @@ namespace IKnowAGuy.Services.Implementation
 
         private SigningCredentials GetSigningCredentials()
         {
-            var key = Environment.GetEnvironmentVariable("KEY", EnvironmentVariableTarget.Machine);
+            //var key = Environment.GetEnvironmentVariable("KEY", EnvironmentVariableTarget.Machine);
+            var key = "asldfhaw9poe78rtyqp3298tuq098utq0pw4jtpq02urtaslkdfhalsiufhap0opo2u";
             var secret = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
 
             return new SigningCredentials(secret, SecurityAlgorithms.HmacSha256);

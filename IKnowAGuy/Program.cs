@@ -18,13 +18,16 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DatabaseContext");
 // Add services to the container.
 
+
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(connectionString).EnableSensitiveDataLogging());
 
 builder.Services.AddAutoMapper(typeof(MapperInitializer));
 
 var jwtSettings = builder.Configuration.GetSection("Jwt");
-var key = Environment.GetEnvironmentVariable("KEY");
+//var key = Environment.GetEnvironmentVariable("KEY");
+
+var key = builder.Configuration["Jwt:Key"];
 
 builder.Services.AddAuthentication();
 builder.Services.AddAuthentication(options =>
@@ -100,6 +103,7 @@ builder.Services.AddSwaggerGen(options =>
     opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);*/
 
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
