@@ -11,7 +11,10 @@ const Home = () => {
     console.log(ads);
 
     const loader = async () => {
-        const req = await fetch("ads");
+        const req = await fetch("ads", {
+            headers: {'Content-Type': 'application/json'},
+            credentials: 'include'
+        });
         if (req.ok) {
             const res = await req.json();
             setAds(res);
