@@ -76,13 +76,50 @@ namespace IKnowAGuy.Controllers
                 {
                     return Unauthorized();
                 }
-                return Accepted(new { Token = await _authManager.CreateToken() });
+
+                var jwt = await _authManager.CreateToken();
+
+                Response.Cookies.Append("jwt", jwt, new CookieOptions
+                {
+                    HttpOnly = true
+                });
+
+                /*                return Accepted(new { Token = await _authManager.CreateToken() });*/
+
+                return Accepted(new { Token = jwt });
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, $"Something went wrong in the {nameof(Login)}!");
                 return Problem($"Something went wrong in the {nameof(Login)}!", statusCode: 500);
             }
+        }
+
+        [HttpGet("user")]
+        public async Task<IActionResult> User()
+        {
+            try
+            {
+                var jwt = Request.Cookies["jwt"];
+                var token = await _authManager.Verify(jwt);
+
+                var username = token.Claims?.FirstOrDefault()?.Value;
+
+                return Ok(username);
+            }
+            catch (Exception)
+            {
+                return Unauthorized();
+            }
+
+        }
+
+        [HttpPost("logout")]
+        public IActionResult Logout()
+        {
+            Response.Cookies.Delete("jwt");
+
+            return Ok();
         }
     }
 }
