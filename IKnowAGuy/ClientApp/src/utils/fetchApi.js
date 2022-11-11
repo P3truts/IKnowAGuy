@@ -42,6 +42,19 @@ const fetchapi = {
             console.error(error);
         }
     },
+    login: async (url, data) => {
+        const request = await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            body: JSON.stringify(data),
+        });
+        try {
+            return await request.json();
+        } catch (error) {
+            console.error(error);
+        }
+    },
 };
 
 export default fetchapi;
