@@ -34,7 +34,8 @@ namespace IKnowAGuy.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        [Authorize(AuthenticationSchemes = "Bearer")]
+/*        [Authorize(AuthenticationSchemes = "Bearer")]*/
+        [Authorize(AuthenticationSchemes = "JWT_OR_COOKIE")]
         public ActionResult<Ad> GetAd(int id)
         {
             /*            var ad = _adService.GetAdById(id);
