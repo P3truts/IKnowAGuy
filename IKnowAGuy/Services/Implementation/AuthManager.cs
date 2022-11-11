@@ -37,10 +37,11 @@ namespace IKnowAGuy.Services.Implementation
 
             var token = new JwtSecurityToken
             (
-                issuer: jwtSettings.GetSection("validIssuer").Value,
+                issuer: jwtSettings.GetSection("Issuer").Value,
                 claims: claims,
                 expires: expiration,
-                signingCredentials: signinCredentials
+                signingCredentials: signinCredentials,
+                audience: "IKnowAGuy"
             );
 
             return token;
@@ -76,6 +77,24 @@ namespace IKnowAGuy.Services.Implementation
             _user = await _userManager.FindByEmailAsync(loginUser.Email);
             return (_user != null && await _userManager.CheckPasswordAsync(_user, loginUser.Password));
 
+        }
+
+        public async Task<JwtSecurityToken> Verify(string jwt)
+        {
+            var jwtSettings = _configuration.GetSection("Jwt");
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Environment.GetEnvironmentVariable("KEY", EnvironmentVariableTarget.Machine);
+            tokenHandler.ValidateToken(jwt, new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                ValidateLifetime = true,
+                ValidateIssuerSigningKey = true,
+                ValidIssuer = jwtSettings.GetSection("Issuer").Value,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key)),
+                ValidateAudience = false
+            }, out SecurityToken validatedToken);
+
+            return (JwtSecurityToken)validatedToken;
         }
     }
 }

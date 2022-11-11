@@ -3,6 +3,9 @@ import CreateAd from './pages/CreateAd';
 import AdDetails from './pages/AdDetails';
 import UpdateAd from './pages/UpdateAd';
 import PATH from './AppPaths';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import Logout from './pages/Logout';
 
 const AppRoutes = [
     {
@@ -19,16 +22,20 @@ const AppRoutes = [
     },
     {
         path: PATH.LogIn,
-        element: <Home />,
+        element: <Login />,
     },
     {
         path: PATH.SignIn,
-        element: <Home />,
+        element: <Register />,
     },
     {
         path: PATH.AdDetails,
         element: <AdDetails />,
     },
+    {
+        path: PATH.LogOut,
+        element: <Logout />
+    }
 ];
 
 export default AppRoutes;

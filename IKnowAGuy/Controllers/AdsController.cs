@@ -1,5 +1,6 @@
 ﻿using IKnowAGuy.Models;
 using IKnowAGuy.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -10,10 +11,12 @@ namespace IKnowAGuy.Controllers
     public class AdsController : ControllerBase
     {
         private readonly IAdService _adService;
+        private readonly ILogger<AdsController> _logger;
 
-        public AdsController(IAdService adService)
+        public AdsController(IAdService adService, ILogger<AdsController> logger)
         {
             _adService = adService;
+            _logger = logger;
         }
 
         // GET: /<AdsController>
@@ -29,12 +32,26 @@ namespace IKnowAGuy.Controllers
 
         // GET api/<AdsController>/5
         [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+/*        [Authorize(AuthenticationSchemes = "Bearer")]*/
+        [Authorize(AuthenticationSchemes = "JWT_OR_COOKIE")]
         public ActionResult<Ad> GetAd(int id)
         {
-            var ad = _adService.GetAdById(id);
-            if(ad == null)
-                return NotFound();
-            return Ok(ad);
+            /*            var ad = _adService.GetAdById(id);
+                        if(ad == null)
+                            return NotFound();
+                        return Ok(ad);*/
+            try
+            {
+                var ad = _adService.GetAdById(id);
+                return Ok(ad);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Something went wrong in the {nameof(GetAd)}");
+                return StatusCode(500, "Internal Server Error. Please try again later.");
+            }
         }
 
         // POST api/<AdsController>

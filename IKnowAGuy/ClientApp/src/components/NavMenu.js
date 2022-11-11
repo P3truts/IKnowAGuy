@@ -3,7 +3,9 @@ import PATH from '../AppPaths';
 
 import '../css/NavMenu.css';
 
-const NavMenu = () => {
+const NavMenu = (username) => {
+    console.log("navigation username", username);
+    console.log("nav username object data", username.username.length == null);
     return (
         <nav className='navbar navbar-dark navbar-expand-lg'>
             <div className='container'>
@@ -28,16 +30,34 @@ const NavMenu = () => {
                                 Home
                             </Link>
                         </li>
-                        <li className='nav-item'>
-                            <Link to={PATH.CreateAd} className='btn btn-outline-light'>
-                                Sign In
-                            </Link>
-                        </li>
-                        <li className='nav-item'>
-                            <Link to={PATH.CreateAd} className='btn btn-outline-light'>
-                                Log In
-                            </Link>
-                        </li>
+                        {(username.username.length == null &&                      
+                            <>
+                                <li className='nav-item'>
+                                    <Link to={PATH.SignIn} className='btn btn-outline-light'>
+                                        Sign In
+                                    </Link>
+                                </li>
+                                <li className='nav-item'>
+                                    <Link to={PATH.LogIn} className='btn btn-outline-light'>
+                                        Log In
+                                    </Link>
+                                </li>
+                            </>
+                            )                            
+                        || (username.username.length > 0 &&                         
+                            <>
+                                <li className='nav-item'>
+                                    <btn className='btn btn-outline-light'>
+                                        Hi, {username}
+                                    </btn>
+                                </li>
+                                <li className='nav-item'>
+                                    <Link to={PATH.LogOut} className='btn btn-outline-light'>
+                                        Log Out
+                                    </Link>
+                                </li>
+                            </>
+                        )}
                         <li className='nav-item'>
                             <Link to={PATH.CreateAd} className='btn btn-info'>
                                 Create Ad

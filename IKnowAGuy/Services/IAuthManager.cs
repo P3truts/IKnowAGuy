@@ -1,4 +1,5 @@
 ﻿using IKnowAGuy.ModelsDTO;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace IKnowAGuy.Services
 {
@@ -6,5 +7,6 @@ namespace IKnowAGuy.Services
     {
         Task<bool> ValidateUser(LoginUserDTO loginUser);
         Task<string> CreateToken();
+        Task<JwtSecurityToken> Verify(string jwt);
     }
 }

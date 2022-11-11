@@ -13,6 +13,8 @@ using IKnowAGuy.Configurations;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.OpenApi.Models;
+using Microsoft.Net.Http.Headers;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DatabaseContext");
@@ -20,6 +22,9 @@ var connectionString = builder.Configuration.GetConnectionString("DatabaseContex
 
 
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddCors();
+
 builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(connectionString).EnableSensitiveDataLogging());
 
 builder.Services.AddAutoMapper(typeof(MapperInitializer));
@@ -29,7 +34,17 @@ var jwtSettings = builder.Configuration.GetSection("Jwt");
 
 var key = builder.Configuration["Jwt:Key"];
 
-builder.Services.AddAuthentication();
+builder.Services.AddAuthentication(options =>
+{
+    // custom scheme defined in .AddPolicyScheme() below
+    options.DefaultScheme = "JWT_OR_COOKIE";
+    options.DefaultChallengeScheme = "JWT_OR_COOKIE";
+});
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie("Cookies", options =>
+{
+    options.LoginPath = "/login";
+    options.ExpireTimeSpan = TimeSpan.FromDays(1);
+});
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -44,13 +59,28 @@ builder.Services.AddAuthentication(options =>
         ValidIssuer = jwtSettings.GetSection("Issuer").Value,
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key))
     };
+    opt.Audience = "IKnowAGuy";
+});
+builder.Services.AddAuthentication().AddPolicyScheme("JWT_OR_COOKIE", "JWT_OR_COOKIE", options =>
+{
+    // runs on each request
+    options.ForwardDefaultSelector = context =>
+    {
+        // filter by auth type
+        string authorization = context.Request.Headers[HeaderNames.Authorization];
+        if (!string.IsNullOrEmpty(authorization) && authorization.StartsWith("Bearer "))
+            return "Bearer";
+
+        // otherwise always check for cookie auth
+        return "Cookies";
+    };
 });
 
+builder.Services.AddAuthorization();
 
 builder.Services.AddIdentity<AppUser, IdentityRole>(q => q.User.RequireUniqueEmail = true)
     .AddEntityFrameworkStores<DatabaseContext>().AddDefaultTokenProviders();
 
-builder.Services.AddAuthorization();
 builder.Services.AddSession();
 
 builder.Services.AddScoped<IAdService, AdService>();
@@ -118,8 +148,15 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 
-app.UseAuthentication();
+app.UseCors(opt => opt
+    .WithOrigins(new []{ "http/localhost:3000" }) //react port
+    .AllowAnyHeader()
+    .AllowAnyMethod()
+    .AllowCredentials()
+);
+
 app.UseAuthorization();
+app.UseAuthentication();
 
 app.UseSwagger();
 app.UseSwaggerUI(options =>

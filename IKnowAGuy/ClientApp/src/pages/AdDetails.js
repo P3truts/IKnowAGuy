@@ -13,7 +13,15 @@ const AdDetails = () => {
     const navigate = useNavigate();
 
     const loader = async () => {
-        const req = await fetch(`ads/${id}`);
+        var headers = new Headers({
+            'Authorization': 'Bearer ' + process.env.API_TOKEN,
+            'Content-Type': 'application/json'
+          });
+
+        const req = await fetch(`ads/${id}`, {
+            headers: headers,
+            credentials: 'include'
+        });
         if (req.ok) {
             const res = await req.json();
             setAd(res);

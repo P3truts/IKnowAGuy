@@ -3,10 +3,11 @@ import Footer from "./Footer";
 
 import "../css/Layout.css";
 
-const Layout = ({ children }) => {
+const Layout = ({ children }, username) => {
+    console.log("layout username", username);
     return (
         <div>
-            <NavMenu />
+            <NavMenu username={username}/>
             <div className="container my-4">{children}</div>
             <Footer />
         </div>
