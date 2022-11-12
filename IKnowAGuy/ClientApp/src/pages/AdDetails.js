@@ -47,13 +47,13 @@ const AdDetails = () => {
 
     return (
         ad.id && (
-            <div className='container' style={{ paddingLeft: '20%' }}>
+            <div className='container' style={{ padding:"2%", position: "relative", paddingLeft: "15%" }}>
                 <h2>
                     Ad Details
                     <Link
                         to={`/update-ad/${id}`}
                         className='btn btn-info me-5'
-                        style={{ position: 'relative', left: '38%' }}
+                        style={{ position: 'relative', left: '42%' }}
                     >
                         Update
                     </Link>

@@ -18,7 +18,11 @@ const App = () => {
 
             const content = await response.text();
             
-            setUsername(content);
+            if (window.localStorage.getItem('username').length > 0){
+                setUsername(window.localStorage.getItem('username'));
+            } else {
+                setUsername(content);
+            }
 
             console.log("app username", username);
         }

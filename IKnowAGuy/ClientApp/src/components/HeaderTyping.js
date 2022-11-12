@@ -24,7 +24,7 @@ const HeaderTyping = () => {
 
     return (
         <div id="typed-strings">
-            <h1>
+            <h1 style={{padding: "5%"}}>
                 Find Handymen for <span id="typed"></span>
             </h1>
         </div>

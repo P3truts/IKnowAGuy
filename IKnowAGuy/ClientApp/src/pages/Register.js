@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import PATH from '../AppPaths';
 import fetchapi from '../utils/fetchApi';
 
+import '../pages/Register.css';
+
 const Register = () => {
 
     const navigate = useNavigate();
@@ -81,8 +83,10 @@ const Register = () => {
         //   });
     }
 
+    // style={{ padding: '15%' }}
+
     return (
-        <div className="mb-3" style={{ padding: '15%' }}>
+        <div className="mb-3 register-center">
             <form onSubmit={submit}>
                 <h1 className='h3 mb-3 fw-normal'>Register</h1>
                 <input type="text" className="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" required

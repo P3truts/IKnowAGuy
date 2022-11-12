@@ -12,6 +12,7 @@ const Logout = () => {
         credentials: 'include'
     }).then(() => {
         window.localStorage.removeItem("token");
+        window.localStorage.removeItem("username");
         navigate(PATH.Home);
         // setLoggedOut(true);
     });

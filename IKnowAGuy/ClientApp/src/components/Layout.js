@@ -6,9 +6,9 @@ import "../css/Layout.css";
 const Layout = ({ children, username }) => {
     console.log("layout username", typeof(username));
     return (
-        <div>
+        <div id="page-container">
             <NavMenu username={username} />
-                <div className="container my-4">{children}</div>
+                <div id="content-wrap">{children}</div>
             <Footer />
         </div>
     );
