@@ -59,7 +59,7 @@ const NavMenu = ({username}) => {
                             </>
                         )}
                         <li className='nav-item'>
-                            <Link to={PATH.CreateAd} className='btn btn-info'>
+                            <Link to={PATH.CreateAd} className='btn btn-info'style={{color: 'white'}}>
                                 Create Ad
                             </Link>
                         </li>

@@ -118,7 +118,7 @@ const Register = () => {
                         </option>
                     ))}
                 </select>
-                <button className='w-100 btn btn-lg btn-primary' type='submit'>Submit</button>
+                <button className='w-100 btn btn-lg btn-info' type='submit' style={{color: 'white'}}>Submit</button>
             </form>
         </div>
     )

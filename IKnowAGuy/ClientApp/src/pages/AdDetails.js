@@ -52,7 +52,7 @@ const AdDetails = () => {
                     Ad Details
                     <Link
                         to={`/update-ad/${id}`}
-                        className='btn btn-info me-5'
+                        className='btn btn-warning me-5'
                         style={{ position: 'relative', left: '42%' }}
                     >
                         Update
@@ -87,7 +87,7 @@ const AdDetails = () => {
                     <p className='card-text'>
                         <strong>County</strong>:{ad.address.county}
                     </p>
-                    <a href='#' className='btn btn-primary'>
+                    <a href='#' className='btn btn-info' style={{color: 'white'}}>
                         Contact
                     </a>
                 </div>
