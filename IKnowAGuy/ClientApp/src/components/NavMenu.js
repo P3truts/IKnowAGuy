@@ -25,19 +25,19 @@ const NavMenu = ({username}) => {
                 </button>
                 <div className='collapse navbar-collapse' id='navbarNav'>
                     <ul className='ms-auto navbar-nav'>
-                        <li className='nav-item'>
+                        <li className='nav-item' style={{ marginRight: '4px'}}>
                             <Link to={PATH.Home} className='btn btn-outline-light'>
                                 Home
                             </Link>
                         </li>
                         {(username.length === 0 &&                      
                             <>
-                                <li className='nav-item'>
+                                <li className='nav-item' style={{ marginRight: '4px'}}>
                                     <Link to={PATH.SignIn} className='btn btn-outline-light'>
                                         Sign In
                                     </Link>
                                 </li>
-                                <li className='nav-item'>
+                                <li className='nav-item' style={{ marginRight: '4px'}}>
                                     <Link to={PATH.LogIn} className='btn btn-outline-light'>
                                         Log In
                                     </Link>
@@ -46,12 +46,12 @@ const NavMenu = ({username}) => {
                             )                            
                         || (username.length > 0 &&                         
                             <>
-                                <li className='nav-item'>
+                                <li className='nav-item' style={{ marginRight: '4px'}}>
                                     <button className='btn btn-outline-light'>
                                         Hi, {username}
                                     </button>
                                 </li>
-                                <li className='nav-item'>
+                                <li className='nav-item'style={{ marginRight: '4px'}}>
                                     <Link to={PATH.LogOut} className='btn btn-outline-light'>
                                         Log Out
                                     </Link>
