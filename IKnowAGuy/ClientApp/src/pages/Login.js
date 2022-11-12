@@ -16,9 +16,16 @@ const Login = () => {
         fetchapi.login("https://localhost:44497/account/login", {
             email,
             password
+        }).then(response => {
+            console.log(response);
+            window.localStorage.setItem('token', response.token);
+            // setUsername(response.username);
         }).then(() => {
             navigate(PATH.Home);
+        }).catch(error => {
+            console.log(error)
         });
+
     }
 
     return (

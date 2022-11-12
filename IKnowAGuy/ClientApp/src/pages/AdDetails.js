@@ -14,20 +14,24 @@ const AdDetails = () => {
 
     const loader = async () => {
         var headers = new Headers({
-            'Authorization': 'Bearer ' + process.env.API_TOKEN,
+            'Authorization': 'Bearer ' + window.localStorage.getItem('token'),
             'Content-Type': 'application/json'
           });
 
-        const req = await fetch(`ads/${id}`, {
-            headers: headers,
-            credentials: 'include'
-        });
-        if (req.ok) {
-            const res = await req.json();
-            setAd(res);
+        if(window.localStorage.getItem('token') === null){
+            navigate(PATH.LogIn);
         } else {
-            console.log('req is not ok');
-            setAd([]);
+            const req = await fetch(`ads/${id}`, {
+                headers: headers,
+                credentials: 'include'
+            });
+            if (req.ok) {
+                const res = await req.json();
+                setAd(res);
+            } else {
+                console.log('req is not ok');
+                setAd([]);
+            }
         }
     };
 
