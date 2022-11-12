@@ -3,9 +3,9 @@ import PATH from '../AppPaths';
 
 import '../css/NavMenu.css';
 
-const NavMenu = (username) => {
-    console.log("navigation username", username);
-    console.log("nav username object data", username.username.length == null);
+const NavMenu = ({username}) => {
+    console.log("navigation username", typeof(username));
+
     return (
         <nav className='navbar navbar-dark navbar-expand-lg'>
             <div className='container'>
@@ -30,7 +30,7 @@ const NavMenu = (username) => {
                                 Home
                             </Link>
                         </li>
-                        {(username.username.length == null &&                      
+                        {(username.length === 0 &&                      
                             <>
                                 <li className='nav-item'>
                                     <Link to={PATH.SignIn} className='btn btn-outline-light'>
@@ -44,12 +44,12 @@ const NavMenu = (username) => {
                                 </li>
                             </>
                             )                            
-                        || (username.username.length > 0 &&                         
+                        || (username.length > 0 &&                         
                             <>
                                 <li className='nav-item'>
-                                    <btn className='btn btn-outline-light'>
+                                    <button className='btn btn-outline-light'>
                                         Hi, {username}
-                                    </btn>
+                                    </button>
                                 </li>
                                 <li className='nav-item'>
                                     <Link to={PATH.LogOut} className='btn btn-outline-light'>

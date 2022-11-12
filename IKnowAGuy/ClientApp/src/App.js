@@ -4,6 +4,7 @@ import Layout from "./components/Layout";
 import React, {useState, useEffect} from 'react';
 
 const App = () => {
+
     const [username, setUsername] = useState('');
 
     useEffect(() => {
@@ -16,6 +17,7 @@ const App = () => {
             // }).then((res) => response.json()).then((content) => setUsername(content));
 
             const content = await response.text();
+            
             setUsername(content);
 
             console.log("app username", username);

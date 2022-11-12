@@ -5,7 +5,7 @@ const PATH = {
     LogIn: '/log-in',
     SignIn: '/sign-in',
     AdDetails: `/ad-details/:id`,
-    LogOut: '/log-out'
+    LogOut: `/log-out`
 };
 
 export default PATH;
