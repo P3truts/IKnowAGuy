@@ -5,7 +5,7 @@ namespace IKnowAGuy.Services
 {
     public interface IAuthManager
     {
-        Task<bool> ValidateUser(LoginUserDTO loginUser);
+        Task<(bool, string)> ValidateUser(LoginUserDTO loginUser);
         Task<string> CreateToken();
         Task<JwtSecurityToken> Verify(string jwt);
     }

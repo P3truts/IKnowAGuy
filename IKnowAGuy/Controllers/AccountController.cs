@@ -72,7 +72,8 @@ namespace IKnowAGuy.Controllers
 
             try
             {
-                if (!await _authManager.ValidateUser(loginUser))
+                var validUser = await _authManager.ValidateUser(loginUser);
+                if (!validUser.Item1)
                 {
                     return Unauthorized();
                 }
@@ -86,7 +87,7 @@ namespace IKnowAGuy.Controllers
 
                 /*                return Accepted(new { Token = await _authManager.CreateToken() });*/
 
-                return Accepted(new { Token = jwt });
+                return Accepted(new { Token = jwt, username = validUser.Item2});
             }
             catch (Exception ex)
             {

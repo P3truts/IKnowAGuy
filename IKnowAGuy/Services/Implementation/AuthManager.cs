@@ -70,10 +70,10 @@ namespace IKnowAGuy.Services.Implementation
             return new SigningCredentials(secret, SecurityAlgorithms.HmacSha256);
         }
 
-        public async Task<bool> ValidateUser(LoginUserDTO loginUser)
+        public async Task<(bool, string)> ValidateUser(LoginUserDTO loginUser)
         {
             _user = await _userManager.FindByEmailAsync(loginUser.Email);
-            return (_user != null && await _userManager.CheckPasswordAsync(_user, loginUser.Password));
+            return ((_user != null && await _userManager.CheckPasswordAsync(_user, loginUser.Password)), (_user != null ? _user.UserName : ""));
 
         }
 
