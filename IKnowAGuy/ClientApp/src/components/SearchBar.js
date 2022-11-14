@@ -37,7 +37,7 @@ const SearchBar = ({ setAds }) => {
     };
 
     return (
-        <div className="input-group input-group-lg search-bar">
+        <div className="input-group input-group-lg search-bar" style={{width: "40%", scale: "140%"}}>
             <input
                 type="text"
                 className="form-control"

@@ -14,20 +14,24 @@ const AdDetails = () => {
 
     const loader = async () => {
         var headers = new Headers({
-            'Authorization': 'Bearer ' + process.env.API_TOKEN,
+            'Authorization': 'Bearer ' + window.localStorage.getItem('token'),
             'Content-Type': 'application/json'
           });
 
-        const req = await fetch(`ads/${id}`, {
-            headers: headers,
-            credentials: 'include'
-        });
-        if (req.ok) {
-            const res = await req.json();
-            setAd(res);
+        if(window.localStorage.getItem('token') === null){
+            navigate(PATH.LogIn);
         } else {
-            console.log('req is not ok');
-            setAd([]);
+            const req = await fetch(`ads/${id}`, {
+                headers: headers,
+                credentials: 'include'
+            });
+            if (req.ok) {
+                const res = await req.json();
+                setAd(res);
+            } else {
+                console.log('req is not ok');
+                setAd([]);
+            }
         }
     };
 
@@ -43,13 +47,13 @@ const AdDetails = () => {
 
     return (
         ad.id && (
-            <div className='container' style={{ paddingLeft: '20%' }}>
+            <div className='container' style={{ padding:"2%", position: "relative", paddingLeft: "15%" }}>
                 <h2>
                     Ad Details
                     <Link
                         to={`/update-ad/${id}`}
-                        className='btn btn-info me-5'
-                        style={{ position: 'relative', left: '38%' }}
+                        className='btn btn-warning me-5'
+                        style={{ position: 'relative', left: '42%' }}
                     >
                         Update
                     </Link>
@@ -83,7 +87,7 @@ const AdDetails = () => {
                     <p className='card-text'>
                         <strong>County</strong>:{ad.address.county}
                     </p>
-                    <a href='#' className='btn btn-primary'>
+                    <a href='#' className='btn btn-info' style={{color: 'white'}}>
                         Contact
                     </a>
                 </div>

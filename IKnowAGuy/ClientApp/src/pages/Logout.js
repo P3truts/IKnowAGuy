@@ -1,17 +1,20 @@
-import React, {useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import PATH from '../AppPaths';
-import fetchapi from '../utils/fetchApi';
 
 const Logout = () => {
     const navigate = useNavigate();
+    // const [loggedOut, setLoggedOut] = useState(false);
 
     const logout = async () => { await fetch("https://localhost:44497/account/logout", {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         credentials: 'include'
     }).then(() => {
+        window.localStorage.removeItem("token");
+        window.localStorage.removeItem("username");
         navigate(PATH.Home);
+        // setLoggedOut(true);
     });
     }
 

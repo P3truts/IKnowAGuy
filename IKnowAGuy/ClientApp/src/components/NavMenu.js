@@ -3,9 +3,9 @@ import PATH from '../AppPaths';
 
 import '../css/NavMenu.css';
 
-const NavMenu = (username) => {
-    console.log("navigation username", username);
-    console.log("nav username object data", username.username.length == null);
+const NavMenu = ({username}) => {
+    console.log("navigation username", typeof(username));
+
     return (
         <nav className='navbar navbar-dark navbar-expand-lg'>
             <div className='container'>
@@ -25,33 +25,33 @@ const NavMenu = (username) => {
                 </button>
                 <div className='collapse navbar-collapse' id='navbarNav'>
                     <ul className='ms-auto navbar-nav'>
-                        <li className='nav-item'>
+                        <li className='nav-item' style={{ marginRight: '4px'}}>
                             <Link to={PATH.Home} className='btn btn-outline-light'>
                                 Home
                             </Link>
                         </li>
-                        {(username.username.length == null &&                      
+                        {(username.length === 0 &&                      
                             <>
-                                <li className='nav-item'>
+                                <li className='nav-item' style={{ marginRight: '4px'}}>
                                     <Link to={PATH.SignIn} className='btn btn-outline-light'>
                                         Sign In
                                     </Link>
                                 </li>
-                                <li className='nav-item'>
+                                <li className='nav-item' style={{ marginRight: '4px'}}>
                                     <Link to={PATH.LogIn} className='btn btn-outline-light'>
                                         Log In
                                     </Link>
                                 </li>
                             </>
                             )                            
-                        || (username.username.length > 0 &&                         
+                        || (username.length > 0 &&                         
                             <>
-                                <li className='nav-item'>
-                                    <btn className='btn btn-outline-light'>
+                                <li className='nav-item' style={{ marginRight: '4px'}}>
+                                    <button className='btn btn-outline-light'>
                                         Hi, {username}
-                                    </btn>
+                                    </button>
                                 </li>
-                                <li className='nav-item'>
+                                <li className='nav-item'style={{ marginRight: '4px'}}>
                                     <Link to={PATH.LogOut} className='btn btn-outline-light'>
                                         Log Out
                                     </Link>
@@ -59,7 +59,7 @@ const NavMenu = (username) => {
                             </>
                         )}
                         <li className='nav-item'>
-                            <Link to={PATH.CreateAd} className='btn btn-info'>
+                            <Link to={PATH.CreateAd} className='btn btn-info'style={{color: 'white'}}>
                                 Create Ad
                             </Link>
                         </li>
