@@ -2,15 +2,17 @@ import React, {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import PATH from '../AppPaths';
 import fetchapi from '../utils/fetchApi';
+import { useAtom } from 'jotai';
+import state from "../state.js";
 
 import '../pages/Login.css';
 
 const Login = () => {
     const navigate = useNavigate();
 
-    // const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [user, setUser] = useAtom(state.user);   
 
     const submit = async (e) => {
         e.preventDefault();
@@ -18,20 +20,21 @@ const Login = () => {
         fetchapi.login("https://localhost:44497/account/login", {
             email,
             password
-        }).then(response => {
-            console.log(response);
-            window.localStorage.setItem('token', response.token);
-            window.localStorage.setItem('username', response.username);
-            // setUsername(response.username);
+        })
+        .then(response => {
+            if(response.token){
+                alert('Login successfull!');
+                window.localStorage.setItem('token', response.token);
+                setUser(response.username);
+            }
         }).then(() => {
             navigate(PATH.Home);
         }).catch(error => {
-            console.log(error)
+            console.log(error);
+            alert('Login failed! Please check your credentials!');
         });
 
     }
-
-    // style={{ padding: '25%' }}
 
     return (
         <div className='login-center'> 
@@ -51,7 +54,7 @@ const Login = () => {
                     />
                     <label htmlFor='floatingPassword'>Password</label>
                 </div>
-                <button className='w-100 btn btn-lg btn-info' type='submit' style={{color: 'white'}}>Sign in</button>
+                <button className='w-100 btn btn-lg btn-info' type='submit' style={{color: 'white'}}>Log in</button>
             </form>
         </div>
     )
