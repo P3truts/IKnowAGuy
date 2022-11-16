@@ -1,10 +1,12 @@
 import {useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import PATH from '../AppPaths';
+import { useAtom } from 'jotai';
+import state from "../state.js";
 
 const Logout = () => {
     const navigate = useNavigate();
-    // const [loggedOut, setLoggedOut] = useState(false);
+    const [user, setUser] = useAtom(state.user);  
 
     const logout = async () => { await fetch("https://localhost:44497/account/logout", {
         method: 'POST',
@@ -12,9 +14,8 @@ const Logout = () => {
         credentials: 'include'
     }).then(() => {
         window.localStorage.removeItem("token");
-        window.localStorage.removeItem("username");
+        setUser('');
         navigate(PATH.Home);
-        // setLoggedOut(true);
     });
     }
 

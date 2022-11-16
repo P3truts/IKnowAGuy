@@ -1,10 +1,12 @@
 import { Link } from 'react-router-dom';
 import PATH from '../AppPaths';
+import { useAtom } from 'jotai';
+import state from "../state.js";
 
 import '../css/NavMenu.css';
 
-const NavMenu = ({username}) => {
-    console.log("navigation username", typeof(username));
+const NavMenu = () => {
+    const [user, setUser] = useAtom(state.user);
 
     return (
         <nav className='navbar navbar-dark navbar-expand-lg'>
@@ -30,34 +32,14 @@ const NavMenu = ({username}) => {
                                 Home
                             </Link>
                         </li>
-                        {(username.length === 0 &&                      
-                            <>
-                                <li className='nav-item' style={{ marginRight: '4px'}}>
-                                    <Link to={PATH.SignIn} className='btn btn-outline-light'>
-                                        Sign In
-                                    </Link>
-                                </li>
-                                <li className='nav-item' style={{ marginRight: '4px'}}>
-                                    <Link to={PATH.LogIn} className='btn btn-outline-light'>
-                                        Log In
-                                    </Link>
-                                </li>
-                            </>
-                            )                            
-                        || (username.length > 0 &&                         
-                            <>
-                                <li className='nav-item' style={{ marginRight: '4px'}}>
-                                    <button className='btn btn-outline-light'>
-                                        Hi, {username}
-                                    </button>
-                                </li>
-                                <li className='nav-item'style={{ marginRight: '4px'}}>
-                                    <Link to={PATH.LogOut} className='btn btn-outline-light'>
-                                        Log Out
-                                    </Link>
-                                </li>
-                            </>
-                        )}
+                        <>
+                            <li className="nav-item" style={{marginRight: "4px"}}>
+                                {user.length ? <button className="btn btn-outline-light">Hi, {user}</button> : <Link to={PATH.SignIn} className="btn btn-outline-light">Sign In</Link> }
+                            </li>
+                            <li className="nav-item" style={{marginRight: "4px"}}>
+                                {user.length ? <Link to={PATH.LogOut} className="btn btn-outline-light">Log Out</Link> : <Link to={PATH.LogIn} className="btn btn-outline-light">Log In</Link> }
+                            </li>
+                        </>
                         <li className='nav-item'>
                             <Link to={PATH.CreateAd} className='btn btn-info'style={{color: 'white'}}>
                                 Create Ad

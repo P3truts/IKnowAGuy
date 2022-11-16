@@ -45,45 +45,11 @@ const Register = () => {
                 password,
                 confirmPassword,
                 roles
-            }).then(() => {
-            navigate(PATH.LogIn);
+            }).then((response) => {
+                console.log(response);
+                navigate(PATH.LogIn);
         });
-
-        // await fetch("https://localhost:44497/account/register", {
-        //     method: 'POST',
-        //     headers: {'Content-Type': 'application/json'},
-        //     body: JSON.stringify({
-        //         username,
-        //         firstName,
-        //         lastName,
-        //         email,
-        //         phoneNumber,
-        //         password,
-        //         confirmPassword,
-        //         roles
-        //     })
-        // }).then(() => {
-        //     navigate(PATH.LogIn);
-        // });
-
-
-        // const content = await response.json();
-
-        // console.log(content);
-
-        // console.log({
-        //     username,
-        //     firstName,
-        //     lastName,
-        //     email,
-        //     phoneNumber,
-        //     password,
-        //     confirmPassword,
-        //     roles
-        //   });
     }
-
-    // style={{ padding: '15%' }}
 
     return (
         <div className="mb-3 register-center">
