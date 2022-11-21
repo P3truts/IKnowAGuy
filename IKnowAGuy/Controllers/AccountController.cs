@@ -46,7 +46,8 @@ namespace IKnowAGuy.Controllers
                     {
                         ModelState.AddModelError(error.Code, error.Description);
                     }
-                    return BadRequest($"User Registration attempt failed for {registrationUser.Email}!");
+                    return BadRequest(result);
+                    //return BadRequest($"User Registration attempt failed for {registrationUser.Email}!");
                 }
 
                 await _userManager.AddToRolesAsync(user, registrationUser.Roles);
