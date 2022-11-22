@@ -16,8 +16,14 @@ const GeneralForm = ({
     adName,
     onDescriptionChange,
     description,
+    uploadImage,
     isPending,
 }) => {
+    // const uploadImage = async (e) => {
+    //     const file = e.target.files[0];
+    //     const base64 = await convertToBase64(file);
+    //     console.log(base64);
+    // };
     return (
         <form className='form-ad' onSubmit={onSubmit}>
             <div className='mb-3'>
@@ -108,6 +114,21 @@ const GeneralForm = ({
                     type='text'
                     aria-label='default input example'
                     value={adName}
+                    required
+                />
+            </div>
+
+            <div className='mb-3'>
+                <label htmlFor='image' className='form-label'>
+                    Image
+                </label>
+                <input
+                    onChange={uploadImage}
+                    className='form-control'
+                    id='image'
+                    name='image'
+                    type='file'
+                    accept='.jpeg, .png, .jpg'
                     required
                 />
             </div>
