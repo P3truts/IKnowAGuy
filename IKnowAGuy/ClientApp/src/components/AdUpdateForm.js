@@ -16,11 +16,31 @@ const AdUpdateForm = () => {
         name: '',
         service: {},
     });
+    const loader = async () => {
+        var headers = new Headers({
+            Authorization: 'Bearer ' + window.localStorage.getItem('token'),
+            'Content-Type': 'application/json',
+        });
+
+        const req = await fetch(`ads/${id}`, {
+            headers: headers,
+            credentials: 'include',
+        });
+        if (req.ok) {
+            const res = await req.json();
+            setAd(res);
+        } else {
+            console.log('req is not ok');
+            setAd([]);
+        }
+    };
 
     useEffect(() => {
-        fetchapi.get(`${FETCH_URL.ads}/${id}`).then((receivedAd) => {
-            setAd(receivedAd);
-        });
+        // fetchapi.get(`${FETCH_URL.ads}/${id}`).then((receivedAd) => {
+        //     console.log(receivedAd);
+        //     setAd(receivedAd);
+        // });
+        loader();
     }, []);
 
     const handleSubmit = (e) => {
