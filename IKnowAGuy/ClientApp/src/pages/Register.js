@@ -53,11 +53,12 @@ const Register = () => {
             })
             .then((response) => {
                 console.log(response);
-                if (response.succeeded) {
+                if (response && response.succeeded) {
                     navigate(PATH.LogIn);
-                }
-                if (response.errors.length) {
+                } else if (response.errors && response.errors.length) {
                     setErrors(response.errors);
+                } else {
+                    setErrors(['Something went wrong! Please retry!']);
                 }
             })
             .catch((e) => console.log(e));
