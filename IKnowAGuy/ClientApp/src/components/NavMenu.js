@@ -2,11 +2,32 @@ import { Link } from 'react-router-dom';
 import PATH from '../AppPaths';
 import { useAtom } from 'jotai';
 import state from "../state.js";
+import { useEffect } from 'react';
 
 import '../css/NavMenu.css';
 
 const NavMenu = () => {
     const [user, setUser] = useAtom(state.user);
+
+    useEffect(() => {
+        (
+        async () => {
+            const response = await fetch('https://localhost:44497/account/user', {
+                headers: {'Content-Type': 'application/json'},
+                credentials: 'include'
+        });
+            // }).then((res) => response.json()).then((content) => setUsername(content));
+
+            const content = await response.text();
+
+            if (user.length == 0) {
+                setUser(content);
+            }
+
+            console.log("nav menu Effect username", user);
+        }
+        )()
+    }, [user]);
 
     return (
         <nav className='navbar navbar-dark navbar-expand-lg'>
