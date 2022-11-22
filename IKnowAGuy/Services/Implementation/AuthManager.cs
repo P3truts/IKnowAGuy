@@ -83,7 +83,8 @@ namespace IKnowAGuy.Services.Implementation
         {
             var jwtSettings = _configuration.GetSection("Jwt");
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Environment.GetEnvironmentVariable("KEY", EnvironmentVariableTarget.Machine);
+            /*var key = Environment.GetEnvironmentVariable("KEY", EnvironmentVariableTarget.Machine);*/
+            var key = "asldfhaw9poe78rtyqp3298tuq098utq0pw4jtpq02urtaslkdfhalsiufhap0opo2u";
             tokenHandler.ValidateToken(jwt, new TokenValidationParameters
             {
                 ValidateIssuer = true,
