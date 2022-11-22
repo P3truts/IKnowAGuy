@@ -24,6 +24,7 @@ namespace IKnowAGuy.Controllers
             _mapper = mapper;
         }
 
+
         [HttpPost("register")]
         [ProducesResponseType(StatusCodes.Status202Accepted)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -51,7 +52,8 @@ namespace IKnowAGuy.Controllers
                 }
 
                 await _userManager.AddToRolesAsync(user, registrationUser.Roles);
-                return Accepted($"User Registration for {registrationUser.Email} was successful!");
+                //return Accepted($"User Registration for {registrationUser.Email} was successful!");
+                return Accepted(new { succeeded = true }) ;
             }
             catch (Exception ex)
             {
