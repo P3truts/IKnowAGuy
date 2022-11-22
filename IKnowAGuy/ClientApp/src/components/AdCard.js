@@ -6,7 +6,8 @@ import { formatTime } from '../utils/helpers';
 const AdCard = ({ ad }) => {
     return (
         <div className='card ad-card'>
-            <img src={`Assets/handyman-${ad.id}.png`} className='card-img-top' alt='...' />
+            {ad.image && <img src={ad.image} alt='img'></img>}
+
             <div className='card-body'>
                 <button type='button' className='btn'>
                     <Link to={`/ad-details/${ad.id}`} className='navbar-brand' style={{ color: 'black' }}>

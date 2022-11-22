@@ -42,6 +42,10 @@ namespace IKnowAGuy.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<long?>("JobCategoryId")
                         .HasColumnType("bigint");
 

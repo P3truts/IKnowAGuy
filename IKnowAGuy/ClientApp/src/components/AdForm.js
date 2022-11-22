@@ -1,18 +1,18 @@
-import "../css/AdForm.css";
+import '../css/AdForm.css';
 
-import { useState, useEffect } from "react";
-import fetchapi from "../utils/fetchApi";
-import { useNavigate } from "react-router-dom";
-import PATH from "../AppPaths";
-import { getCurentTime } from "../utils/helpers";
-import GeneralForm from "./GeneralForm";
+import { useState, useEffect } from 'react';
+import fetchapi from '../utils/fetchApi';
+import { useNavigate } from 'react-router-dom';
+import PATH from '../AppPaths';
+import { convertToBase64, getCurentTime } from '../utils/helpers';
+import GeneralForm from './GeneralForm';
 
-const LOCATIONS_API = "https://roloca.coldfuse.io";
+const LOCATIONS_API = 'https://roloca.coldfuse.io';
 
 const AdForm = () => {
     const [counties, setCounties] = useState([]);
-    const [county, setCounty] = useState("");
-    const [countyAuto, setCountyAuto] = useState("");
+    const [county, setCounty] = useState('');
+    const [countyAuto, setCountyAuto] = useState('');
     const [cities, setCities] = useState([]);
 
     const loader = async (url, cb) => {
@@ -23,41 +23,42 @@ const AdForm = () => {
 
     useEffect(() => {
         if (counties.length === 0) {
-            loader(LOCATIONS_API + "/judete", setCounties);
+            loader(LOCATIONS_API + '/judete', setCounties);
         }
         if (countyAuto) {
-            loader(LOCATIONS_API + "/orase/" + countyAuto, setCities);
+            loader(LOCATIONS_API + '/orase/' + countyAuto, setCities);
         } else {
-            loader(LOCATIONS_API + "/orase/AB", setCities);
+            loader(LOCATIONS_API + '/orase/AB', setCities);
         }
     }, [county]);
 
     const [isPending, setIsPending] = useState(false);
     const navigate = useNavigate();
     const [service, setService] = useState({
-        name: "",
-        description: "service description",
+        name: '',
+        description: 'service description',
     });
 
     const [jobCategory, setJobCategory] = useState({
         jobCategory: {
-            name: "",
-            description: "category description",
+            name: '',
+            description: 'category description',
         },
     });
     const [address, setAddress] = useState({
-        city: "",
-        county: "",
+        city: '',
+        county: '',
     });
 
     const [ad, setAd] = useState({
-        name: "",
-        description: "",
+        name: '',
+        description: '',
         address: address,
         jobCategory: jobCategory,
         service: service,
-        roleId: "1234asdfasdasdf a",
-        userId: "1234asdfasdasdf",
+        image: '',
+        roleId: '1234asdfasdasdf a',
+        userId: '1234asdfasdasdf',
     });
 
     const handleSubmit = (e) => {
@@ -67,7 +68,7 @@ const AdForm = () => {
 
         setIsPending(true);
 
-        fetchapi.post("ads", ad).then(() => {
+        fetchapi.post('ads', ad).then(() => {
             setIsPending(false);
             navigate(PATH.Home);
         });
@@ -123,6 +124,13 @@ const AdForm = () => {
             onDescriptionChange={(e) => {
                 const newAd = { ...ad };
                 newAd.description = e.target.value;
+                setAd(newAd);
+            }}
+            uploadImage={async (e) => {
+                const file = e.target.files[0];
+                const base64 = await convertToBase64(file);
+                const newAd = { ...ad };
+                newAd.image = base64;
                 setAd(newAd);
             }}
             description={ad.description}
