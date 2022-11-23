@@ -1,4 +1,4 @@
-import { Buffer } from 'buffer';
+// import { Buffer } from 'buffer';
 
 export const getCurentTime = () => {
     var date = new Date();
@@ -29,8 +29,8 @@ export const convertToBase64 = (file) => {
     });
 };
 
-export const decodeBase64 = (base64) => {
-    let result = Buffer.from(base64, 'base64').toString();
-    console.log(result);
-    return result;
-};
+// export const decodeBase64 = (base64) => {
+//     let result = Buffer.from(base64, 'base64').toString();
+//     console.log(result);
+//     return result;
+// };

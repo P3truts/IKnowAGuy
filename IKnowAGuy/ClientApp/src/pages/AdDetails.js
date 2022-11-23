@@ -54,14 +54,14 @@ const AdDetails = () => {
                     <Link
                         to={`/update-ad/${id}`}
                         className='btn btn-warning me-5'
-                        style={{ position: 'relative', left: '42%' }}
+                        style={{ position: 'relative', left: '45%' }}
                     >
                         Update
                     </Link>
                     <button
                         type='button'
                         className='btn btn-danger'
-                        style={{ position: 'relative', left: '38%' }}
+                        style={{ position: 'relative', left: '41%' }}
                         onClick={() => deleteAd()}
                     >
                         Delete
@@ -84,10 +84,10 @@ const AdDetails = () => {
                         <strong>Service</strong>: {ad.service.name}
                     </p>
                     <p className='card-text'>
-                        <strong>City</strong>:{ad.address.city}
+                        <strong>City</strong>: {ad.address.city}
                     </p>
                     <p className='card-text'>
-                        <strong>County</strong>:{ad.address.county}
+                        <strong>County</strong>: {ad.address.county}
                     </p>
                     <a href='#' className='btn btn-info' style={{ color: 'white' }}>
                         Contact

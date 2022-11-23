@@ -12,7 +12,7 @@ const HeaderTyping = () => {
                 "almost anything",
             ],
             typeSpeed: 90,
-            backSpeed: 10,
+            backSpeed: 5,
             loop: true,
             showCursor: false,
         });
