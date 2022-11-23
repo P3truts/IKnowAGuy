@@ -54,20 +54,21 @@ const AdDetails = () => {
                     <Link
                         to={`/update-ad/${id}`}
                         className='btn btn-warning me-5'
-                        style={{ position: 'relative', left: '42%' }}
+                        style={{ position: 'relative', left: '45%' }}
                     >
                         Update
                     </Link>
                     <button
                         type='button'
                         className='btn btn-danger'
-                        style={{ position: 'relative', left: '38%' }}
+                        style={{ position: 'relative', left: '41%' }}
                         onClick={() => deleteAd()}
                     >
                         Delete
                     </button>
                 </h2>
-                <img src={`Assets/handyman-${ad.id}.png`} style={{ width: '70%' }} alt='...' />
+                {ad.image && <img src={ad.image} alt='img' style={{maxWidth: "75%", maxHeight: "75%"}}></img>}
+                {!ad.image && <img src={`Assets/Placeholder_image.png`} alt='placeholder_img' />}
                 <div className='card-body'>
                     <h3>{ad.name}</h3>
                     <p className='card-text'>
@@ -83,10 +84,10 @@ const AdDetails = () => {
                         <strong>Service</strong>: {ad.service.name}
                     </p>
                     <p className='card-text'>
-                        <strong>City</strong>:{ad.address.city}
+                        <strong>City</strong>: {ad.address.city}
                     </p>
                     <p className='card-text'>
-                        <strong>County</strong>:{ad.address.county}
+                        <strong>County</strong>: {ad.address.county}
                     </p>
                     <a href='#' className='btn btn-info' style={{ color: 'white' }}>
                         Contact
