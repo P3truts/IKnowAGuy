@@ -67,7 +67,8 @@ const AdDetails = () => {
                         Delete
                     </button>
                 </h2>
-                <img src={`Assets/handyman-${ad.id}.png`} style={{ width: '70%' }} alt='...' />
+                {ad.image && <img src={ad.image} style={{ width: '70%' }} alt='img'></img>}
+
                 <div className='card-body'>
                     <h3>{ad.name}</h3>
                     <p className='card-text'>

@@ -1,5 +1,6 @@
 ﻿using IKnowAGuy.Models;
 using IKnowAGuy.Services;
+using IKnowAGuy.Services.Implementation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,11 +13,13 @@ namespace IKnowAGuy.Controllers
     {
         private readonly IAdService _adService;
         private readonly ILogger<AdsController> _logger;
+        private readonly IAuthManager _authManager;
 
-        public AdsController(IAdService adService, ILogger<AdsController> logger)
+        public AdsController(IAdService adService, ILogger<AdsController> logger, IAuthManager authManager)
         {
             _adService = adService;
             _logger = logger;
+            _authManager = authManager;
         }
 
         // GET: /<AdsController>
@@ -56,16 +59,22 @@ namespace IKnowAGuy.Controllers
 
         // POST api/<AdsController>
         [HttpPost]
-        public ActionResult Post([FromBody] Ad ad)
+        public async Task<ActionResult> Post([FromBody] Ad ad)
         {
             if(ad == null)
                 return BadRequest(ModelState);
 
-           /* ad.Address = address;
-            ad.Service = service;
-            ad.Service.Job = job;*/
+            var jwt = Request.Cookies["jwt"];
+            var token = await _authManager.Verify(jwt);
 
-            if(!_adService.CreateAd(ad))
+            var username = token.Claims?.FirstOrDefault()?.Value;
+            var user = await _authManager.GetUserAsync(username);
+          
+            ad.UserId= user.Id;
+
+            //TODO: AD SHOULD HAVE A ROLE ID?
+            ad.RoleId = "d07b67c9-a4f1-4d20-9b0b-d220b238439a";
+            if (!_adService.CreateAd(ad))
             {
                 ModelState.AddModelError("", "Something went wrong while saving");
                 return StatusCode(500, ModelState);

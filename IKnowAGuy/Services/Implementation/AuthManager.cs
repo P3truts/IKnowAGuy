@@ -97,5 +97,13 @@ namespace IKnowAGuy.Services.Implementation
 
             return (JwtSecurityToken)validatedToken;
         }
+
+        public async Task<AppUser> GetUserAsync(string userName)
+        {
+            var user = await _userManager.FindByNameAsync(userName);
+            return user;
+        }
+
+        
     }
 }
