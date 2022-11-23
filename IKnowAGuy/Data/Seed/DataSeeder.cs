@@ -1,7 +1,6 @@
 ﻿using IKnowAGuy.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 
 namespace IKnowAGuy.Data.Seed
 {
