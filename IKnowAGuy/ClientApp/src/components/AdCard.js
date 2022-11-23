@@ -7,6 +7,7 @@ const AdCard = ({ ad }) => {
     return (
         <div className='card ad-card'>
             {ad.image && <img src={ad.image} alt='img'></img>}
+            {!ad.image && <img src={`Assets/Placeholder_image.png`} alt='...' />}
 
             <div className='card-body'>
                 <button type='button' className='btn'>
