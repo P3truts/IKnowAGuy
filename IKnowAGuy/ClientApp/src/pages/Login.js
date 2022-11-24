@@ -32,7 +32,11 @@ const Login = () => {
             })
             .then(() => {
                 console.log(location);
-                navigate(location.state);
+                if(location.state == null) {
+                    navigate(PATH.Home);
+                } else {
+                    navigate(location.state);
+                }
             })
             .catch((error) => {
                 console.log(error);
