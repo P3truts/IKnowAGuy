@@ -104,6 +104,12 @@ namespace IKnowAGuy.Services.Implementation
             return user;
         }
 
-        
+        public async Task<IEnumerable<string>> GetUserRolesAsync(AppUser user)
+        {
+            var userRoles = await _userManager.GetRolesAsync(user);
+            return userRoles;
+        }
+
+
     }
 }

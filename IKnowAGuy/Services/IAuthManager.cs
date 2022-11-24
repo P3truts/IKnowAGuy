@@ -10,5 +10,6 @@ namespace IKnowAGuy.Services
         Task<string> CreateToken();
         Task<JwtSecurityToken> Verify(string jwt);
         Task<AppUser> GetUserAsync(string userName);
+        Task<IEnumerable<string>> GetUserRolesAsync(AppUser user);
     }
 }
