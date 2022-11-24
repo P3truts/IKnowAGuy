@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import PATH from '../AppPaths';
 import fetchapi from '../utils/fetchApi';
 import { useAtom } from 'jotai';
@@ -8,6 +8,7 @@ import state from '../state.js';
 import '../pages/Login.css';
 
 const Login = () => {
+    const location = useLocation();
     const navigate = useNavigate();
 
     const [email, setEmail] = useState('');
@@ -30,7 +31,8 @@ const Login = () => {
                 }
             })
             .then(() => {
-                navigate(PATH.Home);
+                console.log(location);
+                navigate(location.state);
             })
             .catch((error) => {
                 console.log(error);

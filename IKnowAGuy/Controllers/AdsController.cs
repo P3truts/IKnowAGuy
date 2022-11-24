@@ -1,6 +1,5 @@
 ﻿using IKnowAGuy.Models;
 using IKnowAGuy.Services;
-using IKnowAGuy.Services.Implementation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -69,7 +68,7 @@ namespace IKnowAGuy.Controllers
 
             var username = token.Claims?.FirstOrDefault()?.Value;
             var user = await _authManager.GetUserAsync(username);
-          
+            
             ad.UserId= user.Id;
 
             //TODO: AD SHOULD HAVE A ROLE ID?

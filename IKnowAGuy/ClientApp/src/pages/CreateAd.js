@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import AdForm from '../components/AdForm';
 import PATH from '../AppPaths';
 
@@ -6,6 +6,7 @@ import './CreateAd.css';
 import { useEffect, useState } from 'react';
 
 const CreateAd = () => {
+    const location = useLocation();
     const navigate = useNavigate();
     const [isLoaded, setIsLoaded] = useState(false);
 
@@ -15,8 +16,8 @@ const CreateAd = () => {
             credentials: 'include',
         })
             .then((rsp) => {
-                if (rsp.statusText === 'Unauthorized') {
-                    navigate(PATH.LogIn);
+                if (rsp.status === 401) {
+                    navigate(PATH.LogIn, { state: location.pathname });
                     setIsLoaded(true);
                 }
                 setIsLoaded(true);
