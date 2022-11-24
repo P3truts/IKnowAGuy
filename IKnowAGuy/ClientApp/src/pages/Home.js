@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
-import AdCard from "../components/AdCard";
-import HeaderTyping from "../components/HeaderTyping";
-import SearchBar from "../components/SearchBar";
+import { useState, useEffect } from 'react';
+import AdCard from '../components/AdCard';
+import HeaderTyping from '../components/HeaderTyping';
+import SearchBar from '../components/SearchBar';
 
-import "../css/Home.css";
+import '../css/Home.css';
 
 const Home = () => {
     const [ads, setAds] = useState([]);
@@ -15,9 +15,9 @@ const Home = () => {
     const handymanAds = ads.filter(ad => ad.roleId === "ab3e1019-d170-408d-a94f-8e85d2214081");
 
     const loader = async () => {
-        const req = await fetch("ads", {
-            headers: {'Content-Type': 'application/json'},
-            credentials: 'include'
+        const req = await fetch('ads', {
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
         });
         if (req.ok) {
             const res = await req.json();
@@ -25,7 +25,7 @@ const Home = () => {
             setAds(res);
             setIsLoading(false);
         } else {
-            console.log("req is not ok");
+            console.log('req is not ok');
             setAds([]);
         }
     };

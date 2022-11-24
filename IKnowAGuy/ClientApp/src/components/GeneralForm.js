@@ -19,11 +19,6 @@ const GeneralForm = ({
     uploadImage,
     isPending,
 }) => {
-    // const uploadImage = async (e) => {
-    //     const file = e.target.files[0];
-    //     const base64 = await convertToBase64(file);
-    //     console.log(base64);
-    // };
     return (
         <form className='form-ad' onSubmit={onSubmit}>
             <div className='mb-3'>
@@ -36,7 +31,7 @@ const GeneralForm = ({
                     className='form-select'
                     name='job-type'
                     aria-label='Default select example'
-                    value={jobType}
+                    //value={jobType}
                 >
                     <option value='Piping'>Piping</option>
                     <option value='Electrics'>Electrics</option>
@@ -54,7 +49,7 @@ const GeneralForm = ({
                     id='service'
                     name='service'
                     aria-label='Default select example'
-                    value={service}
+                    //value={service}
                 >
                     <option value='Pipe repairs'>Pipe repairs</option>
                     <option value='Electric installation'>Electric installation</option>

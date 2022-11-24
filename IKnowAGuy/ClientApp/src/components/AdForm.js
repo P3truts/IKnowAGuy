@@ -57,18 +57,16 @@ const AdForm = () => {
         jobCategory: jobCategory,
         service: service,
         image: '',
-        roleId: '1234asdfasdasdf a',
-        userId: '1234asdfasdasdf',
     });
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         ad.date = getCurentTime();
 
         setIsPending(true);
 
-        fetchapi.post('ads', ad).then(() => {
+        fetchapi.includeCredentialsPost('ads', ad).then(() => {
             setIsPending(false);
             navigate(PATH.Home);
         });
