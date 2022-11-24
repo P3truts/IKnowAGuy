@@ -31,8 +31,10 @@ const GeneralForm = ({
                     className='form-select'
                     name='job-type'
                     aria-label='Default select example'
+                    defaultValue={""}
                     //value={jobType}
                 >
+                    <option value="" disabled hidden>Choose Job Category</option>
                     <option value='Piping'>Piping</option>
                     <option value='Electrics'>Electrics</option>
                     <option value='Carpentry'>Carpentry</option>
@@ -49,8 +51,10 @@ const GeneralForm = ({
                     id='service'
                     name='service'
                     aria-label='Default select example'
+                    defaultValue={""}
                     //value={service}
                 >
+                    <option value="" disabled hidden>Choose Service Type</option>
                     <option value='Pipe repairs'>Pipe repairs</option>
                     <option value='Electric installation'>Electric installation</option>
                     <option value='General repairs'>General repairs</option>
@@ -106,6 +110,7 @@ const GeneralForm = ({
                     className='form-control'
                     id='name'
                     name='ad-name'
+                    maxLength={35}
                     type='text'
                     aria-label='default input example'
                     value={adName}
@@ -137,6 +142,7 @@ const GeneralForm = ({
                         className='form-control'
                         id='description'
                         name='description'
+                        maxLength={500}
                         rows='3'
                         defaultValue={description}
                         required
