@@ -14,6 +14,7 @@ const AdForm = () => {
     const [county, setCounty] = useState('');
     const [countyAuto, setCountyAuto] = useState('');
     const [cities, setCities] = useState([]);
+    const [city, setCity] = useState('');
 
     const loader = async (url, cb) => {
         fetchapi.get(url).then((res) => {
@@ -106,9 +107,11 @@ const AdForm = () => {
             onCityChange={(e) => {
                 const newAddress = { ...address };
                 newAddress.city = e.target.value;
+
+                setCity(e.target.value);
                 setAddress(newAddress);
             }}
-            city={ad.city}
+            city={city}
             cities={cities}
             onAdNameChange={(e) => {
                 const newAd = { ...ad };
