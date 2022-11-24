@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import PATH from '../AppPaths';
 import fetchapi from '../utils/fetchApi';
 import { formatTime } from '../utils/helpers';
@@ -10,6 +10,7 @@ import '../pages/AdDetails.css';
 const AdDetails = () => {
     const [ad, setAd] = useState([]);
     const { id } = useParams();
+    const location = useLocation();
     const navigate = useNavigate();
 
     const loader = async () => {
@@ -19,7 +20,7 @@ const AdDetails = () => {
         });
 
         if (window.localStorage.getItem('token') === null) {
-            navigate(PATH.LogIn);
+            navigate(PATH.LogIn, { state: location.pathname });
         } else {
             const req = await fetch(`ads/${id}`, {
                 headers: headers,
@@ -30,7 +31,7 @@ const AdDetails = () => {
                 setAd(res);
             } else {
                 console.log('req is not ok');
-                navigate(PATH.LogIn);
+                navigate(PATH.LogIn, { state: location.pathname });
                 setAd([]);
             }
         }
@@ -71,7 +72,7 @@ const AdDetails = () => {
 
                 <div className='card-body'>
                     <h3>{ad.name}</h3>
-                    <p className='card-text'>
+                    <p className='card-text' style={{fontSize: "20px", width: '80%'}}>
                         <strong>Description</strong>: {ad.description}
                     </p>
                     <p className='card-text'>
