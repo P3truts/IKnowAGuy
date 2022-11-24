@@ -124,7 +124,6 @@ const GeneralForm = ({
                     name='image'
                     type='file'
                     accept='.jpeg, .png, .jpg'
-                    required
                 />
             </div>
 

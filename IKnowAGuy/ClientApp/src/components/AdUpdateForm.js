@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import FETCH_URL from '../AppFetchUrl';
 import fetchapi from '../utils/fetchApi';
-import { getCurentTime } from '../utils/helpers';
+import { getCurentTime, convertToBase64 } from '../utils/helpers';
 import GeneralForm from './GeneralForm';
 
 const AdUpdateForm = () => {
@@ -99,6 +99,15 @@ const AdUpdateForm = () => {
             adName={ad.name}
             onDescriptionChange={onChange}
             description={ad.description}
+            uploadImage={async (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    const base64 = await convertToBase64(file);
+                    const newAd = { ...ad };
+                    newAd.image = base64;
+                    setAd(newAd);
+                }
+            }}
             isPending={isPending}
         />
     );
