@@ -2,8 +2,10 @@ import { useState } from "react";
 
 import "../css/SearchBar.css";
 
-const SearchBar = ({ setAds }) => {
+const SearchBar = ({ setAds, setIsLoading }) => {
     const [searchTerm, setSearchTerm] = useState("");
+    
+    var test;
 
     const searchAds = async (searchTerm) => {
         var req;
@@ -13,15 +15,22 @@ const SearchBar = ({ setAds }) => {
             req = await fetch(`ads/search/${searchTerm}`);
         }
 
+        console.log('request', req);
+
         if (req.ok) {
             var searchData = await req.json();
             setAds(searchData);
-            console.log(searchData);
+            setIsLoading(false);
+            test = searchData;
+            console.log('search data:', searchData);
         } else {
             console.log("Request is nok");
+            setIsLoading(false);
             setAds([]);
         }
     };
+
+    console.log('search data 2:', test);
 
     const handleChange = (e) => {
         setSearchTerm(e.target.value);
