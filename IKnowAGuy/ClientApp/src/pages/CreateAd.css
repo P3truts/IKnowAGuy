@@ -1,0 +1,17 @@
+.ad-form {
+    width: 40vw;
+    background-color: white;
+}
+
+.create-ad-main {
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+}
+
+.ad-form img {
+    display: block;
+    width: 130px;
+    margin: auto;
+    margin-bottom: 5%;
+}

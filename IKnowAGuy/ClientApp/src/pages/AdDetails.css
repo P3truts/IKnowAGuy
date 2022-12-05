@@ -1,0 +1,17 @@
+.ad-details {
+    margin-top: 10%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+.image {
+    width: 50% !important;
+}
+
+.ad-details-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 90vw;
+}
