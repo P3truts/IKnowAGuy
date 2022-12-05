@@ -4,7 +4,7 @@
 I Know A Guy is a learning team project created to explore the development of a web app from scratch. The idea behind is to create a platform where people needing to get a project done and handymen specialized on certain services can advertise their job requirements or offers and get in touch to make the project come to life.
 
 ## Technologies
-The developement was done with C# and the ASP .NET Core framework for the backend functionalities, using .NET Core Entity for the database and .NET Core Identity for the users management. For access security a JWT token verification was implemented. The frontend design is made using the ReactJS library.
+The development was done with C# and the ASP .NET Core framework for the backend functionalities, using .NET Core Entity for the database and .NET Core Identity for the users management. For access security a JWT token verification was implemented. The frontend design is made using the ReactJS library.
 
 ## Screenshots
 ### Home Page
