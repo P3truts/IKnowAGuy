@@ -21,7 +21,7 @@ const GeneralForm = ({
     isPending,
 }) => {
     return (
-        <form className='form-ad'>
+        <form className='form-ad' onSubmit={onSubmit}>
             <div className='mb-3'>
                 <label htmlFor='job-type' className='form-label'>
                     Job Type
