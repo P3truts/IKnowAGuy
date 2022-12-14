@@ -2,7 +2,7 @@ import '../css/AdForm.css';
 
 import { useState, useEffect } from 'react';
 import fetchapi from '../utils/fetchApi';
-import { useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import PATH from '../AppPaths';
 import { convertToBase64, getCurentTime } from '../utils/helpers';
 import GeneralForm from './GeneralForm';
@@ -15,6 +15,8 @@ const AdForm = () => {
     const [countyAuto, setCountyAuto] = useState('');
     const [cities, setCities] = useState([]);
     const [city, setCity] = useState('');
+    const location = useLocation();
+    const { id } = useParams();
 
     const loader = async (url, cb) => {
         fetchapi.get(url).then((res) => {
@@ -73,9 +75,16 @@ const AdForm = () => {
         });
     };
 
+    const handleCancel = async (e) => {
+        e.preventDefault();
+
+        navigate(PATH.Home);
+    };
+
     return (
         <GeneralForm
             onSubmit={handleSubmit}
+            onCancel={handleCancel}
             onJobTypeChange={(e) => {
                 const newJobCategory = { ...jobCategory };
                 newJobCategory.name = e.target.value;
