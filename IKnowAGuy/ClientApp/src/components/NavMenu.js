@@ -15,7 +15,7 @@ const NavMenu = () => {
     useEffect(() => {
         (
         async () => {
-            const response = await fetch('https://localhost:44497/account/user', {
+            const response = await fetch('https://localhost:44497/account/checkUser', {
                 headers: {'Content-Type': 'application/json'},
                 credentials: 'include'
         });
@@ -23,7 +23,7 @@ const NavMenu = () => {
 
             const content = await response.text();
 
-            if (user.length == 0) {
+            if (user.length === 0) {
                 setUser(content);
             }
 
