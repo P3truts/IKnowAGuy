@@ -3,11 +3,14 @@ import PATH from '../AppPaths';
 import { useAtom } from 'jotai';
 import state from "../state.js";
 import { useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 import '../css/NavMenu.css';
 
 const NavMenu = () => {
     const [user, setUser] = useAtom(state.user);
+    const location = useLocation();
+    const navigate = useNavigate();
 
     useEffect(() => {
         (
@@ -28,6 +31,13 @@ const NavMenu = () => {
         }
         )()
     }, [user]);
+
+    const checkLogout = async () => {
+        var answer = window.confirm("Are you sure you want to logout?");
+        if (answer) {
+            navigate(PATH.LogOut);
+        }
+    };
 
     return (
         <nav className='navbar navbar-dark navbar-expand-lg'>
@@ -58,11 +68,18 @@ const NavMenu = () => {
                                 {user.length ? <button className="btn btn-outline-light">Hi, {user}</button> : <Link to={PATH.SignIn} className="btn btn-outline-light">Sign In</Link> }
                             </li>
                             <li className="nav-item" style={{marginRight: "4px"}}>
-                                {user.length ? <Link to={PATH.LogOut} className="btn btn-outline-light">Log Out</Link> : <Link to={PATH.LogIn} className="btn btn-outline-light">Log In</Link> }
+                                {user.length ? 
+                                <button
+                                    type='button'
+                                    className="btn btn-outline-light"
+                                    onClick={() => checkLogout()}
+                                >
+                                    Log Out
+                                </button> : <Link to={PATH.LogIn} className="btn btn-outline-light">Log In</Link>}
                             </li>
                         </>
                         <li className='nav-item'>
-                            <Link to={PATH.CreateAd} className='btn btn-info'style={{color: 'white'}}>
+                            <Link to={PATH.CreateAd} className='btn btn-info' style={{color: 'white'}}>
                                 Create Ad
                             </Link>
                         </li>
