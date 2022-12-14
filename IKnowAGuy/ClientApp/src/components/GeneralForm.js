@@ -2,6 +2,7 @@ import '../css/AdForm.css';
 
 const GeneralForm = ({
     onSubmit,
+    onCancel,
     onJobTypeChange,
     jobType = 'Choose category',
     onServiceChange,
@@ -20,7 +21,7 @@ const GeneralForm = ({
     isPending,
 }) => {
     return (
-        <form className='form-ad' onSubmit={onSubmit}>
+        <form className='form-ad'>
             <div className='mb-3'>
                 <label htmlFor='job-type' className='form-label'>
                     Job Type
@@ -151,9 +152,15 @@ const GeneralForm = ({
             </div>
 
             {!isPending ? (
-                <button type='submit' className='btn'>
-                    Submit
-                </button>
+                <div>
+                    <button type='submit' onSubmit={onSubmit} className='btn' style={{ width: '49%', display: 'inline-block' }}>
+                        Submit
+                    </button>
+
+                    <button type='abort' onClick={onCancel} className='btn' style={{ width: '49%', display: 'inline-block', marginLeft: '10px', backgroundColor: '#A9A9A9' }}>
+                        Cancel
+                    </button>
+                </div>
             ) : (
                 <button disabled type='submit' className='btn'>
                     Adding Add...
