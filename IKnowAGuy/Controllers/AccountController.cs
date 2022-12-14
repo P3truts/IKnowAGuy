@@ -45,13 +45,25 @@ namespace IKnowAGuy.Controllers
                 {
                     foreach (var error in result.Errors)
                     {
-                        ModelState.AddModelError(error.Code, error.Description);
+                        if(error.Description.Length != 0)
+                        {
+                            ModelState.AddModelError(error.Code, error.Description);
+                        } else
+                        {
+                            ModelState.AddModelError(error.Code, "Passwords do not match!");
+                        }
+
                     }
                     return BadRequest(result);
                     //return BadRequest($"User Registration attempt failed for {registrationUser.Email}!");
                 }
-
-                await _userManager.AddToRolesAsync(user, registrationUser.Roles);
+                if(registrationUser.Roles != null && !registrationUser.Roles.Contains("admin"))
+                {
+                    await _userManager.AddToRolesAsync(user, registrationUser.Roles);
+                } else
+                {
+                    return BadRequest($"User Registration attempt failed for {registrationUser.Email} - Bad role!");
+                }
                 //return Accepted($"User Registration for {registrationUser.Email} was successful!");
                 return Accepted(new { succeeded = true }) ;
             }
