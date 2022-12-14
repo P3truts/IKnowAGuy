@@ -37,10 +37,20 @@ const AdDetails = () => {
         }
     };
 
+    const updateAd = async () => {
+        var answer = window.confirm("Are you sure you want to update this ad?");
+        if (answer) {
+            navigate(`/update-ad/${id}`, { state: location.pathname });
+        }
+    };
+
     const deleteAd = async () => {
-        fetchapi.delete(`ads/delete/${id}`).then(() => {
-            navigate(PATH.Home);
-        });
+        var answer = window.confirm("Are you sure you want to delete this ad?");
+        if (answer) {
+            fetchapi.delete(`ads/delete/${id}`).then(() => {
+                navigate(PATH.Home);
+            });
+        }
     };
 
     useEffect(() => {
@@ -52,13 +62,22 @@ const AdDetails = () => {
             <div className='container' style={{ padding: '2%', position: 'relative', paddingLeft: '15%' }}>
                 <h2>
                     Ad Details
-                    <Link
+                    {/* <Link
                         to={`/update-ad/${id}`}
                         className='btn btn-warning me-5'
                         style={{ position: 'relative', left: '45%' }}
                     >
                         Update
-                    </Link>
+                    </Link> */}
+                    <button
+                        type='button'
+                        className='btn btn-warning me-5'
+                        style={{ position: 'relative', left: '45%' }}
+                        onClick={() => updateAd()}
+                    >
+                        Update
+                    </button>
+
                     <button
                         type='button'
                         className='btn btn-danger'
