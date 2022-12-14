@@ -58,6 +58,7 @@ namespace IKnowAGuy.Controllers
 
         // POST api/<AdsController>
         [HttpPost]
+        [Authorize(AuthenticationSchemes = "JWT_OR_COOKIE")]
         public async Task<ActionResult> Post([FromBody] Ad ad)
         {
             if(ad == null)
@@ -84,6 +85,7 @@ namespace IKnowAGuy.Controllers
 
         // PUT api/<AdsController>
         [HttpPut]
+        [Authorize(AuthenticationSchemes = "JWT_OR_COOKIE")]
         public ActionResult Put([FromBody] Ad ad)
         {
            /* ad.Address = address;
@@ -100,6 +102,7 @@ namespace IKnowAGuy.Controllers
 
         // DELETE api/<AdsController>/5
         [HttpDelete("delete/{id}")]
+        [Authorize(AuthenticationSchemes = "JWT_OR_COOKIE")]
         public ActionResult Delete(long id)
         {
             var ad = _adService.GetAdById(id);
