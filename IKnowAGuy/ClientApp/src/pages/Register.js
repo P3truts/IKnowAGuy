@@ -22,7 +22,7 @@ const Register = () => {
         { value: '', text: 'Choose a type from the list' },
         { value: 'client', text: 'Client' },
         { value: 'handyman', text: 'Handyman' },
-        { value: 'admin', text: 'Admin' },
+        // { value: 'admin', text: 'Admin' },
     ];
 
     const [selected, setSelected] = useState(options[0].value);
@@ -126,6 +126,7 @@ const Register = () => {
                     type='password'
                     className='form-control'
                     placeholder='Password'
+                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                     required
                     onChange={(e) => setPassword(e.target.value)}
                 />
@@ -133,6 +134,7 @@ const Register = () => {
                     type='password'
                     className='form-control'
                     placeholder='Confirm password'
+                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                     required
                     onChange={(e) => setConfirmPassword(e.target.value)}
                 />
