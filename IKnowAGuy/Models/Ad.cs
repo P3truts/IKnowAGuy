@@ -10,8 +10,8 @@
         public long? JobId { get; set; }
         public long? ServiceId { get; set; }*/
             
-        public string UserId { get; set; }
-        public string RoleId { get; set; }
+        public string Username { get; set; }
+        public string UserRole { get; set; }
 
         public string Image { get; set; }
     }
