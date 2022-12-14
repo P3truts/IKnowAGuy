@@ -9,8 +9,6 @@ const Home = () => {
     const [ads, setAds] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
-    console.log(isLoading);
-
     const clientAds = ads.filter(ad => ad.userRole === "Client");
     const handymanAds = ads.filter(ad => ad.userRole === "Handyman");
 
@@ -30,8 +28,6 @@ const Home = () => {
         }
     };
 
-    console.log(ads);
-
     useEffect(() => {
         loader();
     }, []);
@@ -50,8 +46,6 @@ const Home = () => {
         setAdType([event.target.value]);
     };
 
-    console.log('ad type is', adType);
-
     const jobTypeOptions = [
         { value: '', text: 'Choose job type' },
         { value: 'job1', text: 'Job1' },
@@ -65,8 +59,6 @@ const Home = () => {
         setSelectedJobType(event.target.value);
         setJobType([event.target.value]);
     };
-
-    console.log('job type is', jobType);
 
     return (
         <>
