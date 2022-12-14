@@ -70,11 +70,9 @@ namespace IKnowAGuy.Controllers
             var user = await _authManager.GetUserAsync(username);
             var userRoles = await _authManager.GetUserRolesAsync(user);
 
-            ad.UserId= user.Id;
+            ad.Username = username;
+            ad.UserRole = userRoles.FirstOrDefault();
 
-            //TODO: AD SHOULD HAVE A ROLE ID?
-            //ad.RoleId = userRoles.FirstOrDefault();
-            ad.RoleId = "ff59a2c4-78a8-478c-8efd-ff322928526e";
             if (!_adService.CreateAd(ad))
             {
                 ModelState.AddModelError("", "Something went wrong while saving");
