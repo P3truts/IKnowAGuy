@@ -163,7 +163,7 @@ const GeneralForm = ({
                 </div>
             ) : (
                 <button disabled type='submit' className='btn'>
-                    Adding Add...
+                    Loading Ad Data...
                 </button>
             )}
         </form>
