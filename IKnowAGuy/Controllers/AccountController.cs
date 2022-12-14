@@ -111,8 +111,8 @@ namespace IKnowAGuy.Controllers
             }
         }
 
-        [HttpGet("user")]
-        public async Task<IActionResult> User()
+        [HttpGet("checkUser")]
+        public async Task<IActionResult> CheckUser()
         {
             try
             {
