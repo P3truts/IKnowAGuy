@@ -11,7 +11,7 @@ const CreateAd = () => {
     const [isLoaded, setIsLoaded] = useState(false);
 
     const isUserLogged = async () => {
-        fetch('https://localhost:44497/account/user', {
+        fetch('https://localhost:44497/account/checkUser', {
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include',
         })
