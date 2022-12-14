@@ -11,8 +11,8 @@ const Home = () => {
 
     console.log(isLoading);
 
-    const clientAds = ads.filter(ad => ad.roleId === "ff59a2c4-78a8-478c-8efd-ff322928526e");
-    const handymanAds = ads.filter(ad => ad.roleId === "ab3e1019-d170-408d-a94f-8e85d2214081");
+    const clientAds = ads.filter(ad => ad.userRole === "Client");
+    const handymanAds = ads.filter(ad => ad.userRole === "Handyman");
 
     const loader = async () => {
         const req = await fetch('ads', {
