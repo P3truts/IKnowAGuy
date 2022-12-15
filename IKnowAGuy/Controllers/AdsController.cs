@@ -26,7 +26,8 @@ namespace IKnowAGuy.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Ad>> GetAds([FromQuery] QueryParams queryParams)
         {
-            var ads =  _adService.GetAllPagedAds(queryParams.UserRole, queryParams.PageSize, queryParams.PageNumber);
+            var ads =  _adService.GetAllPagedAds(queryParams.UserRole, queryParams.PageSize, queryParams.PageNumber, 
+                queryParams.County);
             if (!ads.Any())
                 return NotFound();
 

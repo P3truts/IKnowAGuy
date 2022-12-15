@@ -8,5 +8,6 @@ namespace IKnowAGuy.Models
         public int? PageSize { get; set; }
         public int? PageNumber { get; set; }
         public string SearchTerm { get; set; }
+        public string? County { get; set; }
     }
 }

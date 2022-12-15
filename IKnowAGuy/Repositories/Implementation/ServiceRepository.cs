@@ -19,7 +19,7 @@ namespace IKnowAGuy.Repositories.Implementation
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Service> GetAllPaged(string? role, int? pageSize, int? pageNum)
+        public IEnumerable<Service> GetAllPaged(string? role, int? pageSize, int? pageNum, string? county)
         {
             throw new NotImplementedException();
         }

@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import AdCard from '../components/AdCard';
 import HeaderTyping from '../components/HeaderTyping';
 import SearchBar from '../components/SearchBar';
+import fetchapi from '../utils/fetchApi';
 
 import '../css/Home.css';
 
@@ -17,11 +18,15 @@ const Home = () => {
     const [handymanAds, setHandymanAds] = useState([]);
     const [handymanPageNum, setHandymanPageNum] = useState(1);
 
+    const [counties, setCounties] = useState([]);
+    const [county, setCounty] = useState('');
+    //const [countyAuto, setCountyAuto] = useState('');
+
     const [isLoading, setIsLoading] = useState(true);
     const firstRender = useRef(true);
 
     const clientAdsLoader = async () => {
-        const req = await fetch(`ads?UserRole=Client&PageNumber=${clientPageNum}`, {
+        const req = await fetch(`ads?UserRole=Client&PageNumber=${clientPageNum}&County=${county}`, {
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include',
         });
@@ -70,7 +75,7 @@ const Home = () => {
     };
 
     const handymanAdsLoader = async () => {
-        const req = await fetch(`ads?UserRole=Handyman&PageNumber=${handymanPageNum}`, {
+        const req = await fetch(`ads?UserRole=Handyman&PageNumber=${handymanPageNum}&County=${county}`, {
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include',
         });
@@ -108,6 +113,36 @@ const Home = () => {
         }
     };
 
+    const LOCATIONS_API = 'https://roloca.coldfuse.io';
+
+    const locationsLoader = async (url, cb) => {
+        fetchapi.get(url).then((res) => {
+            cb(res);
+        });
+    };
+
+    useEffect(() => {
+        if (counties.length === 0) {
+            locationsLoader(LOCATIONS_API + '/judete', setCounties);
+        }
+        // if (countyAuto) {
+        //     locationsLoader(LOCATIONS_API + '/orase/' + countyAuto, setCities);
+        // } else {
+        //     locationsLoader(LOCATIONS_API + '/orase/AB', setCities);
+        // }
+    }, [county]);
+
+    const onCountyChange= (e) => {
+        // counties.forEach((c) => {
+        //     if (c.nume === e.target.value) {
+        //         setCountyAuto(c.auto);
+        //         return;
+        //     }
+        // });
+
+        setCounty(e.target.value);
+    }
+
     useEffect(() => {
         clientAdsLoader();
         handymanAdsLoader();
@@ -117,7 +152,7 @@ const Home = () => {
             searchAds();
         }
         firstRender.current = false;
-    }, [clientPageNum, handymanPageNum, searchedAdsPageNum]);
+    }, [clientPageNum, handymanPageNum, searchedAdsPageNum, county]);
 
     const adTypeOptions = [
         { value: '', text: 'Choose ad type' },
@@ -165,6 +200,24 @@ const Home = () => {
                                 {option.text}
                             </option>
                         ))}
+                    </select>
+
+                    <select
+                        onChange={onCountyChange}
+                        className='form-select'
+                        id='county'
+                        name='county'
+                        aria-label='Default select example'
+                        value={county}
+                        style={{ width: "165px", display: "inline-block" }}
+                    >
+                        <option key="" value="">Choose county</option>
+                        {counties.length > 0 &&
+                            counties.map((county, index) => (
+                                <option key={index} value={county.nume}>
+                                    {county.nume}
+                                </option>
+                            ))}
                     </select>
 
                     {/* <select className='form-select' id='inputGroupSelectJobType' value={selectedJobType} onChange={handleJobTypeFilter} 

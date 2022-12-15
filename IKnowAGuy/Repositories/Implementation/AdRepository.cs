@@ -51,12 +51,12 @@ namespace IKnowAGuy.Repositories.Implementation
 
         public IEnumerable<Ad> GetAll() 
         {
-            var ads = _context.Ads.Include(a => a.Address)
-            .Include(a => a.JobCategory).Include(a => a.Service).ToList().OrderByDescending(a => a.Date);
+            var ads = _context.Ads.Include(a => a.Address).Include(a => a.JobCategory).Include(a => a.Service)
+                .ToList().OrderByDescending(a => a.Date);
 
             return ads;
         }
-        public IEnumerable<Ad> GetAllPaged(string? role, int? pageSize, int? pageNum)
+        public IEnumerable<Ad> GetAllPaged(string? role, int? pageSize, int? pageNum, string? county)
         {
             var ads = _context.Ads.Include(a => a.Address).Include(a => a.JobCategory).Include(a => a.Service)
                 .ToList().OrderByDescending(a => a.Date);
@@ -64,9 +64,19 @@ namespace IKnowAGuy.Repositories.Implementation
             int pageDim = (pageSize ?? 3);
             int pageNumber = (pageNum ?? 1);
 
-            if (role != null)
+            if (role != null && county == null)
             {
                 var filteredAds = ads.Where(ad => ad.UserRole == role);
+
+                return filteredAds.ToPagedList(pageNumber, pageDim);
+            } else if (county != null && role == null)
+            {
+                var filteredAds = ads.Where(ad => ad.Address.County == county);
+
+                return filteredAds.ToPagedList(pageNumber, pageDim);
+            } else if (role != null && county != null)
+            {
+                var filteredAds = ads.Where(ad => ad.UserRole == role && ad.Address.County == county);
 
                 return filteredAds.ToPagedList(pageNumber, pageDim);
             }
