@@ -19,6 +19,11 @@ namespace IKnowAGuy.Repositories.Implementation
             throw new NotImplementedException();
         }
 
+        public IEnumerable<JobCategory> GetAllPaged(string? role, int? pageSize, int? pageNum)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool Remove(JobCategory jobCategory)
         {
             throw new NotImplementedException();
