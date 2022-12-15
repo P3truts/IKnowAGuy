@@ -154,7 +154,8 @@ const Home = () => {
 
             <div id="main-container">
                 {/* <h2 className="text-center mb-5">Latest Ads</h2> */}
-                <div id="filter-container" style={{display: "inline-block", padding: "1%", paddingLeft: "10%", width: "100%"}}>
+                { (!isSearch) &&
+                (<div id="filter-container" style={{display: "inline-block", padding: "1%", paddingLeft: "10%", width: "100%"}}>
 
                     <h2>Filter</h2>
                     <select className='form-select' id='inputGroupSelectAdType' value={selectedAdType} onChange={handleAdTypeFilter} 
@@ -175,7 +176,8 @@ const Home = () => {
                         ))}
                     </select> */}
 
-                </div>
+                </div>)
+                }
                 <div id="ads">
                     {(adType == 'client' || adType == '') && (!isSearch) &&
                     (
@@ -229,7 +231,7 @@ const Home = () => {
                     </div>)
                     }
 
-                    {(adType == 'handyman' || adType == '' || adType == 'client' ) && (isSearch) &&
+                    {(isSearch) &&
                     (<div style={{backgroundColor: "whitesmoke", padding: "1%"}}>
                     <h2 style={{marginLeft: "10%", padding: "1%"}}>Search Results</h2>
                     <div className="ads-div container" id="searched-ads">
