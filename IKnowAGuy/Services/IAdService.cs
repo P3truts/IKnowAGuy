@@ -4,6 +4,7 @@ namespace IKnowAGuy.Services
     public interface IAdService
     {
         IEnumerable<Ad> GetAllAds();
+        IEnumerable<Ad> GetAllPagedAds(string? role, int? pageSize, int? pageNum);
         Ad GetAdById(long id);
         bool UpdateAd(Ad ad);
         bool CreateAd(Ad ad);
@@ -14,6 +15,6 @@ namespace IKnowAGuy.Services
 
         IEnumerable<Ad> GetAdsByAddress(long addressId);
 
-        IEnumerable<Ad> GetSearchedAds(string searched);
+        IEnumerable<Ad> GetSearchedAds(string searchTerm, int? pageSize, int? pageNum);
     }
 }

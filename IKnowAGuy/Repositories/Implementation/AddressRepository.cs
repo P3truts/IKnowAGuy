@@ -20,8 +20,8 @@ namespace IKnowAGuy.Repositories.Implementation
 
         public Address Get(long id) => _context.Addresses.FirstOrDefault(a => a.Id == id);
 
-
         public IEnumerable<Address> GetAll() => _context.Addresses.ToList();
+        public IEnumerable<Address> GetAllPaged(string? role, int? pageSize, int? pageNum) => _context.Addresses.ToList();
 
         public bool Remove(Address address)
         {

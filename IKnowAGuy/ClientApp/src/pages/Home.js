@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import AdCard from '../components/AdCard';
 import HeaderTyping from '../components/HeaderTyping';
 import SearchBar from '../components/SearchBar';
@@ -6,31 +6,118 @@ import SearchBar from '../components/SearchBar';
 import '../css/Home.css';
 
 const Home = () => {
-    const [ads, setAds] = useState([]);
+    const [searchedAds, setSearchedAds] = useState([]);
+    const [searchedAdsPageNum, setSearchedAdsPageNum] = useState(1);
+    const [isSearch, setIsSearch] = useState(false);
+    const [homeSearchTerm, setHomeSearchTerm] = useState("");
+
+    const [clientAds, setClientAds] = useState([]);
+    const [clientPageNum, setClientPageNum] = useState(1);
+
+    const [handymanAds, setHandymanAds] = useState([]);
+    const [handymanPageNum, setHandymanPageNum] = useState(1);
+
     const [isLoading, setIsLoading] = useState(true);
+    const firstRender = useRef(true);
 
-    const clientAds = ads.filter(ad => ad.userRole === "Client");
-    const handymanAds = ads.filter(ad => ad.userRole === "Handyman");
-
-    const loader = async () => {
-        const req = await fetch('ads', {
+    const clientAdsLoader = async () => {
+        const req = await fetch(`ads?UserRole=Client&PageNumber=${clientPageNum}`, {
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include',
         });
         if (req.ok) {
             const res = await req.json();
             console.log(res);
-            setAds(res);
+            setClientAds(res);
             setIsLoading(false);
         } else {
             console.log('req is not ok');
-            setAds([]);
+            setClientAds([]);
+        }
+    };
+
+    const previousClientPage = async () => {
+        setClientPageNum(clientPageNum > 1 ? clientPageNum - 1 : 1);
+    };
+
+    const nextClientPage = async () => {
+        if (clientAds.length > 0 )
+        {
+            setClientPageNum(clientPageNum+1);
+        }
+    };
+
+    const previousHandymanPage = async () => {
+        setHandymanPageNum(handymanPageNum > 1 ? handymanPageNum - 1 : 1);
+    };
+
+    const nextHandymanPage = async () => {
+        if (handymanAds.length > 0 )
+        {
+            setHandymanPageNum(handymanPageNum+1);
+        }
+    };
+
+    const previousSearchedAdsPage = async () => {
+        setSearchedAdsPageNum(searchedAdsPageNum > 1 ? searchedAdsPageNum - 1 : 1);
+    };
+
+    const nextSearchedAdsPage = async () => {
+        if (searchedAds.length > 0 )
+        {
+            setSearchedAdsPageNum(searchedAdsPageNum+1);
+        }
+    };
+
+    const handymanAdsLoader = async () => {
+        const req = await fetch(`ads?UserRole=Handyman&PageNumber=${handymanPageNum}`, {
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+        });
+        if (req.ok) {
+            const res = await req.json();
+            console.log(res);
+            setHandymanAds(res);
+            setIsLoading(false);
+        } else {
+            console.log('req is not ok');
+            setHandymanAds([]);
+        }
+    };
+
+    const searchAds = async () => {
+        var req;
+        if (homeSearchTerm === "") {
+            setSearchedAds([]);
+            setIsSearch(false);
+            setIsLoading(false);
+        } else {
+            req = await fetch(`ads/search?searchTerm=${homeSearchTerm}&PageNumber=${searchedAdsPageNum}`);
+            if (req.ok) {
+                var searchData = await req.json();
+                console.log('home search is reached');
+                setSearchedAds(searchData);
+                setIsSearch(true);
+                setIsLoading(false);
+            } else {
+                console.log("Request is nok");
+                setSearchedAds([]);
+                setIsSearch(true);
+                setIsLoading(false);
+            }
         }
     };
 
     useEffect(() => {
-        loader();
-    }, []);
+        clientAdsLoader();
+        handymanAdsLoader();
+        console.log(firstRender);
+        if(firstRender.current == false)
+        {
+            searchAds();
+        }
+        firstRender.current = false;
+    }, [clientPageNum, handymanPageNum, searchedAdsPageNum]);
 
     const adTypeOptions = [
         { value: '', text: 'Choose ad type' },
@@ -63,11 +150,12 @@ const Home = () => {
     return (
         <>
             <HeaderTyping />
-            <SearchBar setAds={setAds} setIsLoading={setIsLoading} />
+            <SearchBar setSearchedAds={setSearchedAds} setIsSearch={setIsSearch} setIsLoading={setIsLoading} setHomeSearchTerm={setHomeSearchTerm} />
 
             <div id="main-container">
                 {/* <h2 className="text-center mb-5">Latest Ads</h2> */}
-                <div id="filter-container" style={{display: "inline-block", padding: "1%", paddingLeft: "10%", width: "100%"}}>
+                { (!isSearch) &&
+                (<div id="filter-container" style={{display: "inline-block", padding: "1%", paddingLeft: "10%", width: "100%"}}>
 
                     <h2>Filter</h2>
                     <select className='form-select' id='inputGroupSelectAdType' value={selectedAdType} onChange={handleAdTypeFilter} 
@@ -88,9 +176,10 @@ const Home = () => {
                         ))}
                     </select> */}
 
-                </div>
+                </div>)
+                }
                 <div id="ads">
-                    {(adType == 'client' || adType == '') &&
+                    {(adType == 'client' || adType == '') && (!isSearch) &&
                     (
                     <div className="bg-light" style={{padding: "1%"}}>
                     <h3 style={{marginLeft: "10%", padding: "1%"}}>Client Ads</h3>
@@ -103,10 +192,13 @@ const Home = () => {
                             (clientAds.length === 0 && !isLoading && <h3>No ads found!</h3>)}
                     </div>
                     <div id="pages-ads" style={{display: "inline-block", marginLeft: "45%"}}>
-                    <a href='#' className='btn btn-info' style={{ color: 'white', marginRight: "4px" }}>
+                    <a onClick={() => { previousClientPage() }} className='btn btn-info' style={{ color: 'white', marginRight: "4px" }}>
                             Previous Page
                         </a>
-                    <a href='#' className='btn btn-info' style={{ color: 'white' }}>
+                    <a className='btn btn-info' style={{ color: 'white', marginRight: "4px" }}>
+                        {clientPageNum}
+                        </a>
+                    <a onClick={() => { nextClientPage() }} className='btn btn-info' style={{ color: 'white' }}>
                             Next Page
                         </a>
                     </div>
@@ -114,7 +206,7 @@ const Home = () => {
                     </div>)
                     }
 
-                    {(adType == 'handyman' || adType == '') &&
+                    {(adType == 'handyman' || adType == '') && (!isSearch) &&
                     (<div style={{backgroundColor: "whitesmoke", padding: "1%"}}>
                     <h2 style={{marginLeft: "10%", padding: "1%"}}>Handyman Ads</h2>
                     <div className="ads-div container" id="handyman-ads">
@@ -126,15 +218,44 @@ const Home = () => {
                             (handymanAds.length === 0 && !isLoading && <h3>No ads found!</h3>)}
                         </div>
                     <div id="pages-ads" style={{display: "inline-block", marginLeft: "45%"}}>
-                    <a href='#' className='btn btn-info' style={{ color: 'white', marginRight: "4px" }}>
+                    <a onClick={() => { previousHandymanPage() }} className='btn btn-info' style={{ color: 'white', marginRight: "4px" }}>
                             Previous Page
                         </a>
-                    <a href='#' className='btn btn-info' style={{ color: 'white' }}>
+                    <a className='btn btn-info' style={{ color: 'white', marginRight: "4px" }}>
+                        {handymanPageNum}
+                        </a>
+                    <a onClick={() => { nextHandymanPage() }} className='btn btn-info' style={{ color: 'white' }}>
                             Next Page
                         </a>
                     </div>
                     </div>)
                     }
+
+                    {(isSearch) &&
+                    (<div style={{backgroundColor: "whitesmoke", padding: "1%"}}>
+                    <h2 style={{marginLeft: "10%", padding: "1%"}}>Search Results</h2>
+                    <div className="ads-div container" id="searched-ads">
+                        {isLoading && searchedAds.length === 0 && <h3>Loading ads...</h3>}
+                        {(searchedAds.length > 0 && !isLoading && 
+                            searchedAds.map((ad) => {
+                                return <AdCard ad={ad} key={ad.id} />;
+                            })) ||
+                            (searchedAds.length === 0 && !isLoading && <h3>No ads found!</h3>)}
+                        </div>
+                    <div id="pages-ads" style={{display: "inline-block", marginLeft: "45%"}}>
+                    <a onClick={() => { previousSearchedAdsPage() }} className='btn btn-info' style={{ color: 'white', marginRight: "4px" }}>
+                            Previous Page
+                        </a>
+                    <a className='btn btn-info' style={{ color: 'white', marginRight: "4px" }}>
+                        {searchedAdsPageNum}
+                        </a>
+                    <a onClick={() => { nextSearchedAdsPage() }} className='btn btn-info' style={{ color: 'white' }}>
+                            Next Page
+                        </a>
+                    </div>
+                    </div>)
+                    }
+
                 </div>
                 <br />
             </div>

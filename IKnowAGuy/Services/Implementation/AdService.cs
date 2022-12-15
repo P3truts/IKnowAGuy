@@ -1,6 +1,7 @@
 ﻿using IKnowAGuy.Models;
 using IKnowAGuy.Repositories;
 using IKnowAGuy.Repositories.Implementation;
+using Microsoft.AspNetCore.Identity;
 using System.Linq;
 
 namespace IKnowAGuy.Services.Implementation
@@ -20,10 +21,14 @@ namespace IKnowAGuy.Services.Implementation
         public IEnumerable<Ad> GetAdsByJob(long jobId) => adRepository.GetAdsByJob(jobId);
         public IEnumerable<Ad> GetAdsByService(long serviceId) => adRepository.GetAdsByService(serviceId);
         public IEnumerable<Ad> GetAllAds() => adRepository.GetAll();
+        public IEnumerable<Ad> GetAllPagedAds(string? role, int? pageSize, int? pageNum) => adRepository.GetAllPaged(role, pageSize, pageNum);
         public bool CreateAd(Ad ad) => adRepository.Add(ad);
         public bool UpdateAd(Ad ad) => adRepository.Update(ad);
         public bool DeleteAd(Ad ad) => adRepository.Remove(ad);
-        public IEnumerable<Ad> GetSearchedAds(string searched) => adRepository.GetSearchedAds(searched);
+        public IEnumerable<Ad> GetSearchedAds(string searchTerm, int? pageSize, int? pageNum) 
+        {
+           return adRepository.GetSearchedAds(searchTerm, pageSize, pageNum);
+        } 
 
     }
 }

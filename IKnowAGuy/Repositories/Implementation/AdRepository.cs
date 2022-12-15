@@ -1,6 +1,8 @@
 ﻿using IKnowAGuy.Data;
 using IKnowAGuy.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
+using X.PagedList;
 
 namespace IKnowAGuy.Repositories.Implementation
 {
@@ -47,9 +49,30 @@ namespace IKnowAGuy.Repositories.Implementation
             return querry;
         }
 
-        public IEnumerable<Ad> GetAll() => _context.Ads.Include(a => a.Address)
+        public IEnumerable<Ad> GetAll() 
+        {
+            var ads = _context.Ads.Include(a => a.Address)
             .Include(a => a.JobCategory).Include(a => a.Service).ToList().OrderByDescending(a => a.Date);
-           
+
+            return ads;
+        }
+        public IEnumerable<Ad> GetAllPaged(string? role, int? pageSize, int? pageNum)
+        {
+            var ads = _context.Ads.Include(a => a.Address).Include(a => a.JobCategory).Include(a => a.Service)
+                .ToList().OrderByDescending(a => a.Date);
+
+            int pageDim = (pageSize ?? 3);
+            int pageNumber = (pageNum ?? 1);
+
+            if (role != null)
+            {
+                var filteredAds = ads.Where(ad => ad.UserRole == role);
+
+                return filteredAds.ToPagedList(pageNumber, pageDim);
+            }
+
+            return ads.ToPagedList(pageNumber, pageDim);
+        }
 
         public bool Remove(Ad ad)
         {
@@ -68,13 +91,16 @@ namespace IKnowAGuy.Repositories.Implementation
             return _context.SaveChanges() > 0;
         }
 
-        public IEnumerable<Ad> GetSearchedAds(string searched)
+        public IEnumerable<Ad> GetSearchedAds(string searchTerm, int? pageSize, int? pageNum)
         {
-            var query = _context.Ads.Where(ad => ad.Name.Contains(searched) || ad.Description.Contains(searched) || 
-                ad.JobCategory.Name.Contains(searched) || ad.Service.Name.Contains(searched)).Include(a => a.Address)
+            var resultAds = _context.Ads.Where(ad => ad.Name.Contains(searchTerm) || ad.Description.Contains(searchTerm) || 
+                ad.JobCategory.Name.Contains(searchTerm) || ad.Service.Name.Contains(searchTerm)).Include(a => a.Address)
                     .Include(a => a.JobCategory).Include(a => a.Service);
 
-            return query;
+            int pageDim = (pageSize ?? 3);
+            int pageNumber = (pageNum ?? 1);
+
+            return resultAds.ToPagedList(pageNumber, pageDim);
         }
     }
 }
