@@ -2,6 +2,7 @@
 using IKnowAGuy.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -23,9 +24,9 @@ namespace IKnowAGuy.Controllers
 
         // GET: /<AdsController>
         [HttpGet]
-        public ActionResult<IEnumerable<Ad>> GetAds()
+        public ActionResult<IEnumerable<Ad>> GetAds([FromQuery] QueryParams queryParams)
         {
-            var ads =  _adService.GetAllAds();
+            var ads =  _adService.GetAllPagedAds(queryParams.UserRole, queryParams.PageSize, queryParams.PageNumber);
             if (!ads.Any())
                 return NotFound();
 
@@ -117,10 +118,10 @@ namespace IKnowAGuy.Controllers
         }
 
         // GET: /<AdsController>/searchedKeyword
-        [HttpGet("search/{searched}")]
-        public ActionResult<IEnumerable<Ad>> GetSearchedAds(string searched)
+        [HttpGet("search")]
+        public ActionResult<IEnumerable<Ad>> GetSearchedAds([FromQuery] QueryParams queryParams)
         {
-            var ads = _adService.GetSearchedAds(searched);
+            var ads = _adService.GetSearchedAds(queryParams.SearchTerm, queryParams.PageSize, queryParams.PageNumber);
             if (!ads.Any())
                 return NotFound();
 
