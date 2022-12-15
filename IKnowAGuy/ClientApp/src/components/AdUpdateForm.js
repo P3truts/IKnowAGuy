@@ -18,6 +18,7 @@ const AdUpdateForm = () => {
         service: {},
     });
     const loader = async () => {
+        debugger;
         var headers = new Headers({
             Authorization: 'Bearer ' + window.localStorage.getItem('token'),
             'Content-Type': 'application/json',

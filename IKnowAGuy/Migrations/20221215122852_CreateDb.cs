@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace IKnowAGuy.Migrations
 {
-    public partial class createDb : Migration
+    public partial class CreateDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
