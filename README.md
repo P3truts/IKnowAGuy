@@ -8,14 +8,14 @@ The development was done with C# and the ASP .NET Core framework for the backend
 
 ## Screenshots
 ### Home Page
-![IKAG preview 1](https://user-images.githubusercontent.com/94113923/205671234-74bfb9c6-2a55-4cbf-b699-f6eb2698dd9d.png)
-![IKAG preview 2](https://user-images.githubusercontent.com/94113923/205671254-22b3b597-20cd-444d-bdab-1655b88561ce.png)
+![IKAG preview 1 - update 1](https://user-images.githubusercontent.com/94113923/208301283-d1d56403-cd12-4993-b076-2ee940703da4.png)
+![IKAG preview 2 - update 1](https://user-images.githubusercontent.com/94113923/208301290-168f7718-5a84-4507-9d2e-a18e6533ab97.png)
 
 ### Filtered Home Page
-![IKAG preview 3](https://user-images.githubusercontent.com/94113923/205671324-94ff590a-eb02-4078-a4f1-49f04e94546d.png)
+![IKAG preview 3 - update 1](https://user-images.githubusercontent.com/94113923/208301298-275205d0-98ff-4b5d-8efb-a6e87eae1704.png)
 
 ### Ad Creation Page
-![IKAG preview 4](https://user-images.githubusercontent.com/94113923/205671352-d47c5842-55c0-4ded-8c5d-d5fd2adecd53.png)
+![IKAG preview 4 - update 1](https://user-images.githubusercontent.com/94113923/208301305-72a6ec58-f452-4d67-af21-b00d9faca751.png)
 
 ### Ad Details
-![IKAG preview 5](https://user-images.githubusercontent.com/94113923/205671394-a73526eb-432e-4128-826b-b31af8e32467.png)
+![IKAG preview 5 - update 1](https://user-images.githubusercontent.com/94113923/208301314-df515cb1-d914-474c-ade7-98d4dcbbb9e0.png)
