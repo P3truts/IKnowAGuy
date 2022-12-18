@@ -2,6 +2,7 @@
 using IKnowAGuy.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -23,9 +24,10 @@ namespace IKnowAGuy.Controllers
 
         // GET: /<AdsController>
         [HttpGet]
-        public ActionResult<IEnumerable<Ad>> GetAds()
+        public ActionResult<IEnumerable<Ad>> GetAds([FromQuery] QueryParams queryParams)
         {
-            var ads =  _adService.GetAllAds();
+            var ads =  _adService.GetAllPagedAds(queryParams.UserRole, queryParams.PageSize, queryParams.PageNumber, 
+                queryParams.County);
             if (!ads.Any())
                 return NotFound();
 
@@ -58,6 +60,7 @@ namespace IKnowAGuy.Controllers
 
         // POST api/<AdsController>
         [HttpPost]
+        [Authorize(AuthenticationSchemes = "JWT_OR_COOKIE")]
         public async Task<ActionResult> Post([FromBody] Ad ad)
         {
             if(ad == null)
@@ -70,11 +73,9 @@ namespace IKnowAGuy.Controllers
             var user = await _authManager.GetUserAsync(username);
             var userRoles = await _authManager.GetUserRolesAsync(user);
 
-            ad.UserId= user.Id;
+            ad.Username = username;
+            ad.UserRole = userRoles.FirstOrDefault();
 
-            //TODO: AD SHOULD HAVE A ROLE ID?
-            //ad.RoleId = userRoles.FirstOrDefault();
-            ad.RoleId = "ff59a2c4-78a8-478c-8efd-ff322928526e";
             if (!_adService.CreateAd(ad))
             {
                 ModelState.AddModelError("", "Something went wrong while saving");
@@ -86,6 +87,7 @@ namespace IKnowAGuy.Controllers
 
         // PUT api/<AdsController>
         [HttpPut]
+        [Authorize(AuthenticationSchemes = "JWT_OR_COOKIE")]
         public ActionResult Put([FromBody] Ad ad)
         {
            /* ad.Address = address;
@@ -102,6 +104,7 @@ namespace IKnowAGuy.Controllers
 
         // DELETE api/<AdsController>/5
         [HttpDelete("delete/{id}")]
+        [Authorize(AuthenticationSchemes = "JWT_OR_COOKIE")]
         public ActionResult Delete(long id)
         {
             var ad = _adService.GetAdById(id);
@@ -116,10 +119,10 @@ namespace IKnowAGuy.Controllers
         }
 
         // GET: /<AdsController>/searchedKeyword
-        [HttpGet("search/{searched}")]
-        public ActionResult<IEnumerable<Ad>> GetSearchedAds(string searched)
+        [HttpGet("search")]
+        public ActionResult<IEnumerable<Ad>> GetSearchedAds([FromQuery] QueryParams queryParams)
         {
-            var ads = _adService.GetSearchedAds(searched);
+            var ads = _adService.GetSearchedAds(queryParams.SearchTerm, queryParams.PageSize, queryParams.PageNumber);
             if (!ads.Any())
                 return NotFound();
 

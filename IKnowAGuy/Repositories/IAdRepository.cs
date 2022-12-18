@@ -7,6 +7,6 @@ namespace IKnowAGuy.Repositories
         IEnumerable<Ad> GetAdsByJob(long jobId);
         IEnumerable<Ad> GetAdsByService(long serviceId);
         IEnumerable<Ad> GetAdsByAddress(long addressId);
-        IEnumerable<Ad> GetSearchedAds(string searched);
+        IEnumerable<Ad> GetSearchedAds(string searchTerm, int? pageSize, int? pageNum);
     }
 }

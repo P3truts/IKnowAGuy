@@ -1,10 +1,12 @@
 .ad-form {
     width: 40vw;
     background-color: white;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .create-ad-main {
-    height: 80vh;
+    /* height: 80vh; */
     display: flex;
     justify-content: center;
 }

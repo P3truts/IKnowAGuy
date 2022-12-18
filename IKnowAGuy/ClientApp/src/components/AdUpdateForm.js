@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import FETCH_URL from '../AppFetchUrl';
 import fetchapi from '../utils/fetchApi';
 import { getCurentTime, convertToBase64 } from '../utils/helpers';
@@ -9,6 +9,7 @@ const AdUpdateForm = () => {
     const navigate = useNavigate();
     const [isPending, setIsPending] = useState(false);
     const { id } = useParams();
+    const location = useLocation();
     const [ad, setAd] = useState({
         address: {},
         description: '',
@@ -17,6 +18,7 @@ const AdUpdateForm = () => {
         service: {},
     });
     const loader = async () => {
+        debugger;
         var headers = new Headers({
             Authorization: 'Bearer ' + window.localStorage.getItem('token'),
             'Content-Type': 'application/json',
@@ -58,6 +60,13 @@ const AdUpdateForm = () => {
             })
             .catch((e) => console.log(e));
     };
+
+    const handleCancel = async (e) => {
+        e.preventDefault();
+
+        navigate(`/ad-details/${ad.id}`, { state: location.pathname });
+    };
+
     const onChange = (e) => {
         const newAd = { ...ad };
         newAd[e.target.id] = e.target.value;
@@ -85,6 +94,7 @@ const AdUpdateForm = () => {
     return (
         <GeneralForm
             onSubmit={handleSubmit}
+            onCancel={handleCancel}
             onJobTypeChange={onJobChateggory}
             jobType={ad.jobCategory.name}
             onServiceChange={onServiceChange}

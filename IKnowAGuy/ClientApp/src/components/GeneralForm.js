@@ -2,6 +2,7 @@ import '../css/AdForm.css';
 
 const GeneralForm = ({
     onSubmit,
+    onCancel,
     onJobTypeChange,
     jobType = 'Choose category',
     onServiceChange,
@@ -31,10 +32,13 @@ const GeneralForm = ({
                     className='form-select'
                     name='job-type'
                     aria-label='Default select example'
-                    defaultValue={""}
+                    defaultValue={''}
+                    required
                     //value={jobType}
                 >
-                    <option value="" disabled hidden>Choose Job Category</option>
+                    <option value='' disabled hidden>
+                        Choose Job Category
+                    </option>
                     <option value='Piping'>Piping</option>
                     <option value='Electrics'>Electrics</option>
                     <option value='Carpentry'>Carpentry</option>
@@ -51,10 +55,13 @@ const GeneralForm = ({
                     id='service'
                     name='service'
                     aria-label='Default select example'
-                    defaultValue={""}
+                    defaultValue={''}
                     //value={service}
+                    required
                 >
-                    <option value="" disabled hidden>Choose Service Type</option>
+                    <option value='' disabled hidden>
+                        Choose Service Type
+                    </option>
                     <option value='Pipe repairs'>Pipe repairs</option>
                     <option value='Electric installation'>Electric installation</option>
                     <option value='General repairs'>General repairs</option>
@@ -71,7 +78,8 @@ const GeneralForm = ({
                     id='county'
                     name='county'
                     aria-label='Default select example'
-                    value={county}
+                    //value={county}
+                    required
                 >
                     {counties.length > 0 &&
                         counties.map((county, index) => (
@@ -91,7 +99,8 @@ const GeneralForm = ({
                     id='city'
                     name='city'
                     aria-label='Default select example'
-                    value={city}
+                    //value={city}
+                    required
                 >
                     {cities.length > 0 &&
                         cities.map((city, index) => (
@@ -151,12 +160,33 @@ const GeneralForm = ({
             </div>
 
             {!isPending ? (
-                <button type='submit' className='btn'>
-                    Submit
-                </button>
+                <div>
+                    <button
+                        type='submit'
+                        onSubmit={onSubmit}
+                        className='btn'
+                        style={{ width: '49%', display: 'inline-block' }}
+                    >
+                        Submit
+                    </button>
+
+                    <button
+                        type='abort'
+                        onClick={onCancel}
+                        className='btn'
+                        style={{
+                            width: '49%',
+                            display: 'inline-block',
+                            marginLeft: '10px',
+                            backgroundColor: '#A9A9A9',
+                        }}
+                    >
+                        Cancel
+                    </button>
+                </div>
             ) : (
                 <button disabled type='submit' className='btn'>
-                    Adding Add...
+                    Loading Ad Data...
                 </button>
             )}
         </form>

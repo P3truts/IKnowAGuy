@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useNavigate, useLocation } from 'react-router-dom';
 import PATH from '../AppPaths';
 import fetchapi from '../utils/fetchApi';
 import { formatTime } from '../utils/helpers';
+import { useAtom } from 'jotai';
+import state from "../state.js";
 
 import '../pages/AdDetails.css';
 
@@ -12,6 +14,7 @@ const AdDetails = () => {
     const { id } = useParams();
     const location = useLocation();
     const navigate = useNavigate();
+    const [user, setUser] = useAtom(state.user);
 
     const loader = async () => {
         var headers = new Headers({
@@ -29,6 +32,8 @@ const AdDetails = () => {
             if (req.ok) {
                 const res = await req.json();
                 setAd(res);
+                console.log(res);
+                console.log(user);
             } else {
                 console.log('req is not ok');
                 navigate(PATH.LogIn, { state: location.pathname });
@@ -37,10 +42,20 @@ const AdDetails = () => {
         }
     };
 
+    const updateAd = async () => {
+        var answer = window.confirm("Are you sure you want to update this ad?");
+        if (answer) {
+            navigate(`/update-ad/${id}`, { state: location.pathname });
+        }
+    };
+
     const deleteAd = async () => {
-        fetchapi.delete(`ads/delete/${id}`).then(() => {
-            navigate(PATH.Home);
-        });
+        var answer = window.confirm("Are you sure you want to delete this ad?");
+        if (answer) {
+            fetchapi.delete(`ads/delete/${id}`).then(() => {
+                navigate(PATH.Home);
+            });
+        }
     };
 
     useEffect(() => {
@@ -52,13 +67,18 @@ const AdDetails = () => {
             <div className='container' style={{ padding: '2%', position: 'relative', paddingLeft: '15%' }}>
                 <h2>
                     Ad Details
-                    <Link
-                        to={`/update-ad/${id}`}
+                    
+                    {ad.username === user && 
+                    <button
+                        type='button'
                         className='btn btn-warning me-5'
                         style={{ position: 'relative', left: '45%' }}
+                        onClick={() => updateAd()}
                     >
                         Update
-                    </Link>
+                    </button>}
+                    
+                    {ad.username === user && 
                     <button
                         type='button'
                         className='btn btn-danger'
@@ -66,7 +86,7 @@ const AdDetails = () => {
                         onClick={() => deleteAd()}
                     >
                         Delete
-                    </button>
+                    </button>}
                 </h2>
                 {ad.image && <img src={ad.image} style={{ width: '80%' }} alt='img'></img>}
 

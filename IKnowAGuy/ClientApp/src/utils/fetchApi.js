@@ -10,7 +10,9 @@ const fetchapi = {
     post: async (url, data) => {
         const request = await fetch(url, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { Authorization: 'Bearer ' + window.localStorage.getItem('token'),
+            'Content-Type': 'application/json' },
+            credentials: 'include',
             body: JSON.stringify(data),
         });
         try {
@@ -22,7 +24,9 @@ const fetchapi = {
     put: async (url, data) => {
         const request = await fetch(url, {
             method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { Authorization: 'Bearer ' + window.localStorage.getItem('token'),
+            'Content-Type': 'application/json' },
+            credentials: 'include',
             body: JSON.stringify(data),
         });
         try {
@@ -34,7 +38,9 @@ const fetchapi = {
     delete: async (url) => {
         const request = await fetch(url, {
             method: 'DELETE',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { Authorization: 'Bearer ' + window.localStorage.getItem('token'),
+            'Content-Type': 'application/json' },
+            credentials: 'include',
         });
         try {
             return await request;
@@ -45,7 +51,8 @@ const fetchapi = {
     includeCredentialsPost: async (url, data) => {
         const request = await fetch(url, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { Authorization: 'Bearer ' + window.localStorage.getItem('token'),
+            'Content-Type': 'application/json' },
             credentials: 'include',
             body: JSON.stringify(data),
         });
@@ -55,9 +62,10 @@ const fetchapi = {
             console.error(error);
         }
     },
-    includeCredentialsGet: async (url, data) => {
+    includeCredentialsGet: async (url) => {
         const request = await fetch(url, {
-            headers: { 'Content-Type': 'application/json' },
+            headers: { Authorization: 'Bearer ' + window.localStorage.getItem('token'),
+            'Content-Type': 'application/json' },
             credentials: 'include',
         });
         try {

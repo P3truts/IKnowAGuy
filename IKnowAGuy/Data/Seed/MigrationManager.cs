@@ -16,7 +16,7 @@ namespace IKnowAGuy.Data.Seed
                         {
                             DataSeeder.GetInstance().SeedData(appContext);
                         }
-                        /*appContext.Database.Migrate();*/
+                        //appContext.Database.Migrate();
                     }
                     catch (Exception ex)
                     {
